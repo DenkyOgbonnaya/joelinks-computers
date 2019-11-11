@@ -10,6 +10,8 @@ import { ServiceComponent } from './service/service.component';
 import { TeamComponent } from './team/team.component';
 import { ClientsComponent } from './clients/clients.component';
 import { AboutPageComponent } from './about/about-page.component';
+import { SubHeader } from './header/subheader.component';
+import { ServicePageComponent } from './service/service-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { AboutPageComponent } from './about/about-page.component';
     ServiceComponent,
     TeamComponent,
     ClientsComponent,
-    AboutPageComponent
+    AboutPageComponent,
+    SubHeader,
+    ServicePageComponent,
     
   ],
   imports: [
