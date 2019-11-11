@@ -3,42 +3,27 @@ import { Component } from "@angular/core";
 @Component({
     selector: "app-services",
     template: `
-        <div class="services_container">
-            <div class= "services_intro">WHAT YOU GET FROM US </div>
-            <h3>Our Services </h3>
-            <div class="card_main">
-                <div class="card">
-                    <div class="card_icon">icon</div>
-                    <div class="service_title">Computer sales</div>
-                    <p>Installations of all kind of application software, Operating system, games etc</p>
-                </div>
-                <div class="card card_2">
-                    <div class="card_icon">icon</div>
-                    <div class="service_title">Repairs and Servicing</div>
-                    <p>Repairs and Servicing of all computers, Laptops, Desktop, printers</p>
-                </div>
-                <div class="card">
-                    <div>icon</div>
-                    <div class="service_title">Software installations</div>
-                    <p>Sales of assorted computer sytems, printers and cameras</p>
-                </div>
-            </div>
-
+    <section class="services">
+    <div class="card_main">
+        <div class="card cards">
+            <img src="/assets/icons/desktop_ic30px.png" class="card_icon" />
+            <div class="service_title">Computer sales</div>
+            <p>Installations of all kind of application software, Operating system, games etc</p>
         </div>
+        <div class="card">
+            <img src="/assets/icons/desktop_ic130px.png" class="card_icon" />
+            <div class="service_title">Repairs and Servicing</div>
+            <p>Repairs and Servicing of all computers, Laptops, Desktop, printers</p>
+        </div>
+        <div class="card cards">
+            <img src="/assets/icons/desktop_ic30px.png" class="card_icon" />
+            <div class="service_title">Software installations</div>
+            <p>Sales of assorted computer sytems, printers and cameras</p>
+        </div>
+    </div>
+</section>
     `,
     styles: [`
-    .services_container {
-        display: flex;
-        flex-direction: column;
-        justif-items: center;
-    }
-    .services_intro, h3 {
-        text-align: center;
-    }
-    .services_intro {
-        color:crimson;
-        font-weight: bold;
-    }
     .card_main {
         column-count: 1;
         column-gap: 20px;
@@ -49,66 +34,43 @@ import { Component } from "@angular/core";
         flex-direction: column;
         align-items: flex-start;
         font-size: 14px;
-        width: 280px;
-        height: 150px;
+        height: 180px;
         margin-bottom: 15px;
         padding: 24px;
         box-sizing: border-box;
-        background: grey;
+        -webkit-column-break-inside: avoid;
+        box-sizing: border-box;
+        -moz-box-shadow: 2px 2px 2px 2px #777777;
+        -webkit-box-shadow: 2px 2px 2px 2px #777777;
+        box-shadow: 2px 2px 2px 2px #777777;
     }
      
     .card p{
         text-align: left;
-        font-size: 12px;
     }
     .card .service_title {
         font-weight: bold;
         font-size: 14px;
     }
     .card:nth-child(2) {
-        position: relative;
+        background: crimson;
+        color: #ddd;
     }
-    .card_2:before, .card_2:after, .card_2>:first-child:before, .card_2>:first-child:after {
-        position: absolute;
-        content: "";
-        width:80px;
-        height: 80px;
-        border: 2px solid crimson
-    }
-    .card_2:before{
-        top:0;
-        left: 0;
-        border-width: 1px 0 0 1px;
-    }
-    .card_2:after{
-        top:0;
-        left: 0;
-        border-width: 0 0 0 0;
-    }
-    .card_2>:first-child:before {
-        bottom: 0;
-        right: 0;
-        border-width: 0 1px 1px 0;
-    }
-    .card_2>:first-child:after {
-        bottom: 0;
-        left: 0;
-        border-width: 0 0 0 0;
-    }
-    .card:nth-child(2) .service_title {
-        color: crimson
+    .cards {
+        border-top: 2px solid crimson;
+        border-bottom: 2px solid crimson;
     }
     @media only screen and (min-width: 65.625em) {
         /* Break out main cards into three columns */
         .card_main {
-          column-count: 3;
-          column-gap: 10px;
-          width: 650;
-          margin: 10px auto 10px auto;
-        }
-        .card {
-            width: 200px;
-        }
+            column-count: 3;
+            column-gap: 10px;
+            width: 650px;
+            margin: 10px auto 10px auto;
+          }
+          .card {
+              width: 200px;
+          }
     }
     
     `]

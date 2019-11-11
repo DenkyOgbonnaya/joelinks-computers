@@ -9,6 +9,7 @@ import { AboutComponent } from "./about/about.component";
 import { ServiceComponent } from './service/service.component';
 import { TeamComponent } from './team/team.component';
 import { ClientsComponent } from './clients/clients.component';
+import { AboutPageComponent } from './about/about-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ClientsComponent } from './clients/clients.component';
     AboutComponent,
     ServiceComponent,
     TeamComponent,
-    ClientsComponent
+    ClientsComponent,
+    AboutPageComponent
     
   ],
   imports: [
