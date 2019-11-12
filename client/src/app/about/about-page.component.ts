@@ -9,6 +9,7 @@ import { Component, Input } from "@angular/core";
         <h1 class="service_label"> Our Services </h1>
         <app-services></app-services>
         <app-clients></app-clients>
+        <app-faq></app-faq>
      </div>`,
     styles: [`
        

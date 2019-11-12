@@ -12,6 +12,8 @@ import { ClientsComponent } from './clients/clients.component';
 import { AboutPageComponent } from './about/about-page.component';
 import { SubHeader } from './header/subheader.component';
 import { ServicePageComponent } from './service/service-page.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { FaqComponent } from './about/faq.components';
 
 @NgModule({
   declarations: [
@@ -25,6 +27,8 @@ import { ServicePageComponent } from './service/service-page.component';
     AboutPageComponent,
     SubHeader,
     ServicePageComponent,
+    ContactUsComponent,
+    FaqComponent,
     
   ],
   imports: [
