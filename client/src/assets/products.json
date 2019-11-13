@@ -1,0 +1,212 @@
+[
+    {
+        "_id":"1",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample3.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"1",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample1.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"3",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample3.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"5",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample2.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"6",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample1.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+
+    {
+        "_id":"0",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample1.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"9",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample3.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"8",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample2.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"7s",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample1.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+
+    {
+        "_id":"0w",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample1.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"9s",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample3.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"8f",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample2.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    },
+    {
+        "_id":"7d",
+        "name": "Hp EliteBook 8470P",
+        "price": "82000",
+        "discounted_price": "65000",
+        "category": "computers",
+        "image": "/assets/images/productSample1.jpg",
+        "brand": "HP",
+        "decription": "the Hp EliteBook ",
+        "attributes": {
+            "display": "14.2inch",
+            "color": "silver",
+            "processor": "intel processor corei5 3rd gen",
+            "ram": "4gb"
+        }
+    }
+]

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,10 @@ import { SubHeader } from './header/subheader.component';
 import { ServicePageComponent } from './service/service-page.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { FaqComponent } from './about/faq.components';
+import { ProductService } from './shared/products.service';
+import { ProductsComponent } from './products/products.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { productlistComponent } from './products/productlist.components';
 
 @NgModule({
   declarations: [
@@ -29,13 +34,17 @@ import { FaqComponent } from './about/faq.components';
     ServicePageComponent,
     ContactUsComponent,
     FaqComponent,
+    ProductsComponent,
+    ProductDetailsComponent,
+    productlistComponent
     
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
