@@ -4,7 +4,7 @@ import { Component} from "@angular/core";
     selector: "app-faq",
     template: `
     <div class="faq_container">
-        <h6>Frequently asked questions</h6>
+        <h5>Frequently asked questions</h5>
         <h1>Faq</h1>
         <div class="cont">
             <div class="row"> 
@@ -119,8 +119,9 @@ import { Component} from "@angular/core";
       .visibleAnswer {
           display: block;
       }
-      h6 {
+      h5 {
           color: crimson;
+          font-weight: bold;
 
       }
     `]

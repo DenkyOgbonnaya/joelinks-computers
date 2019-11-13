@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
     selector: "app-clients",
     template: `<section class="container-fluid clients_container">
-        <h4>WHAT CLIENTS SAY? </h4>
+        <h5>What clients say? </h5>
         <div class="comment_main"> 
             <div class="comment"> 
                 <p> Bootstrap’s carousel class exposes two events for 
@@ -49,7 +49,7 @@ import { Component } from "@angular/core";
             display: flex;
             flex-direction: column;
             justif-items: center;
-            background: #777777;
+            background: whitesmoke;
         }
         .comment_main {
             column-count: 1;
@@ -75,21 +75,24 @@ import { Component } from "@angular/core";
         p {
             font-size: 12px;
         }
-        h4 {
+        h5 {
             text-align: center;
             font-weight:bold;
-            color: crimson
+            color: crimson;
+            margin-top: 20px;
         }
         img {
             width: 50px;
             height: 50px;
             border-radius: 100%;
-            margin rigth: 2px;
+            margin-right: 10px;
         }
         .comment {
-            background: #212121;
-            color: #ffffff;
+            background:#ffffff ;
+            color: #212121;
             padding: 10px;
+            border-bottom: 2px solid crimson;
+            margin-bottom: 10px;
         }
         @media only screen and (min-width: 65.625em) {
             /* Break out main cards into three columns */

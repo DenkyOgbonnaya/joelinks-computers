@@ -15,6 +15,14 @@ opacity: 0.8;
     padding: 10px;
     color: #ddd;
 }
+h5 {
+    text-align: center;
+    color: crimson;
+    font-weight: bold;
+}
+.products {
+    background: whitesmoke;
+}
 
 /* Medium-sized screen breakpoint (tablet, 1050px) */
 @media only screen and (min-width: 65.625em) {

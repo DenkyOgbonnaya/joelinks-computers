@@ -50,7 +50,7 @@ import { Product } from '../product';
         border-color: #ccc;
     }
     @media only screen and (min-width: 65.625em) {
-        .product_main {
+        .container {
             width: 800px;
             margin: auto;
         }
