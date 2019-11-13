@@ -19,6 +19,7 @@ import { ProductService } from './shared/products.service';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { productlistComponent } from './products/productlist.components';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { productlistComponent } from './products/productlist.components';
     FaqComponent,
     ProductsComponent,
     ProductDetailsComponent,
-    productlistComponent
+    productlistComponent,
+    ShoppingCartComponent
     
   ],
   imports: [

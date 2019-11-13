@@ -1,0 +1,67 @@
+<div>
+    <header>
+        <app-subheader [pageName]="pageName"></app-subheader>
+    </header>
+    <main class="container main" >
+        <section class="cart_products">
+            <div class="table-responsive table_res">
+                <table class="table w-75">
+                        <tbody class="tbody">
+                            <tr class="tr" *ngFor="let cartProduct of cartProducts">
+                                <td class="td">
+                                    <img src="/assets/images/productSample2.jpg" alt="product" />
+                                </td>
+                                <td class="td">
+                                    <div class="product_name"> Microsoft Surface Book</div>
+                                    <div class="product_price">price 2000</div>
+                                </td>
+                                <td class="td">
+                                    <span class="quantity_pane">
+                                        <input type="number" class="quantity_field" readonly value="7" />
+                                        <div class="quantity_btns">
+                                                <button>^</button>
+                                                <button>v</button>
+                                        </div>
+                                    </span>
+                                </td>
+                                <td> 20,8970</td>
+                                <td class="remove_icon"> x </td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+            
+        </section>
+        <section class="cart_total">
+            <table>
+                <tbody class="table w-100 table-borderless">
+                    <tr>
+                        <td>3 items</td>
+                        
+                        <td>588,99</td>
+                    </tr>
+                    <tr>
+                        <td>delivery</td>
+                        
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        
+                        <td>588,99</td>
+                    </tr>
+                    <tr>
+                      <td>
+                            <button class="btn btn-success btn-sm">Checkout</button>
+                      </td>  
+                      <td>
+                            <button class="btn btn-danger btn-sm">Continue shopping</button>
+                      </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            
+        </section>
+    </main>
+</div>

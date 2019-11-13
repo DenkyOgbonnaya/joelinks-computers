@@ -6,12 +6,14 @@ import { ServicePageComponent } from './service/service-page.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'product/:id', component: ProductDetailsComponent},
+  {path: 'cart', component: ShoppingCartComponent},
   {path: 'about', component: AboutPageComponent},
   {path: 'services', component: ServicePageComponent},
   {path: 'contact', component: ContactUsComponent},
