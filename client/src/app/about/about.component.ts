@@ -18,7 +18,7 @@ import { Component } from "@angular/core";
             <li class="li">Bestvgg computers</li>
             
         </ul>
-        <button class="btn btn-danger btn-sm">Learn More</button>
+        <button class="btn btn-danger btn-sm" [routerLink]= "['/about']">Learn More</button>
     </div>
 </div>
     `,
