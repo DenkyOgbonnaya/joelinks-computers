@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8080
 
 applyMiddleware(middleware, app);
 applyRoutes(routers, app);
-
+app.use('/public', express.static(__dirname + '/public'));
 app.get('/', (req:Request, res: Response) => {
     res.status(200).send('hurray! app is working!.');
 })
