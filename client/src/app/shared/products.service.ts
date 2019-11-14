@@ -5,7 +5,7 @@ import { Product } from '../product';
 
 @Injectable()
 export class ProductService {
-    _productsUrl:string = "http://localhost:8080/api/products";
+    _productsUrl:string = "/api/products";
 
     constructor(private http: HttpClient){
 
@@ -14,7 +14,7 @@ export class ProductService {
         return this.http.get<any>(this._productsUrl, {observe: "response"})
     }
     getProduct(id:string):Observable<HttpResponse<any>>{
-        return this.http.get<any>(`http://localhost:8080/api/products/${id}`, {observe: "response"});
+        return this.http.get<any>(`/api/products/${id}`, {observe: "response"});
 
     }
     getHomeProducts():Observable<HttpResponse<any>>{
