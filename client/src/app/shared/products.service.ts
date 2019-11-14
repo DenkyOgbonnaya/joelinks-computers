@@ -5,16 +5,22 @@ import { Product } from '../product';
 
 @Injectable()
 export class ProductService {
-    _productsUrl:string = "/assets/products.json";
+    _productsUrl:string = "http://localhost:8080/api/products";
 
     constructor(private http: HttpClient){
 
     }
-    getProducts():Observable<HttpResponse<Product>> {
-        return this.http.get<Product>(this._productsUrl, {observe: "response"})
+    getProducts():Observable<HttpResponse<any>> {
+        return this.http.get<any>(this._productsUrl, {observe: "response"})
     }
-    getProduct(id:string):Observable<HttpResponse<Product>>{
-        return this.http.get<Product>(`/api/products/${id}`, {observe: "response"});
+    getProduct(id:string):Observable<HttpResponse<any>>{
+        return this.http.get<any>(`http://localhost:8080/api/products/${id}`, {observe: "response"});
 
+    }
+    getHomeProducts():Observable<HttpResponse<any>>{
+        return this.http.get<any>("/assets/products.json", {observe: "response"});
+    }
+    getSimilarProducts():Observable<HttpResponse<any>>{
+        return this.http.get<any>("/assets/similar-products.json", {observe: "response"});
     }
 }

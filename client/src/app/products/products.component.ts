@@ -18,9 +18,12 @@ export class ProductsComponent {
     }
     getProducts(){
         this.productService.getProducts().subscribe( res => {
+            
+            
             if(res.status === 200){
-                this.products = res.body;
+                this.products = res.body.products;
             }
+            console.log(this.products.price);
             
         })
     }

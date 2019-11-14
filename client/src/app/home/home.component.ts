@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../shared/products.service';
+import { Product } from '../product';
 
 @Component({
   selector: 'app-home',
@@ -6,75 +8,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  products:any[] = [
-    {
-        _id:"9",
-        name: "Hp EliteBook 8470P",
-        price: 82000,
-        discounted_price: 65000,
-        category: "computers",
-        image: "/assets/images/productSample3.jpg",
-        brand: "HP",
-        description: "the Hp EliteBook ",
-        attributes: {
-            display: "14.2inch",
-            color: "silver",
-            processor: "intel processor corei5 3rd gen",
-            ram: "4gb"
-        }
-    },
-        {
-            _id:"9",
-            name: "Hp EliteBook 8470P",
-            price: 82000,
-            discounted_price: 65000,
-            category: "computers",
-            image: "/assets/images/productSample3.jpg",
-            brand: "HP",
-            description: "the Hp EliteBook ",
-            attributes: {
-                display: "14.2inch",
-                color: "silver",
-                processor: "intel processor corei5 3rd gen",
-                ram: "4gb"
-            }
-        },
-            {
-                _id:"9",
-                name: "Hp EliteBook 8470P",
-                price: 82000,
-                discounted_price: 65000,
-                category: "computers",
-                image: "/assets/images/productSample3.jpg",
-                brand: "HP",
-                description: "the Hp EliteBook ",
-                attributes: {
-                    display: "14.2inch",
-                    color: "silver",
-                    processor: "intel processor corei5 3rd gen",
-                    ram: "4gb"
-                }
-            },
-                {
-                    _id:"9",
-                    name: "Hp EliteBook 8470P",
-                    price: 82000,
-                    discounted_price: 65000,
-                    category: "computers",
-                    image: "/assets/images/productSample3.jpg",
-                    brand: "HP",
-                    description: "the Hp EliteBook ",
-                    attributes: {
-                        display: "14.2inch",
-                        color: "silver",
-                        processor: "intel processor corei5 3rd gen",
-                        ram: "4gb"
-                    }
-                }
-]
-  constructor() { }
+  products:Product[] = [];
+  constructor(private productService: ProductService) { }
 
   ngOnInit() {
+    this.getHomeProducts();
+  }
+  getHomeProducts(){
+    this.productService.getHomeProducts().subscribe(res => {
+      console.log(res.body);
+      
+      this.products = res.body;
+    })
   }
 
 }

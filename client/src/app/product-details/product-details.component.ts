@@ -10,99 +10,26 @@ import { Product } from '../product';
 
 export class ProductDetailsComponent {
     pageName:string = "Products Details";
-    product:Product = {
-        _id:"9",
-        name: "Hp EliteBook 8470P",
-        price: 82000,
-        discounted_price: 65000,
-        category: "computers",
-        image: "/assets/images/productSample3.jpg",
-        brand: "HP",
-        description: `what is your 
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod 
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, 
-        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea`,
-        attributes: {
-            display: "14.2inch",
-            color: "silver",
-            processor: "intel processor corei5 3rd gen",
-            ram: "4gb"
-        }
-    }
-    similarProducts:Product[] = [
-        {
-            _id:"9",
-            name: "Hp EliteBook 8470P",
-            price: 82000,
-            discounted_price: 65000,
-            category: "computers",
-            image: "/assets/images/productSample3.jpg",
-            brand: "HP",
-            description: "the Hp EliteBook ",
-            attributes: {
-                display: "14.2inch",
-                color: "silver",
-                processor: "intel processor corei5 3rd gen",
-                ram: "4gb"
-            }
-        },
-            {
-                _id:"9",
-                name: "Hp EliteBook 8470P",
-                price: 82000,
-                discounted_price: 65000,
-                category: "computers",
-                image: "/assets/images/productSample3.jpg",
-                brand: "HP",
-                description: "the Hp EliteBook ",
-                attributes: {
-                    display: "14.2inch",
-                    color: "silver",
-                    processor: "intel processor corei5 3rd gen",
-                    ram: "4gb"
-                }
-            },
-                {
-                    _id:"9",
-                    name: "Hp EliteBook 8470P",
-                    price: 82000,
-                    discounted_price: 65000,
-                    category: "computers",
-                    image: "/assets/images/productSample3.jpg",
-                    brand: "HP",
-                    description: "the Hp EliteBook ",
-                    attributes: {
-                        display: "14.2inch",
-                        color: "silver",
-                        processor: "intel processor corei5 3rd gen",
-                        ram: "4gb"
-                    }
-                },
-                    {
-                        _id:"9",
-                        name: "Hp EliteBook 8470P",
-                        price: 82000,
-                        discounted_price: 65000,
-                        category: "computers",
-                        image: "/assets/images/productSample3.jpg",
-                        brand: "HP",
-                        description: "the Hp EliteBook ",
-                        attributes: {
-                            display: "14.2inch",
-                            color: "silver",
-                            processor: "intel processor corei5 3rd gen",
-                            ram: "4gb"
-                        }
-                    }
-    ]
+    product:Product;
+    similarProducts:Product[] = []
     constructor(private route: ActivatedRoute, private productService: ProductService){}
 
     ngOnInit(){
-        //this.getProduct();
+        this.getProduct();
+        this.getSimilarProducts();
     }
     getProduct(){
-        const productId:string = this.route.snapshot.params["_id"];
-        this.productService.getProduct(productId);
+        const productId:string = this.route.snapshot.params["id"];
+        this.productService.getProduct(productId).subscribe(res => {
+            console.log(res.body.product);
+            
+            this.product = res.body.product;
+        })
+    }
+    getSimilarProducts(){
+        this.productService.getSimilarProducts().subscribe(res => {
+            this.similarProducts = res.body;
+        })
     }
 
 }
