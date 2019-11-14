@@ -5,7 +5,9 @@ export interface IProduct extends Document {
     discounted_price: number,
     description: string,
     brand: string,
-    category?: string,
+    category: string,
+    images:any,
+    quantity:number,
     attributes: {
         size: string,
         color: string,

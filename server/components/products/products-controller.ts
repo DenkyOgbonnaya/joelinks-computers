@@ -11,9 +11,33 @@ const{
 } = productService;
 const  productController = {
 
-    async addProduct(req: Request, res: Response){
+    async addProduct(req: any, res: Response){
+        let images = [];
+        const{name, price, discounted_price, brand, quantity, category, description, processor, ram, size} = req.body;
+
+        if(req.files.length > 0){
+            for(let i=0; i< req.files.length; i+=1){
+                images.push(`/public/uploads/${req.files[i].filename}`)
+            }
+        }else {
+            return res.status(400).send({message: "Atleast one product image is required"})
+        }
+        const newProduct = {
+            name,
+            price,
+            brand,
+            quantity,
+            category,
+            description,
+            attributes: {
+                processor,
+                ram,
+                size
+            },
+            images
+        }
         try {
-            const product = await add(req.body);
+            const product = await add(newProduct);
             res.status(201).send({product});
         } catch (err) {
             res.status(500).send(err.message);

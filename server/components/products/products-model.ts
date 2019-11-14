@@ -12,6 +12,10 @@ const productSchema: Schema = new Schema({
     },
     discounted_price: {
         type: Number,
+        default: 0
+    },
+    quantity: {
+        type: Number,
         required: true
     },
     description: {
@@ -23,13 +27,24 @@ const productSchema: Schema = new Schema({
         required: true
     },
     category: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: String,
+    },
+    images: {
+        type: Array
     },
     attributes: {
         size: String,
         color: String,
         processor: String,
         ram: String
-    }
+    },
+    reservations: [{
+        cartId: String,
+        quantity: Number,
+        createdOn: {
+            type: Date,
+            default: Date.now()
+        }
+    }]
 })
 export default mongoose.model<IProduct>('Product', productSchema);

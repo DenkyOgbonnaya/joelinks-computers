@@ -1,6 +1,7 @@
 import {Router} from "express";
 const productRouter= Router();
 import productController from "./products-controller";
+import upload from "../../utills/config/multer-config";
 
 const{
     addProduct,
@@ -11,7 +12,7 @@ const{
 } = productController;
 
 productRouter.route('/products')
-.post(addProduct)
+.post(upload.array('image', 4), addProduct)
 .get(getAllProducts)
 
 productRouter.route('/products/:id')
