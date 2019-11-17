@@ -2,30 +2,42 @@
     <header>
         <app-subheader [pageName]="pageName"></app-subheader>
     </header>
-    <main class="container main" >
+    <div class="jumbotron" *ngIf="(cart | async)?.length === 0">
+        <img src="/assets/icons/cart30.png" alt="shopping cart" />
+        <p>You have no items in your shopping cart! </p>
+        <button class="btn btn-danger" routerLink = "/products">Start Shopping</button>
+    </div>
+    <main class="container main" *ngIf="(cart | async)?.length > 0" >
         <section class="cart_products">
             <div class="table-responsive table_res">
                 <table class="table w-75">
+                        <thead>
+                            <th></th>  
+                            <th>Product</th>  
+                            <th>Quantity</th>  
+                            <th>Subtotal</th>  
+                            <th></th>  
+                        </thead>
                         <tbody class="tbody">
-                            <tr class="tr" *ngFor="let cartProduct of cartProducts">
+                            <tr class="tr" *ngFor="let cartProduct of cart | async ">
                                 <td class="td">
-                                    <img src="/assets/images/productSample2.jpg" alt="product" />
+                                    <img src="http://localhost:8080{{cartProduct?.image}}" alt="product" />
                                 </td>
                                 <td class="td">
-                                    <div class="product_name"> Microsoft Surface Book</div>
-                                    <div class="product_price">price 2000</div>
+                                    <div class="product_name">{{cartProduct?.name}} </div>
+                                    <div class="product_price">price {{cartProduct?.price | currency:"USD":"symbol"}} </div>
                                 </td>
                                 <td class="td">
                                     <span class="quantity_pane">
-                                        <input type="number" class="quantity_field" readonly value="7" />
+                                        <input type="number" class="quantity_field" readonly value= {{cartProduct.quantity}} />
                                         <div class="quantity_btns">
-                                                <button>^</button>
-                                                <button>v</button>
+                                            <button (click)= "onQuantityChange(cartProduct._id, cartProduct?.quantity+1)">^</button>
+                                            <button (click)= "onQuantityChange(cartProduct._id, cartProduct?.quantity-1)">v</button>
                                         </div>
                                     </span>
                                 </td>
-                                <td> 20,8970</td>
-                                <td class="remove_icon"> x </td>
+                                <td> {{cartProduct?.price * cartProduct?.quantity | currency:"USD":"symbol"}}</td>
+                                <td class="remove_icon" (click) = "removeProduct(cartProduct?._id)"> x </td>
                             </tr>
                         </tbody>
                 </table>
@@ -36,19 +48,19 @@
             <table>
                 <tbody class="table w-100 table-borderless">
                     <tr>
-                        <td>3 items</td>
+                        <td>{{(cart | async)?.length}} items</td>
                         
-                        <td>588,99</td>
+                        <td>{{getTotalPrice(cart | async)| currency:"USD":"symbol"}}</td>
                     </tr>
                     <tr>
-                        <td>delivery</td>
+                        <td>shipping</td>
                         
                         <td>0</td>
                     </tr>
                     <tr>
                         <td>Total</td>
                         
-                        <td>588,99</td>
+                        <td>{{getTotalPrice(cart | async) | currency:"USD":"symbol" }}</td>
                     </tr>
                     <tr>
                       <td>

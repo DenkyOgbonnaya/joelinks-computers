@@ -4,11 +4,11 @@ import cartController from "./cart-controller";
 const cartRouter = Router();
 const{addToCart, updateQuantity, removeProduct, getCart} = cartController;
 
-cartRouter.route("/cart/:cartId")
+cartRouter.route("/cart")
 .post(addToCart)
 .get(getCart)
 
-cartRouter.route("/cart/:cartId/:productId")
+cartRouter.route("/cart/:productId")
 .put(updateQuantity)
 .delete(removeProduct)
 

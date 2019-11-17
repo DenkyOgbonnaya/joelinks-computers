@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { ToastrModule } from "ngx-toastr";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +22,9 @@ import { ProductsComponent } from './products/products.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { productlistComponent } from './products/productlist.components';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { CartStoreService } from './shared/cart-store.service';
+import { FooterComponent } from './footer/footer.component';
+import { CartService } from './shared/cart-service';
 
 @NgModule({
   declarations: [
@@ -38,15 +43,17 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
     ProductsComponent,
     ProductDetailsComponent,
     productlistComponent,
-    ShoppingCartComponent
-    
+    ShoppingCartComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
-  providers: [ProductService],
+  providers: [ProductService, CartStoreService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

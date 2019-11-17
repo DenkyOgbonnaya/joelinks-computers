@@ -5,7 +5,7 @@ export interface Product {
     discounted_price: number,
     category: string,
     brand: string,
-    image: string
+    images: any,
     description: string,
     attributes: {
         display: string,

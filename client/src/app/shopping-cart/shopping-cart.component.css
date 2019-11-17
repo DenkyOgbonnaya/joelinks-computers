@@ -38,6 +38,14 @@ table{
 }
 .remove_icon:hover {
     cursor: pointer;
+    color: crimson;
+}
+th {
+    color: crimson;
+}
+.jumbotron {
+    text-align: center;
+    padding-top: 20px;
 }
 @media only screen and (min-width: 65.625em) {
     .main {

@@ -21,7 +21,7 @@
                 <li> <a routerLink ="/services">Service</a></li>
                 <li> <a routerLink ="/products">Products</a></li>
                 <li> <a routerLink ="/about">About</a></li>
-                <li> <a routerLink ="/cart"><img src="/assets/icons/cart_ic15px.png" />5 </a></li>
+                <li > <a routerLink ="/cart"><img src="/assets/icons/cart_ic15px.png" />{{(cart | async)?.length}}</a></li>
             </ul>
         </nav>
 </header>

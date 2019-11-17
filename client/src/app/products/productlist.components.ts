@@ -1,5 +1,7 @@
 import { Component, Input } from "@angular/core";
 import { Product } from '../product';
+import { CartStoreService } from '../shared/cart-store.service';
+import { NotificationService } from '../shared/notification.service';
 
 @Component({
     selector: "app-productlist",
@@ -8,13 +10,12 @@ import { Product } from '../product';
     <div class="row no-gutters">
         <div class="col no-gutters" *ngFor="let product of products">
             <div class="product_card" [routerLink] = "['/product', product._id]" >
-                <img src={{product?.images[0]}} alt="product" />
+                <img src='http://localhost:8080{{product?.images[0]}}' alt="product" />
                     <div class="product_atr">
                         <div class="product_name">{{product?.name | slice:0:16}} ... </div>
-                        <div>{{product?.attributes.processor}}</div>
-                        <div>{{product?.price}}</div>
+                        <div>{{product?.price | currency:"USD":"symbol"}}</div>
                     </div>
-                <button class="cart_btn">ADD TO CART</button>
+                <button class="cart_btn" (click)= "addToCart($event, product)">ADD TO CART</button>
                 </div>
             </div>
         </div>
@@ -60,4 +61,16 @@ import { Product } from '../product';
 
 export class productlistComponent {
     @Input() products:Product[];
+
+    constructor(private cartstoreService: CartStoreService, private notifyService: NotificationService){}
+
+    addToCart(e:any, product:Product){
+        e.stopPropagation();
+
+        const{_id, name, price, images} = product;
+        this.cartstoreService.addToCart({_id, name, price, image:images[1], quantity:1});
+
+        this.notifyService.showSuccessMessage("Notification", "Added to cart!");
+        
+    }
 }
