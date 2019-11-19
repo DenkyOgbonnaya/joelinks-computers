@@ -1,14 +1,14 @@
 import { Component, OnInit } from "@angular/core";
-import { Product } from '../product';
-import { ProductService } from '../shared/products.service';
+import { Product, ProductService } from './shared';
+import { Observable } from 'rxjs';
 
 @Component({
     templateUrl: "./products.component.html",
     styleUrls: ["./products.component.css"]
 })
 
-export class ProductsComponent {
-    products:Product;
+export class ProductsComponent implements OnInit {
+    products$:Observable<Product[]>;
     pageName:string = "Products";
 
     constructor(private productService: ProductService){}
@@ -17,14 +17,6 @@ export class ProductsComponent {
         this.getProducts();
     }
     getProducts(){
-        this.productService.getProducts().subscribe( res => {
-            
-            
-            if(res.status === 200){
-                this.products = res.body.products;
-            }
-            console.log(this.products.price);
-            
-        })
+        this.products$ = this.productService.getProducts();
     }
 }

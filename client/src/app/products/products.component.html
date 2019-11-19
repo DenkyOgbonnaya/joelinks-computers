@@ -8,7 +8,7 @@
                 <li>Camaras</li>
             </ul>
         </nav>
-        <app-productlist [products] ="products"></app-productlist>
+        <products-list [products] ="(products$ | async)" ></products-list>
         
     </div>
         

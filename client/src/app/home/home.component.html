@@ -13,7 +13,7 @@
     </div>
     <div class="products">
         <h5>Our products</h5>
-        <app-productlist [products]= "products"></app-productlist>
+        <products-list [products]= "(products$ | async )"></products-list>
     </div>
     <app-clients></app-clients>
     <app-team></app-team>

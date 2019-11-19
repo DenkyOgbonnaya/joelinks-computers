@@ -4,9 +4,10 @@ import { HomeComponent } from './home/home.component';
 import { AboutPageComponent } from './about/about-page.component';
 import { ServicePageComponent } from './service/service-page.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { ProductsComponent } from './products/products.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductsComponent, ProductDetailsComponent } from './products';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,8 @@ const routes: Routes = [
   {path: 'about', component: AboutPageComponent},
   {path: 'services', component: ServicePageComponent},
   {path: 'contact', component: ContactUsComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignupComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}];
 
 @NgModule({

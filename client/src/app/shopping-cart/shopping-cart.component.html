@@ -7,7 +7,7 @@
         <p>You have no items in your shopping cart! </p>
         <button class="btn btn-danger" routerLink = "/products">Start Shopping</button>
     </div>
-    <main class="container main" *ngIf="(cart | async)?.length > 0" >
+    <main class="container main" *ngIf="(cart$ | async)?.length > 0" >
         <section class="cart_products">
             <div class="table-responsive table_res">
                 <table class="table w-75">
@@ -19,12 +19,12 @@
                             <th></th>  
                         </thead>
                         <tbody class="tbody">
-                            <tr class="tr" *ngFor="let cartProduct of cart | async ">
+                            <tr class="tr" *ngFor="let cartProduct of cart$ | async ">
                                 <td class="td">
                                     <img src="http://localhost:8080{{cartProduct?.image}}" alt="product" />
                                 </td>
                                 <td class="td">
-                                    <div class="product_name">{{cartProduct?.name}} </div>
+                                    <div class="product_name" [routerLink]= "['/product', cartProduct._id]">{{cartProduct?.name}} </div>
                                     <div class="product_price">price {{cartProduct?.price | currency:"USD":"symbol"}} </div>
                                 </td>
                                 <td class="td">
@@ -48,9 +48,9 @@
             <table>
                 <tbody class="table w-100 table-borderless">
                     <tr>
-                        <td>{{(cart | async)?.length}} items</td>
+                        <td>{{(cart$ | async)?.length}} items</td>
                         
-                        <td>{{getTotalPrice(cart | async)| currency:"USD":"symbol"}}</td>
+                        <td>{{getTotalPrice(cart$ | async)| currency:"USD":"symbol"}}</td>
                     </tr>
                     <tr>
                         <td>shipping</td>
@@ -60,14 +60,14 @@
                     <tr>
                         <td>Total</td>
                         
-                        <td>{{getTotalPrice(cart | async) | currency:"USD":"symbol" }}</td>
+                        <td>{{getTotalPrice(cart$ | async) | currency:"USD":"symbol" }}</td>
                     </tr>
                     <tr>
                       <td>
                             <button class="btn btn-success btn-sm">Checkout</button>
                       </td>  
                       <td>
-                            <button class="btn btn-danger btn-sm">Continue shopping</button>
+                            <button class="btn btn-danger btn-sm" routerLink="/products">Continue shopping</button>
                       </td>
                     </tr>
                 </tbody>

@@ -10,6 +10,9 @@ img {
     font-weight: bold;
     font-size: 12px;
 }
+.product_name:hover {
+    cursor: pointer;
+}
 .quantity_field {
     width: 36px;
     height: 36px;

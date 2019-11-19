@@ -1,27 +1,32 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { ProductService } from '../shared/products.service';
-import { Product } from '../product';
-import { CartStoreService } from '../shared/cart-store.service';
-import { NotificationService } from '../shared/notification.service';
+import { ProductService, Product } from '../shared';
+import { CartStoreService, NotificationService } from 'src/app/shared';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     templateUrl: "./product-details.component.html",
     styleUrls: ["./product-details.component.css"]
 })
 
-export class ProductDetailsComponent {
+export class ProductDetailsComponent implements OnInit, OnDestroy {
     pageName:string = "Products Details";
     product:Product;
-    similarProducts:Product[] = [];
+    similarProducts$:Observable<Product[]>;
     quantity:number = 1;
+    productSub: Subscription;
+    routeSub:Subscription;
 
     constructor(
         private route: ActivatedRoute, 
         private productService: ProductService,
         private cartstoreService: CartStoreService,
         private notifyService: NotificationService
-    ){}
+    ){
+        this.routeSub = route.params.subscribe(val => {
+            this.getProduct();
+        })
+    }
 
     ngOnInit(){
         this.getProduct();
@@ -29,16 +34,11 @@ export class ProductDetailsComponent {
     }
     getProduct(){
         const productId:string = this.route.snapshot.params["id"];
-        this.productService.getProduct(productId).subscribe(res => {
-            console.log(res.body.product);
-            
-            this.product = res.body.product;
-        })
+        this.productSub = this.productService.getProduct(productId)
+        .subscribe( data => this.product = data)
     }
     getSimilarProducts(){
-        this.productService.getSimilarProducts().subscribe(res => {
-            this.similarProducts = res.body;
-        })
+        this.similarProducts$ = this.productService.getSimilarProducts();
     }
     addQuantity():void{
         this.quantity+=1;
@@ -52,6 +52,10 @@ export class ProductDetailsComponent {
         this.cartstoreService.addToCart({_id, name, price, image:images[1], quantity: this.quantity});
 
         this.notifyService.showSuccessMessage("Notification", "Added to cart!");
+    }
+    ngOnDestroy(){
+        this.productSub.unsubscribe();
+        this.routeSub.unsubscribe();
     }
 }
 

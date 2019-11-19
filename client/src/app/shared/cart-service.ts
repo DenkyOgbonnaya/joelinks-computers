@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpErrorResponse, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { catchError } from "rxjs/operators";
-import { ICartItem } from '../interfaces/cart-item';
+import { ICartItem } from '../shopping-cart/shared/cart-item';
 
 const httpOptions = {
     headers: new HttpHeaders({

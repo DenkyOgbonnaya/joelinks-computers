@@ -38,7 +38,7 @@ const  productController = {
         }
         try {
             const product = await add(newProduct);
-            res.status(201).send({product});
+            res.status(201).send(product);
         } catch (err) {
             res.status(500).send(err.message);
         }
@@ -47,7 +47,7 @@ const  productController = {
     async getAllProducts(req: Request, res: Response){
         try {
             const products = await getProducts();
-            res.status(200).send({products})
+            res.status(200).send(products)
         } catch (err) {
             res.status(500).send(err.message);
         }
@@ -57,7 +57,7 @@ const  productController = {
         try {
             const product = await getSingle(id);
             if(product)
-                return res.status(200).send({product});
+                return res.status(200).send(product);
             return res.status(404).send({message: 'Could not find this product'})
         } catch (err) {
             console.log(err);
@@ -70,7 +70,7 @@ const  productController = {
         try {
             const product = await edit(id, req.body);
             if(product)
-                return res.status(200).send({message:"Product edited successfully", product});
+                return res.status(200).send(product);
             return res.status(400).send({message: "No such product exist"})
         } catch (err) {
             res.status(500).send(err.message);
