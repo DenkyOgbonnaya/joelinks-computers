@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import userService from "./user-service";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-const{create, usernameExist} = userService;
+const{create, usernameExist, emailExist} = userService;
 const{SECRET_KEY} = process.env;
 
 const userController = {
@@ -66,6 +66,37 @@ const userController = {
             res.status(400).send(err);
         }
     },
+    verifyToken(req:Request, res:Response){
+        const{token} = req.params;
+        jwt.verify(token, "SECRET_KEY",  (err) => {
+            if(err ) return res.status(401).send({isAuthenticated: false})
+        res.status(200).send({isAuthenticated: true})
+        })
+    },
+    async usernamExist(req:Request, res:Response, next:NextFunction){
+        const{username} = req.body;
+        try{
+            const isUsername = await usernameExist(username);
+            if(isUsername)
+                return res.status(400).send({status: 'error', message: 'This username is taken'})
+                
+            next();
+        }catch(err){
+            throw err
+        }
+    },
+    async emailExist(req:Request, res:Response, next:NextFunction){
+        const{email} = req.body;
+        try{
+            const isEmail = await emailExist(email);
+            if(isEmail)
+                return res.status(400).send({status: 'error', message: 'This email is taken'})
+                
+            next();
+        }catch(err){
+            throw err
+        }
+    }
 }
 
 export default userController;

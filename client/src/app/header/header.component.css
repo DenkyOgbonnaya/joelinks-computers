@@ -35,6 +35,9 @@ body, html {
 .terms a {
     color: #ffffff;
 }
+.terms span:hover {
+    cursor: pointer;
+}
 .sub_header_logo {
     font-weight: bold;
 }

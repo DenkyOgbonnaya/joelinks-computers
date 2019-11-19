@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartStoreService } from '../shared/cart-store.service';
 import { Observable } from 'rxjs';
 import { ICartItem } from '../shopping-cart/shared/cart-item';
+import { AuthService } from '../shared';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,20 @@ import { ICartItem } from '../shopping-cart/shared/cart-item';
 })
 export class HeaderComponent implements OnInit {
   cart$:Observable<ICartItem[]>;
-  constructor(private cartstoreService:CartStoreService) { }
+  currentUser$:Observable<any>;
+  constructor(private cartstoreService:CartStoreService, private authService: AuthService) { }
 
   ngOnInit() {
-    this.getNumOfCartItems()
+    this.getNumOfCartItems();
+    this.getCurrentUser();
   }
   getNumOfCartItems(){
     this.cart$ = this.cartstoreService.getCart();
   }
-
+  getCurrentUser(){
+    this.currentUser$ = this.authService.getCurrentUser();
+  }
+  logoutUser(){
+    this.authService.logout();
+  }
 }

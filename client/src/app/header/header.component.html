@@ -7,8 +7,10 @@
         </div>
             <div class="terms"> 
                 <a routerLink ="/contact">Contact us</a>
-                <a routerLink ="/login">Login</a>
-                <a routerLink ="/signup">Sign up</a>
+                <a *ngIf="!(currentUser$ | async )" routerLink ="/login">Login</a>
+                <a *ngIf="!(currentUser$ | async )" routerLink ="/signup">Sign up</a>
+                <a *ngIf="(currentUser$ | async )" routerLink ="/login">{{ (currentUser$ | async)?.username}}</a>
+                <span *ngIf="(currentUser$ | async )" (click)="logoutUser()">Logout</span>
             </div>
     </footer>
         <nav class="sub-header">

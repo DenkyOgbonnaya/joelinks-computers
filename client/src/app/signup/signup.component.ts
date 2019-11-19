@@ -1,32 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { AuthService } from '../shared';
+import { Subscription } from 'rxjs';
 
 @Component({
-    template: `<div class="login_container">
-        <app-subheader [pageName]="pageName"></app-subheader>
-        <div class="main">
-            <div class="logo">
-                <img src="/assets/icons/logo.ico" alt="logo"/>
-                <span>Joe</span>
-                <span>links</span>
-            </div>
-            <form [formGroup]="signupForm">
-                <div class="form-group">
-                    <label for="username">Username </label>
-                    <input type="text" name="username" formControlName="username" class="form-control" placeholder="username" />
-                </div>
-                <div class="form-group">
-                    <label for="email">Email </label>
-                    <input type="text" name="email" formControlName="email" class="form-control" placeholder="email" />
-                </div>
-                <div class="form-group">
-                    <label for="password">Password </label>
-                    <input type="password" name="password" formControlName="password" class="form-control" placeholder="password" />
-                </div>
-                <button class="btn btn-danger">Sign up</button>
-            </form>
-        </div>
-    </div>`,
+    templateUrl: "./signup.component.html",
     styles: [`
     .main {
         display: flex;
@@ -53,23 +31,34 @@ import { FormGroup, FormControl, Validators } from "@angular/forms";
     `]
 })
 
-export class SignupComponent implements OnInit {
-    pageName:string = "Sign up";
-    signupForm:FormGroup;
+export class SignupComponent implements OnDestroy {
+    pageName:string = "Signup";
+    mouseOverLogin;
+    errorMessage:string = "";
+    loading: boolean = false;
+    authSub:Subscription;
 
-    ngOnInit(){
-        this.initSignupForm();
+    constructor(private authService: AuthService){}
+
+    signup(user:any){
+        this.loading = true;
+        this.authSub = this.authService.signup(user)
+        .subscribe( 
+            data => {
+            this.authService.setCurrentUser(data.token);
+            this.loading = false;
+            
+            },
+            err => {
+                this.errorMessage = err;
+                this.loading = false;
+            }
+            
+        )
+        
     }
-    initSignupForm(){
-        let username = new FormControl("", Validators.required);
-        let email = new FormControl("", Validators.required);
-        let password = new FormControl("", Validators.required);
-
-        this.signupForm = new FormGroup({
-            username,
-            email,
-            password
-        })
+    ngOnDestroy(){
+        this.authSub.unsubscribe();
     }
     
 }

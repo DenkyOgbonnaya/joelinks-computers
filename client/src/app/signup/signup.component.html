@@ -1,0 +1,40 @@
+<div class="login_container">
+    <app-subheader [pageName]="pageName"></app-subheader>
+    <div class="main">
+        <div *ngIf="errorMessage" class="alert alert-danger"> {{errorMessage}} </div>
+        <div class="logo">
+            <img src="/assets/icons/logo.ico" alt="logo"/>
+            <span>Joe</span>
+            <span>links</span>
+        </div>
+        <form #loginForm="ngForm" (ngSubmit)=signup(loginForm.value)>
+            <div class="form-group" >
+                <label for="username">Username </label>
+                <em *ngIf="loginForm.controls.name?.invalid &&
+                (loginForm.controls.name?.touched || mouseOverLogin)
+                ">Required</em>
+                <input type="text" (ngModel)="name" name="username" class="form-control" placeholder="username" />
+            </div>
+            <div class="form-group" >
+                <label for="email">Email address </label>
+                <em *ngIf="loginForm.controls.email?.invalid &&
+                (loginForm.controls.email?.touched || mouseOverLogin)
+                ">Required</em>
+                <input type="email" (ngModel)="email" name="email" class="form-control" placeholder="email" />
+            </div>
+            <div class="form-group">
+                <label for="password">Password </label> 
+                <em *ngIf="loginForm.controls.password?.invalid">Required</em>
+                <input type="password" (ngModel)="password" name="password" class="form-control" placeholder="password" />               
+            </div>
+            <span (mouseenter)="mouseOverLogin=true" (mouseleave)="mouseOverLogin=false">
+                <button type="submit" class="btn btn-danger" (disabled)="loginForm.invalid">
+                    <span *ngIf="!loading">Create account</span>
+                    <div *ngIf="loading" class="spinner-border text-light spinner-border-sm" role="status">
+                        <span class="sr-only">loading...</span>
+                    </div>
+                </button>
+            </span>
+        </form>
+    </div>
+</div>
