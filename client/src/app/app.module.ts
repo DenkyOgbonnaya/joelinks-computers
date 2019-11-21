@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
-import { FormsModule, ReactiveFormsModule} from "@angular/forms"
+import { FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +27,8 @@ import { SignupComponent } from './signup/signup.component';
 import { AuthService } from './shared/auth.service';
 import { ProductsModule } from './products';
 import { HeaderModule } from './header/header.module';
+import { CheckoutComponent } from './shopping-cart/checkout/checkout.component';
+import { OrdersModule } from './orders/orders.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import { HeaderModule } from './header/header.module';
     ShoppingCartComponent,
     FooterComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
@@ -53,9 +57,12 @@ import { HeaderModule } from './header/header.module';
     FormsModule,
     ReactiveFormsModule,
     ProductsModule,
-    HeaderModule
+    HeaderModule,
+    NgbModule,
+    OrdersModule
   ],
   providers: [ProductService, CartStoreService, CartService, AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [CheckoutComponent]
 })
 export class AppModule { }

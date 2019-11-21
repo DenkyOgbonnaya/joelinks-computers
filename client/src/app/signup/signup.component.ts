@@ -58,7 +58,8 @@ export class SignupComponent implements OnDestroy {
         
     }
     ngOnDestroy(){
-        this.authSub.unsubscribe();
+        if(this.authSub)
+            this.authSub.unsubscribe();
     }
     
 }

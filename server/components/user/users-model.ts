@@ -8,6 +8,7 @@ interface IUser extends Document {
         lastname?: string,
         address?: string,
         phone?: string,
+        city?: string,
         state?: string,
         image?: string
     }
@@ -36,6 +37,9 @@ const userSchema: Schema = new Schema({
             type: String
         },
         phone: {
+            type: String
+        },
+        city: {
             type: String
         },
         state: {

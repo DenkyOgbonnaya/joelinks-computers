@@ -30,18 +30,23 @@ export class CartService {
     updateQuantity(productId:string, quantity:number){
         return this.http.put(`api/cart/${productId}`, {quantity}, httpOptions)
     }
+    checkout(credentials: any, userId:any):Observable<any>{
+        return this.http.post(`/api/checkout/${userId}`,credentials, httpOptions )
+        .pipe(catchError(this.handleError));
+    }
 
     private handleError(error: HttpErrorResponse){
         if(error.error instanceof ErrorEvent){
             //client or network error
-            console.log("error", error.error.message);
+            return throwError("Could not complete your checkout, Network error detected.")
         }else {
             //bE error
-            console.error(error.status, error.error);
+            if(error.status < 500){
+                return throwError(error.error.message);
+            }else 
+            return throwError("Something went wrong, it's not you it's us. try checkout again");
             
         }
-        //return a friendly observable error
-        return throwError("an error occoured")
     }
 }
 

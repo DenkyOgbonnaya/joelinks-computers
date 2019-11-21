@@ -5,6 +5,11 @@ import { Product } from '../shared/product.model';
     selector: "products-list",
     template: `
     <div class="container">
+    <div class="spinner">
+        <div  class="spinner-border text-danger" *ngIf="!products">
+            <span class="sr-only">loading..</span>
+        </div>
+    </div>
     <div class="row no-gutters">
         <div class="col no-gutters" *ngFor="let product of products">
             <products-product [product] = product></products-product>
@@ -15,6 +20,9 @@ import { Product } from '../shared/product.model';
     .col {
         margin-bottom: 5px;
         column-gap: 5px;
+    }
+    .spinner {
+        text-align: center;
     }
     @media only screen and (min-width: 65.625em) {
         .container {

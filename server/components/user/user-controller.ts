@@ -24,7 +24,9 @@ const userController = {
                 {currentUser: {
                     _id: user._id, 
                     username: user.username, 
-                    email: user.email}},
+                    email: user.email,
+                    profile: user.profile
+                }},
                 "SECRET_KEY",
                 {expiresIn: '24h'} ) 
                 
@@ -57,7 +59,9 @@ const userController = {
                 {currentUser: {
                     _id: user._id, 
                     username: user.username, 
-                    email: user.email}},
+                    email: user.email,
+                    profile: user.profile
+                }},
                 "SECRET_KEY",
                 {expiresIn: '24h'} ) 
             return res.status(200).send({status: 'success', token})

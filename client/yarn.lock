@@ -849,6 +849,13 @@
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
+"@ng-bootstrap/ng-bootstrap@^5.1.4":
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/@ng-bootstrap/ng-bootstrap/-/ng-bootstrap-5.1.4.tgz#1ace4d4a7b80017fb1c55547a5569993b4742b5d"
+  integrity sha512-UtL9GBkAMy0O/0Rkc4DG1WoFDWhAnAdvsQuJ1IFLmlN2v6HAX+E84tgUK0n15WLBhYBXXuhRx0dIW2jafjg1xQ==
+  dependencies:
+    tslib "^1.9.0"
+
 "@ngtools/webpack@8.3.15":
   version "8.3.15"
   resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-8.3.15.tgz#1b523e56693bc459accc734a0d9b93f3e1d1b6b2"

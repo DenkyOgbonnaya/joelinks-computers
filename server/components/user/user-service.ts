@@ -1,4 +1,5 @@
 import User from "./users-model";
+import { ENGINE_METHOD_DIGESTS } from "constants";
 
 type user = {
     username: string,
@@ -28,6 +29,13 @@ const userService = {
             throw err;
         }
     },
+    async edit(userId:any, profile:any){
+        try {
+            return await User.findByIdAndUpdate(userId, {$set: {profile}})
+        } catch (err) {
+            throw err;
+        }
+    }
 
 }
 export default userService;
