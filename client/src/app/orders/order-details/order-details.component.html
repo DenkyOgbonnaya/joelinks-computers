@@ -1,0 +1,52 @@
+<div class="order_details">
+    <section class="order_summary">
+        <h3>Order Details</h3>
+        <div class="order_id">Order ID: {{order?._id}}</div>
+        <small class="text-muted">Order items: {{getNumOfItems(order?.items)}} | </small>
+        <small class="text-muted">placed on: {{order?.createdAt | date }} | </small>
+        <small class="text-muted">Grand total: {{(getTotalPrice(order.items, order.shippingFee) | currency )}}</small>
+    </section>
+    <hr />
+    <section>
+        <h6>Items in your order</h6>
+        <div class="row">
+            <div class="col items">
+                <h6 class="order_status">Status: {{order?.status}}</h6>
+                <div class="order_items">
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr *ngFor="let item of order?.items">
+                                <td>
+                                    <img src="http://localhost:8080{{item?.image}}" class="item_image" alt="item" />
+                                </td>
+                                <td>
+                                    <div class="item_name">{{item.name}}</div>
+                                    <small>{{item.quantity}} x {{item.price}}</small>
+                                </td>
+                                <td> {{getSubTotal(item.quantity, item.price) | currency}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col">
+                <h6>Payment information</h6>
+                <div class="payment_info">
+                    <p>payment details</p>
+                    <div class="items_total">Items total: {{(getTotalPrice(order.items, 0) | currency )}}</div>
+                    <div class="shipping_fee">Shipping fee: {{ order.shippingFee | currency}}</div>
+                    <div class="order_total">Grand total: {{(getTotalPrice(order.items, order.shippingFee) | currency )}}</div>
+                </div>
+                <h6>Delivery information</h6>
+                <div class="delivery_info">
+                    <p>Delivery details </p>
+                    <div class="customer_name">{{order.customerName}}</div>
+                    <address class="shipping_address">No 23 Hillcon street</address>
+                    <div class="shipping_state">Enugu, Enugu state </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+    <section></section>
+</div>

@@ -9,19 +9,21 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { OrdersDetailsComponent } from './orders/order-details/order-details.component';
+import { OrdersComponent } from './orders/orders.component';
 
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'products', component: ProductsComponent},
   {path: 'cart', component: ShoppingCartComponent},
-  {path: 'about', component: AboutPageComponent},
-  {path: 'order/:id', component: OrdersDetailsComponent},
+  {path: 'about', component: OrdersComponent},
+  {path: 'rice', component: AboutPageComponent},
   {path: 'services', component: ServicePageComponent},
   {path: 'contact', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'product/:id', component: ProductDetailsComponent},
+  {path: 'user/order/:id', component: OrdersDetailsComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'}];
 
 @NgModule({

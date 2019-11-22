@@ -1,0 +1,29 @@
+.order_details {
+    padding: 10px;
+}
+.order_summary {
+    text-align: center;
+}
+.item_image {
+    width: 60px;
+    height: 60px;
+}
+.item_name, p, .order_id {
+    font-weight: bold;
+}
+.delivery_info, .payment_info,  .order_summary, .items{
+    font-size: 13px;
+    margin-top: 5px;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+.order_summary {
+    font-size: 15;
+}
+h6 {
+    padding: 5px;
+    color: crimson;
+}
+table, .order_items {
+    padding: 10px;
+}

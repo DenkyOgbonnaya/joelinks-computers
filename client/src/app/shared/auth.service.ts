@@ -44,6 +44,9 @@ export class AuthService {
         return this.http.get<any>(`/api/users/verify/${token}`)
         .pipe(catchError(this.handleError));
     }
+    isCurrentUser(){
+        return this._currentUser$.getValue();
+    }
     private handleError(error: HttpErrorResponse){
         if(error.error instanceof ErrorEvent){
             //client or network error

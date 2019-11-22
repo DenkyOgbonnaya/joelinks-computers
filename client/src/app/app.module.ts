@@ -29,6 +29,8 @@ import { ProductsModule } from './products';
 import { HeaderModule } from './header/header.module';
 import { CheckoutComponent } from './shopping-cart/checkout/checkout.component';
 import { OrdersModule } from './orders/orders.module';
+import { JwtInterceptor } from './shared';
+import { OrderService } from './orders/shared/orders.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,14 @@ import { OrdersModule } from './orders/orders.module';
     NgbModule,
     OrdersModule
   ],
-  providers: [ProductService, CartStoreService, CartService, AuthService],
+  providers: [
+    ProductService, 
+    CartStoreService, 
+    CartService, 
+    AuthService,
+    JwtInterceptor,
+    OrderService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [CheckoutComponent]
 })

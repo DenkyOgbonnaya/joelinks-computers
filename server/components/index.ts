@@ -4,6 +4,7 @@ import { userRoute } from "./user";
 import { cartRoute } from "./cart";
 import { reviewRoute } from "./reviews";
 import { checkoutRoute } from "./paystack";
+import { orderRoute } from "./order";
 
 export const routers = [
     productRoute, 
@@ -11,5 +12,6 @@ export const routers = [
     userRoute,
     cartRoute,
     reviewRoute,
-    checkoutRoute
+    checkoutRoute,
+    orderRoute
 ]
