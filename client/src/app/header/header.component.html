@@ -9,7 +9,7 @@
                 <a routerLink ="/contact">Contact us</a>
                 <a *ngIf="!(currentUser$ | async )" routerLink ="/login">Login</a>
                 <a *ngIf="!(currentUser$ | async )" routerLink ="/signup">Sign up</a>
-                <a *ngIf="(currentUser$ | async )" routerLink ="/login">{{ (currentUser$ | async)?.username}}</a>
+                <header-dropdown *ngIf="(currentUser$ | async )" [username]="(currentUser$ | async ).username" ></header-dropdown>
                 <span *ngIf="(currentUser$ | async )" (click)="logoutUser()">Logout</span>
             </div>
     </footer>
