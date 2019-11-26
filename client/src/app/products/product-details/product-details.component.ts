@@ -35,7 +35,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     getProduct(){
         const productId:string = this.route.snapshot.params["id"];
         this.productSub = this.productService.getProduct(productId)
-        .subscribe( data => this.product = data)
+        .subscribe( data => this.product = data.product)
     }
     getSimilarProducts(){
         this.similarProducts$ = this.productService.getSimilarProducts();

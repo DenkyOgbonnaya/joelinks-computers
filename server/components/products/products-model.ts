@@ -10,7 +10,7 @@ const productSchema: Schema = new Schema({
         type: Number,
         required: true
     },
-    discounted_price: {
+    discountedPrice: {
         type: Number,
         default: 0
     },
@@ -34,7 +34,6 @@ const productSchema: Schema = new Schema({
     },
     attributes: {
         size: String,
-        color: String,
         processor: String,
         ram: String
     },

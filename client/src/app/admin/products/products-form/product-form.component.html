@@ -1,0 +1,96 @@
+<div class="container">
+        <div *ngIf="errorMessage" class="alert alert-danger"> {{errorMessage}}</div>
+        <form [formGroup]= "productForm" (ngSubmit)="onSubmit(productForm.value)" >
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" formControlName="name" placeholder="prodoct name" class="form-control">
+                    </div>
+                </div>
+                <div class="col">
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="number" formControlName="price" placeholder="product price" class="form-control">
+                        </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="discountedPrice">Discounted price</label>
+                        <input type="number" formControlName="discountedPrice" placeholder="discounted price" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" formControlName="quantity" name="quantity" placeholder="product inventery" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col">
+                            <div class="form-group">
+                                <label for="brand">Brand</label>
+                                <input type="text" formControlName="brand" name="brand" placeholder="brand name" class="form-control">
+                            </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="category">Select category</label>
+                            <select name="category" formControlName="category" id="category" class="form-control">
+                                <option value="computers">Computer</option>
+                                <option value="cameras"> Cameras</option>
+                                <option value="office equipments">Office equipments</option>
+                                <option value="accessories"> Accessory</option>
+                            </select>
+                        </div>
+                    </div>
+            </div>
+                <div formGroupName="attributes">
+                    <h3>Product attributes</h3>
+                    <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="processor">Processor</label>
+                                    <input name="processor" type="text" formControlName="processor" placeholder="for computers only" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col">
+                                    <div class="form-group">
+                                        <label for="ram">Ram</label>
+                                        <input name="ram" type="text" formControlName="ram" placeholder="computers only" class="form-control">
+                                    </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="size">Size</label>
+                                    <input name="size" type="text" formControlName="size" placeholder="e.g 14'inch, 32gb, 10m" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" formControlName="description" placeholder="product description"></textarea>
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="description">select upto 3 images(hold ctr+select</label>
+                                <input type="file" class="form-control"  (change)="onSelectFile($event)" multiple>
+                            </div>
+                        </div>
+            </div>
+            <button type="submit" class="btn btn-danger btn-lg" [disabled] = "!productForm.valid">
+                <div class="spinner-border text-light spinner-border-sm" role="status" *ngIf="isLoading">
+                        <span class="sr-only">loading...</span>
+                </div>
+                <div *ngIf="!isLoading"> Submit</div>
+            </button>
+                
+        </form>
+    </div>

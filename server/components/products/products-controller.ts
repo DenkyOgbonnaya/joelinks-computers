@@ -13,7 +13,7 @@ const  productController = {
 
     async addProduct(req: any, res: Response){
         let images = [];
-        const{name, price, discounted_price, brand, quantity, category, description, processor, ram, size} = req.body;
+        const{name, price, discountedPrice, brand, quantity, category, description, attributes} = req.body;
 
         if(req.files.length > 0){
             for(let i=0; i< req.files.length; i+=1){
@@ -25,20 +25,17 @@ const  productController = {
         const newProduct = {
             name,
             price,
+            discountedPrice,
             brand,
             quantity,
             category,
             description,
-            attributes: {
-                processor,
-                ram,
-                size
-            },
+            attributes,
             images
         }
         try {
             const product = await add(newProduct);
-            res.status(201).send(product);
+            res.status(201).send({product, message: "Product Successfully added!"});
         } catch (err) {
             res.status(500).send(err.message);
         }
@@ -47,7 +44,7 @@ const  productController = {
     async getAllProducts(req: Request, res: Response){
         try {
             const products = await getProducts();
-            res.status(200).send(products)
+            res.status(200).send({products})
         } catch (err) {
             res.status(500).send(err.message);
         }
@@ -57,7 +54,7 @@ const  productController = {
         try {
             const product = await getSingle(id);
             if(product)
-                return res.status(200).send(product);
+                return res.status(200).send({product});
             return res.status(404).send({message: 'Could not find this product'})
         } catch (err) {
             console.log(err);
@@ -70,7 +67,7 @@ const  productController = {
         try {
             const product = await edit(id, req.body);
             if(product)
-                return res.status(200).send(product);
+                return res.status(200).send({product, message: "Product edited successfully"});
             return res.status(400).send({message: "No such product exist"})
         } catch (err) {
             res.status(500).send(err.message);

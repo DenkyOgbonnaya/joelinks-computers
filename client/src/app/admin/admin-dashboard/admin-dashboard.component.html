@@ -1,0 +1,65 @@
+<div class="dashboard-container">
+    <section class="side_nav">
+        <app-subheader [pageName]="pageName"></app-subheader>
+        <ul class="nav flex-column nav-pills">
+            <li class="nav-item" >
+                <img src="/assets/icons/product_ic20px.png" alt="products">
+                <a routerLink="/admin/products">  Manage Products</a>
+            </li>
+            <hr />
+            <li class="nav-item">
+                <img src="/assets/icons/order_ic20px.png" alt="products"> 
+                <a routerLink="/admin/orders"> Manage orders </a>
+            </li>
+            <hr />
+            <li class="nav-item">
+                    <img src="/assets/icons/users_ic20px.png" alt="products"> 
+                    <a routerLink="/admin/users"> Users </a>
+            </li>
+            <hr />
+            <li class="nav-item">
+                    <img src="/assets/icons/categori_ic20px.png" alt="products"> 
+                    <a routerLink="/admin/categories"> Categories </a>
+            </li>
+            <hr />
+            <li class="nav-item">
+                <img src="/assets/icons/home-product_ic20px.png" alt="products"> 
+                <a routerLink="/admin/homeproducts"> Home products </a>
+            </li>
+        </ul>
+    </section>
+    <section class="main">
+            <div class="dashboard_title">
+                <img src="/assets/icons/dashboard_ic40px.png" alt="dashboard">
+                <span class="title">Admin Dashboard</span>
+            </div>
+            <hr />
+            <div class="products">
+                <h6>Manage Products</h6>
+                <p>Use this section to Add, view, update and Dekete products</p>
+            </div>
+            <hr />
+            <div class="orders">
+                <h6>Manage Orders</h6>
+                <p>You can use this section to track all Cancelled, Pending, Failed, Shipped and Delivered orders. it also 
+                    has link to update order status and delete order.
+                </p>
+            </div>
+            <hr />
+            <div class="users">
+                <h6>Users</h6>
+                <p>This section contains a list of all registered users, and a link to their profile and ordered items.</p>
+            </div>
+            <hr />
+            <div class="categories">
+                <h6>Manage Categories</h6>
+                <p>Use this section to add new category, modify existing category or delet.</p>
+            </div>
+            <hr />
+            <div class="home_products">
+                <h6>Home Products</h6>
+                <p>This section allows you to add, view, and remove products displayed in the home page</p>
+            </div>
+    </section>
+    
+</div>
