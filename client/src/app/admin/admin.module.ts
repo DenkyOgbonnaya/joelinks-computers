@@ -10,20 +10,22 @@ import { RouterModule } from '@angular/router';
 import { AddProductComponent } from './products/add-product/add-product.component';
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { ProductFormComponent } from './products/products-form/products-form.component';
+import { PaginationModule } from '../pagination/pagination.module';
 
 @NgModule({
     imports: [
         CommonModule,
         HeaderModule,
         RouterModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        PaginationModule
     ],
     declarations: [
         AdminDashboardComponent,
         ProductFormComponent,
         AdminProductsComponent,
         AddProductComponent,
-        EditProductComponent
+        EditProductComponent,
     ]
 })
 export class AdminModule {

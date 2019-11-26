@@ -4,14 +4,23 @@ import { ProductService, Product } from '../products/shared';
 
 @Injectable({providedIn: "root"})
 export class ProductsStoreService {
-    private _products$ = new BehaviorSubject([]);
+    initialState = {
+        products: [],
+        page: 1,
+        pages: 1,
+        total: 1
+    }
+    private _products$ = new BehaviorSubject(this.initialState);
 
     constructor(private productService: ProductService){}
 
-    getProducts():Observable<any>{
-        this.productService.getProducts()
+    getProducts(page:number, limit:number):Observable<any>{
+        this.productService.getProducts(page, limit)
         .subscribe( data => {
-            this._products$.next(data.products);
+            this._products$.next({
+                ...this._products$.getValue(),
+                ...data
+            });
         })
         return this._products$.asObservable();
     }
@@ -19,7 +28,8 @@ export class ProductsStoreService {
         this.productService.addProduct(product)
         .subscribe(
             data => {
-                this._products$.next(this._products$.getValue().concat(data.product));
+                const updatedProducts = this._products$.getValue().products.concat(data.product);
+                this.updateProductsState(updatedProducts);
                 return cb(null, data.message);
             },
             err => {
@@ -33,9 +43,10 @@ export class ProductsStoreService {
         this.productService.editProduct(productId, credentials)
         .subscribe(
             data => {
-                let updatedProducts = this._products$.getValue().map( (product:Product) => 
+                let updatedProducts = this._products$.getValue().products.map( (product:Product) => 
                     product._id === productId ? Object.assign({}, product, data.product) : product);
-                this._products$.next(updatedProducts);
+
+               this.updateProductsState(updatedProducts);
 
                 return cb(null, data.message);
             },
@@ -43,13 +54,21 @@ export class ProductsStoreService {
         )
     }
     deleteProduct(productId:string, cb:any){
-        const updatedProducts = this._products$.getValue().filter( (product:Product) => product._id !== productId);
-        this._products$.next(updatedProducts);
-        
+        const updatedProducts = this._products$.getValue().products.filter( (product:Product) => product._id !== productId);
+        this.updateProductsState(updatedProducts);
+
         this.productService.deleteProduct(productId)
         .subscribe(
             data => cb(null, data.message),
             err => cb(err)
         )
+    }
+
+    updateProductsState(updatedProducts:Product[]){
+        const  updatedState = {
+            ...this._products$.getValue(),
+            products: updatedProducts
+        }
+        this._products$.next(updatedState);
     }
 }

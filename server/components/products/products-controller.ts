@@ -6,7 +6,8 @@ const{
     getProducts,
     getSingle,
     edit,
-    deleteOne
+    deleteOne,
+    getProductsCount
 
 } = productService;
 const  productController = {
@@ -42,9 +43,20 @@ const  productController = {
         
     },
     async getAllProducts(req: Request, res: Response){
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 10;
+
+        const offset = (page*limit) - limit;
         try {
-            const products = await getProducts();
-            res.status(200).send({products})
+            const products = await getProducts(offset, limit);
+            const productsCount = await getProductsCount();
+
+            return res.status(200).send({
+                products,
+                page,
+                pages: Math.ceil(productsCount/limit),
+                total: products.length
+            })
         } catch (err) {
             res.status(500).send(err.message);
         }

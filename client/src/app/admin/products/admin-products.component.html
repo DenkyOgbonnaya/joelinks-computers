@@ -1,11 +1,11 @@
 <div class="products_container">
     <button class="btn btn-danger" routerLink="/admin/product/new">Add new+</button>
     <div class="spinner">
-        <div class="spinner-border text-danger" role="status" *ngIf="!(products$ | async).length">
+        <div class="spinner-border text-danger" role="status" *ngIf="!(products$ | async).products.length">
             <span class="sr-only">loading...</span>
         </div>
     </div>
-    <div *ngIf="(products$ | async).length >=1 else noData" class="table-responsive">
+    <div *ngIf="(products$ | async).products.length >=1" class="table-responsive">
         <table class="table w-100 table-hover">
             <thead>
                 <tr>
@@ -18,7 +18,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let product of products$ | async" [routerLink]= "['/product', product?._id]" >
+                <tr *ngFor="let product of (products$ | async).products" [routerLink]= "['/product', product?._id]" >
                     <td>{{product?.name}}</td>
                     <td>{{product?.price}}</td>
                     <td>{{product?.quantity}}</td>
@@ -30,5 +30,11 @@
             </tbody>
         </table>
     </div>
-    <ng-template #noData> No products! </ng-template>
+    <div *ngIf="(products$ | async).products.length === 0" class="jumbotron"> No Products!</div>
+    <app-pagination 
+            [pages]="pages" 
+            [currentPage]="currentPage" 
+            (pageChanged)="changePage($event)"
+            *ngIf="pages>1">
+        </app-pagination>
 </div>

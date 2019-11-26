@@ -8,7 +8,13 @@
                 <li>Camaras</li>
             </ul>
         </nav>
-        <products-list [products] ="products$ | async" ></products-list>
+        <products-list [products] ="(products$ | async).products" ></products-list>
+        <app-pagination 
+            [pages]="pages" 
+            [currentPage]="currentPage" 
+            (pageChanged)="changePage($event)"
+            *ngIf="pages>1">
+        </app-pagination>
         
     </div>
         

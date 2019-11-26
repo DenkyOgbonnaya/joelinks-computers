@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from 'rxjs';
-import { Product, ProductService } from 'src/app/products/shared';
+import { tap } from "rxjs/operators";
+import { Product} from 'src/app/products/shared';
 import { ProductsStoreService, NotificationService } from 'src/app/shared';
 import { Router } from '@angular/router';
 
@@ -17,6 +18,8 @@ import { Router } from '@angular/router';
 })
 export class AdminProductsComponent implements OnInit {
     products$:Observable<Product[]>
+    currentPage:number = 1;
+    pages:number = 1;
 
     constructor(
         private productsStoreService:ProductsStoreService,
@@ -24,8 +27,18 @@ export class AdminProductsComponent implements OnInit {
         private router: Router
     ){}
 
-    getProducts(){
-        this.products$ = this.productsStoreService.getProducts();
+    changePage(pageNumber:number){
+        this.getProducts(pageNumber, 10);
+    }
+    getProducts(pageNumber:number, limit:number){
+        this.products$ = this.productsStoreService.getProducts(pageNumber, limit)
+        .pipe(
+            tap(data => {
+                this.currentPage = data.page;
+                this.pages = data.pages;
+                
+            })
+        )
     }
     handleEdit(event:Event, id:string){
         this.router.navigate([`/admin/product/edit/${id}`]);
@@ -34,7 +47,7 @@ export class AdminProductsComponent implements OnInit {
     }
     deleteProduct(event:Event, id:string){
         event.stopPropagation();
-        
+
         this.productsStoreService.deleteProduct(id, (err:any, message:string) => {
             if(!err){
                 this.notify.showSuccessMessage("Succes", message);
@@ -42,6 +55,6 @@ export class AdminProductsComponent implements OnInit {
         })
     }
     ngOnInit(){
-        this.getProducts();
+        this.getProducts(1, 10);
     }
 }

@@ -16,8 +16,8 @@ export class ProductService {
     constructor(private http: HttpClient){
 
     }
-    getProducts():Observable<any> {
-        return this.http.get<any>(this._productsUrl)
+    getProducts(page:number, limit:number):Observable<any> {
+        return this.http.get<any>(`/api/products?page=${page}&limit=${limit}`)
     }
     getProduct(id:string):Observable<any>{
         return this.http.get<any>(`/api/products/${id}`);

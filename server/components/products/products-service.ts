@@ -8,10 +8,18 @@ const productService =  {
             throw err;
         }
     },
-    async getProducts(){
+    async getProducts(offset:number, limit:number){ 
+        
         try {
-            return await Product.find({});
+            return await Product.find({}).skip(offset).limit(limit)
         } catch (err) {
+            throw err;
+        }
+    },
+    async getProductsCount(){
+        try{
+            return await Product.countDocuments();
+        }catch(err){
             throw err;
         }
     },

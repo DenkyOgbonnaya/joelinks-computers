@@ -32,6 +32,7 @@ import { OrdersModule } from './orders/orders.module';
 import { JwtInterceptor, ProductsStoreService } from './shared';
 import { OrderService } from './orders/shared/orders.service';
 import { AdminModule } from './admin/admin.module';
+import { PaginationModule } from './pagination/pagination.module';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { AdminModule } from './admin/admin.module';
     HeaderModule,
     NgbModule,
     OrdersModule,
-    AdminModule
+    AdminModule,
+    PaginationModule
   ],
   providers: [
     ProductService, 
