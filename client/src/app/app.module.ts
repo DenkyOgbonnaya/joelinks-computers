@@ -33,6 +33,10 @@ import { JwtInterceptor, ProductsStoreService } from './shared';
 import { OrderService } from './orders/shared/orders.service';
 import { AdminModule } from './admin/admin.module';
 import { PaginationModule } from './pagination/pagination.module';
+import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
+import { CategoriesModule } from './admin/admin-categories/categories.module';
+import { CategoriesStoreService } from './shared/categories-store.service';
+import { CategoryService } from './admin/admin-categories/shared/categories.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,8 @@ import { PaginationModule } from './pagination/pagination.module';
     NgbModule,
     OrdersModule,
     AdminModule,
-    PaginationModule
+    PaginationModule,
+    CategoriesModule
   ],
   providers: [
     ProductService, 
@@ -74,7 +79,9 @@ import { PaginationModule } from './pagination/pagination.module';
     AuthService,
     JwtInterceptor,
     OrderService,
-    ProductsStoreService
+    ProductsStoreService,
+    CategoriesStoreService,
+    CategoryService
   ],
   bootstrap: [AppComponent],
   entryComponents: [CheckoutComponent]

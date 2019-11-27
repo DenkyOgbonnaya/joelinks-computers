@@ -22,6 +22,13 @@ const categoriesService = {
         } catch (err) {
             throw err;
         }
+    },
+    async deleteCategory (id:string) {
+        try {
+            return Category.findByIdAndDelete(id);
+        } catch (err) {
+            throw err;
+        }
     }
 }
 export default categoriesService;

@@ -3,9 +3,7 @@
     <div class="container product_main">
         <nav>
             <ul>
-                <li>Computers</li>
-                <li>Printers</li>
-                <li>Camaras</li>
+                <li *ngFor="let category of categories$ | async" (click)="getProductsInCat(category.name)"> {{category.name}}</li>
             </ul>
         </nav>
         <products-search></products-search>

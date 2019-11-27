@@ -43,6 +43,9 @@ export class ProductService {
         return this.http.get<any>(`/api/product/search?search=${search}`)
         .pipe(catchError(this.handleError));
     }
+    getProductsByCat(name:string):Observable<any> {
+        return this.http.get<any>(`/api/product/category/${name}`)
+    }
     private handleError(error: HttpErrorResponse){
         if(error.error instanceof ErrorEvent){
             //client or network error

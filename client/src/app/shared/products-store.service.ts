@@ -75,6 +75,16 @@ export class ProductsStoreService {
         err => cb(err)
         );
     }
+    getProductsByCat(name:string):Observable<any>{
+        this.productService.getProductsByCat(name)
+        .subscribe( data => {
+            this._products$.next({
+                ...this._products$.getValue(),
+                ...data
+            });
+        })
+        return this._products$.asObservable();
+    }
     updateProductsState(updatedProducts:Product[]){
         const  updatedState = {
             ...this._products$.getValue(),

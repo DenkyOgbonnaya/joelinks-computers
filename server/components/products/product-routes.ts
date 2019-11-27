@@ -9,7 +9,8 @@ const{
     getSingleProduct,
     editProduct,
     deleteProduct,
-    searchProduct
+    searchProduct, 
+    getProductByCat
 } = productController;
 
 productRouter.route('/products')
@@ -22,6 +23,7 @@ productRouter.route('/products/:id')
 .delete(deleteProduct)
 
 productRouter.get("/product/search", searchProduct)
+productRouter.get("/product/category/:name", getProductByCat)
 const api ={
     path: '/api',
     router: productRouter

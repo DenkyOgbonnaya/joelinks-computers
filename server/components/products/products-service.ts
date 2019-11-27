@@ -57,6 +57,13 @@ const productService =  {
         } catch (err) {
             throw err;
         }
-    }
+    },
+    async getByCategory(productCategory:string){
+        try {
+            return await Product.find({category: productCategory});
+        } catch (err) {
+            throw err;
+        }
+    },
 }
 export default productService;

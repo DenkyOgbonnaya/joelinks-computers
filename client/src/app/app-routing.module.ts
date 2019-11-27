@@ -14,6 +14,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { AdminProductsComponent } from './admin/products/admin-products.component';
 import { AddProductComponent } from './admin/products/add-product/add-product.component';
 import { EditProductComponent } from './admin/products/edit-product/edit-product.component';
+import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'admin/products', component: AdminProductsComponent},
   {path: 'admin/product/new', component: AddProductComponent},
   {path: 'admin/product/edit/:id', component: EditProductComponent},
+  {path: 'admin/categories', component: AdminCategoriesComponent},
   {path: 'services', component: ServicePageComponent},
   {path: 'contact', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},

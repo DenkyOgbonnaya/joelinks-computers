@@ -10,7 +10,8 @@ const{
     deleteOne,
     getProductsCount,
     searchProduct,
-    getSimilar
+    getSimilar,
+    getByCategory
 
 } = productService;
 const  productController = {
@@ -127,6 +128,20 @@ const  productController = {
             res.status(500).send(err);
         }
     },
+    async getProductByCat(req:Request, res: Response){
+        const {name} = req.params;
+
+        try {
+            const products = await getByCategory(name);
+            return res.status(200).send({
+                products,
+                page: 1,
+                pages: 1
+            });
+        } catch (err) {
+            res.status(500).send(err);
+        }
+}
 }
 
 export default productController;

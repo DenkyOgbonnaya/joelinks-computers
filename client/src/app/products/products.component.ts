@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from 'rxjs';
-import { ProductsStoreService } from '../shared';
-import { take, tap } from 'rxjs/operators';
+import { ProductsStoreService, CategoriesStoreService } from '../shared';
+import {tap } from 'rxjs/operators';
 
 @Component({
     templateUrl: "./products.component.html",
@@ -10,17 +10,22 @@ import { take, tap } from 'rxjs/operators';
 
 export class ProductsComponent implements OnInit {
     products$:Observable<any>;
+    categories$:Observable<any>;
     pageName:string = "Products";
     currentPage:number = 1;
     pages:number = 1;
 
-    constructor(private productStoreService: ProductsStoreService){}
+    constructor(
+        private productStoreService: ProductsStoreService,
+        private categoriesStoreService:CategoriesStoreService
+        ){}
     changePage(pageNumber:number){
         this.getProducts(pageNumber, 10);
     }
 
     ngOnInit(){
         this.getProducts(1, 10);
+        this.getCategories();
     }
     getProducts(pageNumber:number, limit:number){
         this.products$ = this.productStoreService.getProducts(pageNumber, limit)
@@ -31,5 +36,11 @@ export class ProductsComponent implements OnInit {
                 
             })
         )
+    }
+    getCategories(){
+        this.categories$ = this.categoriesStoreService.getCategories();
+    }
+    getProductsInCat(name:string){
+        this.products$ = this.productStoreService.getProductsByCat(name);
     }
 }

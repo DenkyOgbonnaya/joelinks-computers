@@ -10,7 +10,11 @@ import { Product } from '../shared/product.model';
             <span class="sr-only">loading..</span>
         </div>
     </div>
-    <div class="row no-gutters">
+    <div class="jumbotron"  *ngIf="products && products.length === 0">
+        <img src="/assets/icons/product_ic20px.png" alt="no products" />
+         <span>No Products </span>
+    </div>
+    <div class="row no-gutters" *ngIf="products && products.length > 0">
         <div class="col no-gutters" *ngFor="let product of products">
             <products-product [product] = product></products-product>
         </div>
@@ -23,6 +27,10 @@ import { Product } from '../shared/product.model';
     }
     .spinner {
         text-align: center;
+    }
+    .jumbotron {
+        text-align: center;
+        
     }
     @media only screen and (min-width: 65.625em) {
         .container {
