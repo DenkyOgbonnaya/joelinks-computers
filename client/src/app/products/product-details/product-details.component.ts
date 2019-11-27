@@ -12,7 +12,7 @@ import { Observable, Subscription } from 'rxjs';
 export class ProductDetailsComponent implements OnInit, OnDestroy {
     pageName:string = "Products Details";
     product:Product;
-    similarProducts$:Observable<Product[]>;
+    similarProducts:Product[];
     quantity:number = 1;
     productSub: Subscription;
     routeSub:Subscription;
@@ -30,15 +30,14 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
     ngOnInit(){
         this.getProduct();
-        this.getSimilarProducts();
     }
     getProduct(){
         const productId:string = this.route.snapshot.params["id"];
         this.productSub = this.productService.getProduct(productId)
-        .subscribe( data => this.product = data.product)
-    }
-    getSimilarProducts(){
-        this.similarProducts$ = this.productService.getSimilarProducts();
+        .subscribe( data => {
+            this.product = data.product;
+            this.similarProducts = data.similarProducts;
+        })
     }
     addQuantity():void{
         this.quantity+=1;

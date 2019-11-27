@@ -1,5 +1,6 @@
 import {Request, Response} from "express";
 import productService from "./products-service";
+import { IProduct } from "./product";
 
 const{
     add,
@@ -8,7 +9,8 @@ const{
     edit,
     deleteOne,
     getProductsCount,
-    searchProduct
+    searchProduct,
+    getSimilar
 
 } = productService;
 const  productController = {
@@ -66,8 +68,12 @@ const  productController = {
         const{id} =req.params;
         try {
             const product = await getSingle(id);
-            if(product)
-                return res.status(200).send({product});
+            if(product){
+                const similarProduct = await getSimilar(product.category);
+                const filtered = similarProduct.filter( (item:IProduct) => item._id != product._id);
+                
+                return res.status(200).send({product, similarProducts: filtered});
+            }
             return res.status(404).send({message: 'Could not find this product'})
         } catch (err) {
             console.log(err);

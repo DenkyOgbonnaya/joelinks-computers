@@ -31,8 +31,8 @@
         </section>
         
     </main>
-        <section class="similar_products">
+        <section class="similar_products" *ngIf="similarProducts.length>0">
             <h6>You may also like</h6>
-            <products-list [products]="(similarProducts$ | async)"></products-list>
+            <products-list [products]="similarProducts"></products-list>
         </section>
 </div>

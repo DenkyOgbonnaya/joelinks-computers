@@ -26,9 +26,6 @@ export class ProductService {
     getHomeProducts():Observable<Product[]>{
         return this.http.get<Product[]>("/assets/products.json");
     }
-    getSimilarProducts():Observable<Product[]>{
-        return this.http.get<Product[]>("/assets/similar-products.json");
-    }
     addProduct(product: FormData):Observable<any>{
         return this.http.post<any>(`/api/products`, product, httOptions)
         .pipe(catchError(this.handleError))

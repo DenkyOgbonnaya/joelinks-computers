@@ -51,5 +51,12 @@ const productService =  {
             throw err;
         }
     },
+    async getSimilar(productCategory:string){
+        try {
+            return await Product.find({category: productCategory}).limit(4);
+        } catch (err) {
+            throw err;
+        }
+    }
 }
 export default productService;
