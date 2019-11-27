@@ -42,17 +42,20 @@ export class ProductService {
         return this.http.delete<any>(`/api/products/${productId}`, httOptions)
         .pipe(catchError(this.handleError));
     }
-
+    searchProduct(search:string):Observable<any>{
+        return this.http.get<any>(`/api/product/search?search=${search}`)
+        .pipe(catchError(this.handleError));
+    }
     private handleError(error: HttpErrorResponse){
         if(error.error instanceof ErrorEvent){
             //client or network error
-            return throwError("Could not complete your login, Network error detected.")
+            return throwError("Could not complete your request, Network error detected.")
         }else {
             //bE error
             if(error.status < 500){
                 return throwError(error.error.message);
             }else 
-            return throwError("Something went wrong, it's not you it's us. try login again");
+            return throwError("Something went wrong, it's not you it's us. try again");
             
         }
     }

@@ -11,6 +11,7 @@ import { AddProductComponent } from './products/add-product/add-product.componen
 import { EditProductComponent } from './products/edit-product/edit-product.component';
 import { ProductFormComponent } from './products/products-form/products-form.component';
 import { PaginationModule } from '../pagination/pagination.module';
+import { ProductsModule } from '../products';
 
 @NgModule({
     imports: [
@@ -18,7 +19,8 @@ import { PaginationModule } from '../pagination/pagination.module';
         HeaderModule,
         RouterModule,
         ReactiveFormsModule,
-        PaginationModule
+        PaginationModule,
+        ProductsModule
     ],
     declarations: [
         AdminDashboardComponent,

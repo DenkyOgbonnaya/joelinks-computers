@@ -43,6 +43,13 @@ const productService =  {
         } catch (err) {
             throw err;
         }
-    }
+    }, 
+    async searchProduct(query:any){
+        try{
+            return await  Product.find(query)
+        }catch(err){
+            throw err;
+        }
+    },
 }
 export default productService;

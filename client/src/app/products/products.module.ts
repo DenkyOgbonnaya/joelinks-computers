@@ -7,24 +7,29 @@ import { ProductComponent } from './product/product.component';
 import { HeaderModule } from '../header/header.module';
 import { RouterModule } from '@angular/router';
 import { PaginationModule } from '../pagination/pagination.module';
+import { FormsModule } from '@angular/forms';
+import { ProductSerchComponent } from './products-search/product-search.component';
 
 @NgModule({
     imports: [
         CommonModule,
         RouterModule,
         HeaderModule,
-        PaginationModule
+        PaginationModule,
+        FormsModule
     ],
     declarations: [
         ProductsComponent,
         productlistComponent,
         ProductDetailsComponent,
         ProductComponent,
+        ProductSerchComponent
     ],
     exports: [
         productlistComponent,
         ProductDetailsComponent,
-        ProductsComponent
+        ProductsComponent,
+        ProductSerchComponent
     ]
 })
 export class ProductsModule {

@@ -8,6 +8,8 @@
                 <li>Camaras</li>
             </ul>
         </nav>
+        <products-search></products-search>
+        <hr />
         <products-list [products] ="(products$ | async).products" ></products-list>
         <app-pagination 
             [pages]="pages" 

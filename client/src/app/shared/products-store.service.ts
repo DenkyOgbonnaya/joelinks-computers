@@ -63,7 +63,18 @@ export class ProductsStoreService {
             err => cb(err)
         )
     }
-
+    searchProduct(search:string, cb:Function){
+        this.productService.searchProduct(search)
+        .subscribe( data => {
+            this._products$.next({
+                ...this._products$.getValue(),
+                ...data
+            });
+            cb(null);
+        },
+        err => cb(err)
+        );
+    }
     updateProductsState(updatedProducts:Product[]){
         const  updatedState = {
             ...this._products$.getValue(),
