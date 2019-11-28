@@ -36,6 +36,13 @@ const orderService = {
         } catch (err) {
             throw err;
         }
+    },
+    async getOrdersInStaus(status:string){
+        try {
+            return await Order.find({status})
+        } catch (err) {
+            throw err;
+        }
     }
 }
 

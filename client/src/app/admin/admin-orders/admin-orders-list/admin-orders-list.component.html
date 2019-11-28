@@ -1,0 +1,28 @@
+<div class="table-responsive" *ngIf=" orders && orders.length > 0 else jumbotron">
+    <table class="table w-100 table-hover">
+        <thead>
+            <tr>
+                <th class ='thead'>Date ordered</th>
+                <th class ='thead'>Reference</th>
+                <th class ='thead'>Customer</th>
+                <th class ='thead'>items</th>
+                <th class ='thead'>shipping fee</th>
+                <th class ='thead'>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders">
+                <td>{{order.createdAt | date}}</td>
+                <td> {{order.paymentRef || "-"}}</td>
+                <td> <a routerLink="/profile/{{order.user}}"> {{order.customerName}} </a> </td>
+                <td> {{order.items.length}}</td>
+                <td> {{order.shippingFee | currency}}</td>
+                <td> {{(getTotalPrice(order.items, order.shippingFee) | currency )}} </td>
+                <td [routerLink]="['/user/order', order._id]"> <button class="btn btn-light">Update</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<ng-template #jumbotron>
+    <div class="jumbotron" style="text-align: center;">No orders</div>
+</ng-template>

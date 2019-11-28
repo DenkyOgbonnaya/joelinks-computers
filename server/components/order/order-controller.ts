@@ -7,7 +7,8 @@ const{
     getAll,
     getOne,
     edit,
-    getUserOrders
+    getUserOrders,
+    getOrdersInStaus
 } = orderService;
 
 const orderController = {
@@ -72,6 +73,16 @@ const orderController = {
         try {
             const orders = await getUserOrders(userId);
             res.status(200).send({orders});
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    },
+    async getOrdersInStatus(req:Request, res:Response){
+        const{status} = req.params;
+
+        try {
+            const orders = await getOrdersInStaus(status);
+            return res.status(200).send({orders});
         } catch (err) {
             res.status(500).send(err);
         }

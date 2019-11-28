@@ -1,0 +1,32 @@
+<ngb-tabset>
+    <ngb-tab >
+        <ng-template ngbTabTitle> <div (click)="getOrdersInStatus('Pending')"> Pending</div> </ng-template>
+      <ng-template ngbTabContent>
+        <admin-orderlist [orders]="(orders$ | async)?.orders "></admin-orderlist>
+      </ng-template>
+    </ngb-tab >
+    <ngb-tab>
+      <ng-template ngbTabTitle> <div (click)="getOrdersInStatus('Processing')"> Processing</div> </ng-template>
+      <ng-template ngbTabContent>
+        <admin-orderlist [orders]="(orders$ | async)?.orders "></admin-orderlist>
+      </ng-template>
+    </ngb-tab>
+    <ngb-tab>
+        <ng-template ngbTabTitle> <div (click)="getOrdersInStatus('Shipped')"> Shipped</div> </ng-template>
+      <ng-template ngbTabContent>
+            <admin-orderlist [orders]="(orders$ | async)?.orders "></admin-orderlist>
+        </ng-template>
+    </ngb-tab>
+    <ngb-tab >
+            <ng-template ngbTabTitle> <div (click)="getOrdersInStatus('Delivered')"> Delivered</div> </ng-template>
+        <ng-template ngbTabContent>
+            <admin-orderlist [orders]="(orders$ | async)?.orders "></admin-orderlist>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab>
+        <ng-template ngbTabTitle> <div (click)="getOrdersInStatus('Cancelled')"> Cancelled</div> </ng-template>
+        <ng-template ngbTabContent>
+            <admin-orderlist [orders]="(orders$ | async)?.orders "></admin-orderlist>
+        </ng-template>
+      </ngb-tab>
+  </ngb-tabset>

@@ -22,6 +22,10 @@ export class OrderService {
         return this.http.get(`/api/orders/${orderId}`, httOptions)
         .pipe(catchError(this.handleError));
     }
+    getOrdersInStatus(status:string):Observable<any> {
+        return this.http.get(`/api/orders/${status}/status`, httOptions)
+        .pipe(catchError(this.handleError));
+    }
 
     private handleError(error: HttpErrorResponse){
         if(error.error instanceof ErrorEvent){
