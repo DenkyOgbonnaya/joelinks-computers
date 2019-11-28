@@ -47,6 +47,19 @@ export class AuthService {
     isCurrentUser(){
         return this._currentUser$.getValue();
     }
+    getUsers(pageNumber:number, limit:number):Observable<any>{
+        return this.http.get(`/api/users?page=${pageNumber}&limit=${limit}`, httOptions)
+        .pipe(catchError(this.handleError));
+    }
+    makeAdmin(userId:string){
+        return this.http.post<any>(`/api/users/${userId}/makeadmin`, httOptions)
+        .pipe(catchError(this.handleError))
+    }
+    disAdmin(userId:string){
+        return this.http.post<any>(`/api/users/${userId}/disadmin`, httOptions)
+        .pipe(catchError(this.handleError))
+    }
+    
     private handleError(error: HttpErrorResponse){
         if(error.error instanceof ErrorEvent){
             //client or network error

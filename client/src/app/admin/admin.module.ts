@@ -15,6 +15,7 @@ import { PaginationModule } from '../pagination/pagination.module';
 import { ProductsModule } from '../products';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { AdminOrderlistComponent } from './admin-orders/admin-orders-list/admin-orders-list.component';
+import { AdminUsersComponent } from './admin-users/admin-users.component';
 
 @NgModule({
     imports: [
@@ -35,7 +36,8 @@ import { AdminOrderlistComponent } from './admin-orders/admin-orders-list/admin-
         AddProductComponent,
         EditProductComponent,
         AdminOrdersComponent,
-        AdminOrderlistComponent
+        AdminOrderlistComponent,
+        AdminUsersComponent
     ]
 })
 export class AdminModule {

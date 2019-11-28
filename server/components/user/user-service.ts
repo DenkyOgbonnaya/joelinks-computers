@@ -35,7 +35,39 @@ const userService = {
         } catch (err) {
             throw err;
         }
-    }
+    },
+    async makeAdmin (userId:any){
+        try {
+            return await User.findByIdAndUpdate(userId, {$set: {isAdmin: true}}, {new: true});
+        } catch (err) {
+            throw err;
+        }
+    },
+    async getUsers(options:any){
+        const{page, limit} = options;
+        const offset = (page*limit)-limit;
+        try{
+            return await User.find({}, {password: 0})
+            .skip(offset)
+            .limit(limit)
+        }catch(err){
+            throw err;
+        }
+    },
+    async userCount(){
+        try{
+            return  await User.countDocuments();
+        }catch(err){
+            throw err;
+        }
+    },
+    async disAdmin(userId:string){
+        try{
+            return await User.findByIdAndUpdate(userId, {$set: {isAdmin: false}}, {new:true});
+        }catch(err){
+            throw err;
+        }
+    },
 
 }
 export default userService;

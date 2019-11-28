@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-const{create, usernameExist, emailExist} = userService;
+const{create, usernameExist, emailExist, getUsers, userCount, makeAdmin, disAdmin} = userService;
 const{SECRET_KEY} = process.env;
 
 const userController = {
@@ -99,6 +99,46 @@ const userController = {
             next();
         }catch(err){
             throw err
+        }
+    },
+    async getUsers(req:Request, res:Response){
+        const page = Number(req.query.page) || 1;
+        const limit = Number(req.query.limit) || 20;
+
+        try{
+            const users = await getUsers({page, limit});
+            const count = await userCount();
+
+            return res.status(200).send({
+                users,
+                page,
+                pages: Math.ceil(count/limit),
+                total: users.length
+            })
+        }catch(err){
+            res.status(400).send(err);
+        }
+    },
+    async makeAdmin(req:Request, res:Response){
+        const {userId} = req.params;
+        try {
+            const user = await makeAdmin(userId);
+            if(user)
+                return res.status(200).send({user})
+            return res.status(400).send({message: "user does not exist"})
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    },
+    async disAdmin(req:Request, res:Response){
+        const {userId} = req.params;
+        try {
+            const user = await disAdmin(userId);
+            if(user)
+                return res.status(200).send({user})
+            return res.status(400).send({message: "user does not exist"})
+        } catch (err) {
+            res.status(500).send(err);
         }
     }
 }
