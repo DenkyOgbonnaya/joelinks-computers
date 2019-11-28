@@ -37,11 +37,8 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="category">Select category</label>
-                            <select name="category" formControlName="category" id="category" class="form-control">
-                                <option value="computers">Computer</option>
-                                <option value="cameras"> Cameras</option>
-                                <option value="office equipments">Office equipments</option>
-                                <option value="accessories"> Accessory</option>
+                            <select name="category" formControlName="category" aria-placeholder="select"  id="category" class="form-control">
+                                <option *ngFor="let category of categories$ | async" value={{category.name}}>{{category.name}}</option>
                             </select>
                         </div>
                     </div>

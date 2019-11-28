@@ -1,7 +1,8 @@
 import { Component, OnInit, Input} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ProductsStoreService, NotificationService } from 'src/app/shared';
+import { ProductsStoreService, NotificationService, CategoriesStoreService } from 'src/app/shared';
 import { Product } from 'src/app/products/shared';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: "products-form",
@@ -11,13 +12,15 @@ export class ProductFormComponent implements OnInit {
     productForm:FormGroup;
     files: Array<File> = [];
     @Input() product:Product;
+    categories$:Observable<any>;
     isLoading:boolean = false;
     errorMessage:string = "";
 
     constructor(
         private formBuilder:FormBuilder, 
         private productsStoreService: ProductsStoreService,
-        private notifyService: NotificationService
+        private notifyService: NotificationService,
+        private categoriesStore: CategoriesStoreService
         ){
             this.productForm = this.initForm(this.formBuilder)
     }
@@ -37,6 +40,9 @@ export class ProductFormComponent implements OnInit {
              size: [''],
          }),
         })
+    }
+    getCategories(){
+        this.categories$ = this.categoriesStore.getCategories();
     }
     onSelectFile(event:any){
         if(event.target.files && event.target.files.length)
@@ -95,6 +101,7 @@ export class ProductFormComponent implements OnInit {
         if(this.product){
             this.productForm.patchValue(this.product)
         }
+        this.getCategories();
     }
 
     
