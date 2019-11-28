@@ -18,6 +18,7 @@ import { AdminCategoriesComponent } from './admin/admin-categories/admin-categor
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AuthGuard } from './shared/auth.guard';
+import { AdminGuard } from './shared';
 
 
 const routes: Routes = [
@@ -26,13 +27,13 @@ const routes: Routes = [
   {path: 'cart', component: ShoppingCartComponent},
   {path: 'about', component: AboutPageComponent},
   {path: 'user/order', component: OrdersComponent, canActivate: [AuthGuard]},
-  {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard]},
-  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard]},
+  {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AdminGuard]},
+  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AdminGuard]},
   {path: 'admin/product/new', component: AddProductComponent, canActivate: [AuthGuard]},
-  {path: 'admin/product/edit/:id', component: EditProductComponent,canActivate: [AuthGuard]},
-  {path: 'admin/categories', component: AdminCategoriesComponent, canActivate: [AuthGuard]},
-  {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard]},
-  {path: 'admin/users', component: AdminUsersComponent, canActivate: [AuthGuard]},
+  {path: 'admin/product/edit/:id', component: EditProductComponent,canActivate: [AdminGuard]},
+  {path: 'admin/categories', component: AdminCategoriesComponent, canActivate: [AdminGuard]},
+  {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AdminGuard]},
+  {path: 'admin/users', component: AdminUsersComponent, canActivate: [AdminGuard]},
   {path: 'services', component: ServicePageComponent},
   {path: 'contact', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},

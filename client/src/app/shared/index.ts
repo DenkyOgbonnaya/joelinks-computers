@@ -6,6 +6,7 @@ import { JwtInterceptor } from "./jwt.interceptor";
 import { ProductsStoreService } from "./products-store.service";
 import { CategoriesStoreService } from "./categories-store.service";
 import { ErrorInterceptor } from "./error.interceptor";
+import { AdminGuard } from "./admin.guard";
 
 export {
     AuthService,
@@ -15,5 +16,6 @@ export {
     JwtInterceptor,
     ProductsStoreService,
     CategoriesStoreService,
-    ErrorInterceptor
+    ErrorInterceptor,
+    AdminGuard
 }
