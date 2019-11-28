@@ -2,7 +2,6 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { Product } from './product.model';
 
 const httOptions = {
     headers: new HttpHeaders({
@@ -22,9 +21,6 @@ export class ProductService {
     getProduct(id:string):Observable<any>{
         return this.http.get<any>(`/api/products/${id}`);
 
-    }
-    getHomeProducts():Observable<Product[]>{
-        return this.http.get<Product[]>("/assets/products.json");
     }
     addProduct(product: FormData):Observable<any>{
         return this.http.post<any>(`/api/products`, product, httOptions)
