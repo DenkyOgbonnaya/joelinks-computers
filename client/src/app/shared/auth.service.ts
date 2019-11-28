@@ -26,7 +26,6 @@ export class AuthService {
         localStorage.authToken = authToken;
         const decoded = jwt_decode(authToken);
         this._currentUser$.next(decoded.currentUser);
-        this.router.navigate(['/home']);
     }
     getCurrentUser():Observable<any>{
         return this._currentUser$.asObservable();

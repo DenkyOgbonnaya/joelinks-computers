@@ -17,6 +17,7 @@ import { EditProductComponent } from './admin/products/edit-product/edit-product
 import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
 import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.component';
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
+import { AuthGuard } from './shared/auth.guard';
 
 
 const routes: Routes = [
@@ -24,20 +25,20 @@ const routes: Routes = [
   {path: 'products', component: ProductsComponent},
   {path: 'cart', component: ShoppingCartComponent},
   {path: 'about', component: AboutPageComponent},
-  {path: 'user/order', component: OrdersComponent},
-  {path: 'admin/dashboard', component: AdminDashboardComponent},
-  {path: 'admin/products', component: AdminProductsComponent},
-  {path: 'admin/product/new', component: AddProductComponent},
-  {path: 'admin/product/edit/:id', component: EditProductComponent},
-  {path: 'admin/categories', component: AdminCategoriesComponent},
-  {path: 'admin/orders', component: AdminOrdersComponent},
-  {path: 'admin/users', component: AdminUsersComponent},
+  {path: 'user/order', component: OrdersComponent, canActivate: [AuthGuard]},
+  {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard]},
+  {path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuard]},
+  {path: 'admin/product/new', component: AddProductComponent, canActivate: [AuthGuard]},
+  {path: 'admin/product/edit/:id', component: EditProductComponent,canActivate: [AuthGuard]},
+  {path: 'admin/categories', component: AdminCategoriesComponent, canActivate: [AuthGuard]},
+  {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuard]},
+  {path: 'admin/users', component: AdminUsersComponent, canActivate: [AuthGuard]},
   {path: 'services', component: ServicePageComponent},
   {path: 'contact', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
   {path: 'product/:id', component: ProductDetailsComponent},
-  {path: 'user/order/:id', component: OrdersDetailsComponent},
+  {path: 'user/order/:id', component: OrdersDetailsComponent, canActivate: [AuthGuard]},
   {path: '', redirectTo: 'home', pathMatch: 'full'}];
 
 @NgModule({

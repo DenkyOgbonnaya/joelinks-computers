@@ -1,6 +1,7 @@
-import { Component, OnDestroy } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
 import { AuthService } from '../shared';
 import { Subscription } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     templateUrl: "./login.component.html",
@@ -33,14 +34,19 @@ import { Subscription } from 'rxjs';
     `]
 })
 
-export class LoginComponent implements OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
     pageName:string = "Login";
     mouseOverLogin;
     errorMessage:string = "";
     loading: boolean = false;
     authSub:Subscription;
+    returnUrl:string;
 
-    constructor(private authService: AuthService){}
+    constructor(
+        private authService: AuthService, 
+        private route:ActivatedRoute,
+        private router:Router
+        ){}
 
     login(user:any){
         this.loading = true;
@@ -49,6 +55,7 @@ export class LoginComponent implements OnDestroy {
             data => {
             this.authService.setCurrentUser(data.token);
             this.loading = false;
+            this.router.navigate([this.returnUrl]);
             },
             err => {
                 this.errorMessage = err
@@ -57,6 +64,9 @@ export class LoginComponent implements OnDestroy {
             
         )
         
+    }
+    ngOnInit(){
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || "/";
     }
     ngOnDestroy(){
         if(this.authSub)
