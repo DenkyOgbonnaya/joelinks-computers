@@ -1,12 +1,13 @@
 import { Router } from "express";
 import paystackController from "./paystck-controller";
 import orderController from "../order/order-controller";
+import { isLoggedIn} from "../../middlewares/authorization";
 
 const{initiatePayment, verifyPayment} = paystackController;
 const{createOrder} = orderController;
 const checkoutRouter = Router();
 
-checkoutRouter.post('/checkout/:userId', createOrder, initiatePayment)
+checkoutRouter.post('/checkout/:userId', isLoggedIn, createOrder, initiatePayment)
 checkoutRouter.get('/checkout/redirect', verifyPayment);
 
 const api = {

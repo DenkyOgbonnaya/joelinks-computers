@@ -1,7 +1,7 @@
 import { Router } from "express";
 import userController from "./user-controller";
 import { orderController } from "../order";
-import { isLoggedIn} from "../../middlewares/authorization";
+import { isLoggedIn, isAdmin} from "../../middlewares/authorization";
 
 const userRouter = Router();
 const{
@@ -20,10 +20,10 @@ const{getUserOrders} = orderController;
 userRouter.post('/signup', usernamExist, emailExist, createUser)
 userRouter.post('/login', loginUser)
 userRouter.get('/verify/:token', verifyToken)
-userRouter.get("/:userId/orders",  getUserOrders)
-userRouter.get("/", getUsers)
-userRouter.post("/:userId/makeadmin", makeAdmin)
-userRouter.post("/:userId/disadmin", disAdmin)
+userRouter.get("/:userId/orders", isLoggedIn,  getUserOrders)
+userRouter.get("/", isLoggedIn, isAdmin, getUsers)
+userRouter.post("/:userId/makeadmin", isLoggedIn, isAdmin, makeAdmin)
+userRouter.post("/:userId/disadmin", isLoggedIn, isAdmin, disAdmin)
 
 const api = {
     path: '/api/users',

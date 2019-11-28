@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const{create, usernameExist, emailExist, getUsers, userCount, makeAdmin, disAdmin} = userService;
-const{SECRET_KEY} = process.env;
+const SECRET_KEY:any = process.env.SECRET_KEY;
 
 const userController = {
     async createUser(req:Request, res:Response){
@@ -27,7 +27,7 @@ const userController = {
                     email: user.email,
                     profile: user.profile
                 }},
-                "SECRET_KEY",
+                SECRET_KEY,
                 {expiresIn: '24h'} ) 
                 
             return res.status(201).send({
@@ -62,7 +62,7 @@ const userController = {
                     email: user.email,
                     profile: user.profile
                 }},
-                "SECRET_KEY",
+                SECRET_KEY,
                 {expiresIn: '24h'} ) 
             return res.status(200).send({status: 'success', token})
         }catch(err){
@@ -72,7 +72,7 @@ const userController = {
     },
     verifyToken(req:Request, res:Response){
         const{token} = req.params;
-        jwt.verify(token, "SECRET_KEY",  (err) => {
+        jwt.verify(token, SECRET_KEY,  (err:any) => {
             if(err ) return res.status(401).send({isAuthenticated: false})
         res.status(200).send({isAuthenticated: true})
         })
