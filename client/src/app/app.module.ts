@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { ToastrModule } from "ngx-toastr";
 import { FormsModule, ReactiveFormsModule} from "@angular/forms";
@@ -29,7 +29,7 @@ import { ProductsModule } from './products';
 import { HeaderModule } from './header/header.module';
 import { CheckoutComponent } from './shopping-cart/checkout/checkout.component';
 import { OrdersModule } from './orders/orders.module';
-import { JwtInterceptor, ProductsStoreService } from './shared';
+import { JwtInterceptor, ProductsStoreService, ErrorInterceptor } from './shared';
 import { OrderService } from './orders/shared/orders.service';
 import { AdminModule } from './admin/admin.module';
 import { PaginationModule } from './pagination/pagination.module';
@@ -77,11 +77,21 @@ import { CategoryService } from './admin/admin-categories/shared/categories.serv
     CartStoreService, 
     CartService, 
     AuthService,
-    JwtInterceptor,
     OrderService,
     ProductsStoreService,
     CategoriesStoreService,
-    CategoryService
+    CategoryService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true
+    },
+    
   ],
   bootstrap: [AppComponent],
   entryComponents: [CheckoutComponent]

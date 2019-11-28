@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders,HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError, BehaviorSubject } from 'rxjs';
-import { catchError } from "rxjs/operators";
+import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { Observable, BehaviorSubject } from 'rxjs';
 import * as jwt_decode  from "jwt-decode";
 import {Router } from '@angular/router';
 
@@ -18,12 +17,10 @@ export class AuthService {
 
     constructor(private http: HttpClient, private router: Router){}
     login(user:any):Observable<any>{
-        return this.http.post<any>("/api/users/login", user, httOptions)
-        .pipe(catchError(this.handleError))
+        return this.http.post<any>("/api/users/login", user, httOptions);
     }
     signup(user:any):Observable<any>{
-        return this.http.post<any>("/api/users/signup", user, httOptions)
-        .pipe(catchError(this.handleError));
+        return this.http.post<any>("/api/users/signup", user, httOptions);
     }
     setCurrentUser(authToken: string){
         localStorage.authToken = authToken;
@@ -41,36 +38,19 @@ export class AuthService {
         
     }
     verifyToken(token:string):Observable<any>{
-        return this.http.get<any>(`/api/users/verify/${token}`)
-        .pipe(catchError(this.handleError));
+        return this.http.get<any>(`/api/users/verify/${token}`);
     }
     isCurrentUser(){
         return this._currentUser$.getValue();
     }
     getUsers(pageNumber:number, limit:number):Observable<any>{
-        return this.http.get(`/api/users?page=${pageNumber}&limit=${limit}`, httOptions)
-        .pipe(catchError(this.handleError));
+        return this.http.get(`/api/users?page=${pageNumber}&limit=${limit}`, httOptions);
     }
     makeAdmin(userId:string){
-        return this.http.post<any>(`/api/users/${userId}/makeadmin`, httOptions)
-        .pipe(catchError(this.handleError))
+        return this.http.post<any>(`/api/users/${userId}/makeadmin`, httOptions);
     }
     disAdmin(userId:string){
-        return this.http.post<any>(`/api/users/${userId}/disadmin`, httOptions)
-        .pipe(catchError(this.handleError))
+        return this.http.post<any>(`/api/users/${userId}/disadmin`, httOptions);
     }
     
-    private handleError(error: HttpErrorResponse){
-        if(error.error instanceof ErrorEvent){
-            //client or network error
-            return throwError("Could not complete your login, Network error detected.")
-        }else {
-            //bE error
-            if(error.status < 500){
-                return throwError(error.error.message);
-            }else 
-            return throwError("Something went wrong, it's not you it's us. try login again");
-            
-        }
-    }
 }

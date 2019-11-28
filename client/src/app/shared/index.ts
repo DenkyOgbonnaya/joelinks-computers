@@ -5,6 +5,7 @@ import { NotificationService } from "./notification.service";
 import { JwtInterceptor } from "./jwt.interceptor";
 import { ProductsStoreService } from "./products-store.service";
 import { CategoriesStoreService } from "./categories-store.service";
+import { ErrorInterceptor } from "./error.interceptor";
 
 export {
     AuthService,
@@ -13,5 +14,6 @@ export {
     NotificationService,
     JwtInterceptor,
     ProductsStoreService,
-    CategoriesStoreService
+    CategoriesStoreService,
+    ErrorInterceptor
 }

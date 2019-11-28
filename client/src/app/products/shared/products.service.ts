@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders, HttpErrorResponse } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { catchError } from "rxjs/operators";
+import { HttpClient, HttpHeaders} from "@angular/common/http";
+import { Observable} from "rxjs";
 
 const httOptions = {
     headers: new HttpHeaders({
@@ -23,37 +22,21 @@ export class ProductService {
 
     }
     addProduct(product: FormData):Observable<any>{
-        return this.http.post<any>(`/api/products`, product, httOptions)
-        .pipe(catchError(this.handleError))
+        return this.http.post<any>(`/api/products`, product, httOptions);
 
     }
     editProduct(productId:string, credentials:any):Observable<any>{
-        return this.http.put<any>(`/api/products/${productId}`, credentials, httOptions)
-        .pipe(catchError(this.handleError));
+        return this.http.put<any>(`/api/products/${productId}`, credentials, httOptions);
     }
     deleteProduct(productId:string):Observable<any>{
-        return this.http.delete<any>(`/api/products/${productId}`, httOptions)
-        .pipe(catchError(this.handleError));
+        return this.http.delete<any>(`/api/products/${productId}`, httOptions);
     }
     searchProduct(search:string):Observable<any>{
-        return this.http.get<any>(`/api/product/search?search=${search}`)
-        .pipe(catchError(this.handleError));
+        return this.http.get<any>(`/api/product/search?search=${search}`);
     }
     getProductsByCat(name:string):Observable<any> {
         return this.http.get<any>(`/api/product/category/${name}`)
     }
-    private handleError(error: HttpErrorResponse){
-        if(error.error instanceof ErrorEvent){
-            //client or network error
-            return throwError("Could not complete your request, Network error detected.")
-        }else {
-            //bE error
-            if(error.status < 500){
-                return throwError(error.error.message);
-            }else 
-            return throwError("Something went wrong, it's not you it's us. try again");
-            
-        }
-    }
+    
 }
 
