@@ -9,13 +9,19 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="name">First name</label>
-                                    <input type="text" formControlName="firstname" class="form-control" name="firstname" />
+                                    <em *ngIf="checkoutForm.controls.firstname?.invalid &&
+                                    (checkoutForm.controls.firstname?.touched || mouseOverProceed)
+                                    ">Required</em>
+                                    <input type="text" required formControlName="firstname" class="form-control" name="firstname" />
                                 </div>
                             </div>
                             <div class="col">
                               <div class="form-group">
                                   <label for="email">Last name</label>
-                                  <input type="text" formControlName="lastname" class="form-control" name="lastname" />
+                                  <em *ngIf="checkoutForm.controls.lastname?.invalid &&
+                                    (checkoutForm.controls.lastname?.touched || mouseOverProceed)
+                                    ">Required</em>
+                                  <input type="text" required formControlName="lastname" class="form-control" name="lastname" />
                               </div>
                           </div>
                         </div>
@@ -23,44 +29,63 @@
                             <div class="col">
                                     <div class="form-group">
                                         <label for="phone">phone</label>
-                                        <input type="text" formControlName="phone" class="form-control" name="phone" />
+                                        <em *ngIf="checkoutForm.controls.phone?.invalid &&
+                                        (checkoutForm.controls.phon?.touched || mouseOverProceed)
+                                        ">Required</em>
+                                        <input type="text" required formControlName="phone" class="form-control" name="phone" />
                                     </div>
                                 </div>
                             <div class="col">
                               <div class="form-group">
                                   <label for="email">Email</label>
-                                  <input type="text" formControlName="email" class="form-control" name="email" />
+                                  <em *ngIf="checkoutForm.controls.email?.invalid &&
+                                    (checkoutForm.controls.email?.touched || mouseOverProceed)
+                                    ">Required</em>
+                                  <input type="text" required formControlName="email" class="form-control" name="email" />
                               </div>
                           </div>
                         </div>
                             <h4>Delivery address</h4>
                               <div class="form-group">
                                   <label for="address">Address</label>
-                                  <input type="text" formControlName="address" class="form-control" name="address" />
+                                  <em *ngIf="checkoutForm.controls.address?.invalid &&
+                                    (checkoutForm.controls.address?.touched || mouseOverProceed)
+                                    ">Required</em>
+                                  <input type="text" required formControlName="address" class="form-control" name="address" />
                               </div>
                       <div class="row">
                           <div class="col">
                               <div class="form-group">
                                   <label for="city">City/Town</label>
-                                  <input type="text" formControlName="city" class="form-control" name="city" />
+                                  <em *ngIf="checkoutForm.controls.city?.invalid &&
+                                    (checkoutForm.controls.city?.touched || mouseOverProceed)
+                                    ">Required</em>
+                                  <input type="text" required formControlName="city" class="form-control" name="city" />
                               </div>
                           </div>
                           <div class="col">
                             <div class="form-group">
                                 <label for="state">State</label>
-                                <input type="text" formControlName="state" class="form-control" name="state" />
+                                <em *ngIf="checkoutForm.controls.state?.invalid &&
+                                    (checkoutForm.controls.state?.touched || mouseOverProceed)
+                                    ">Required</em>
+                                <input type="text" required formControlName="state" class="form-control" name="state" />
                             </div>
                         </div>
                       </div>
                       <div class="modal-footer">
-                            <button type="submit" class="btn btn-danger"  (click)="checkout()">
-                                <span *ngIf="!loading">Proceed</span>
-                                <div *ngIf="loading" class="spinner-border text-light spinner-border-sm" role="status">
-                                        <span class="sr-only">loading...</span>
-                                </div>
-                            </button>
+                            <span (mouseenter)="mouseOverProceed=true" (mouseleave)="mouseOverProceed=false">
+                                    <button type="submit" class="btn btn-danger" [disabled]="checkoutForm.invalid">
+                                        <span *ngIf="!loading">Proceed</span>
+                                        <div *ngIf="loading" class="spinner-border text-light spinner-border-sm" role="status">
+                                            <span class="sr-only">loading...</span>
+                                        </div>
+                                    </button>
+                                </span>
+
+                            
+                        </div>
                     </div>
-            </div>
                 
-            </form>
+        </form>
 

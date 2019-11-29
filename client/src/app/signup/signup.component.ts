@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { Component, OnDestroy } from "@angular/core";
 import { AuthService } from '../shared';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
     templateUrl: "./signup.component.html",
@@ -11,6 +11,10 @@ import { Subscription } from 'rxjs';
         flex-direction: column;
         margin-top: 30px;
         padding:10px;
+    }
+    em {
+        color:red;
+        float: right;
     }
     .logo {
         font-weight: bold;
@@ -33,12 +37,12 @@ import { Subscription } from 'rxjs';
 
 export class SignupComponent implements OnDestroy {
     pageName:string = "Signup";
-    mouseOverLogin;
+    mouseOverCreate;
     errorMessage:string = "";
     loading: boolean = false;
     authSub:Subscription;
 
-    constructor(private authService: AuthService){}
+    constructor(private authService: AuthService, private router: Router){}
 
     signup(user:any){
         this.loading = true;
@@ -47,6 +51,7 @@ export class SignupComponent implements OnDestroy {
             data => {
             this.authService.setCurrentUser(data.token);
             this.loading = false;
+            this.router.navigate(["/"]);
             
             },
             err => {

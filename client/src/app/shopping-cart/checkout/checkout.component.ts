@@ -12,12 +12,17 @@ import { Subscription } from "rxjs";
             background: #424242;
             color: #ffffff;
         }
+        em {
+            color:crimson;
+            float:right;
+        }
     `]
 })
 
 export class CheckoutComponent implements OnInit, OnDestroy {
     @Input() user:any;
     loading:boolean = false;
+    mouseOverProceed:boolean;
     errorMessage:string = "";
     cartSub: Subscription;
 

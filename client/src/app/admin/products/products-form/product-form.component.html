@@ -5,12 +5,18 @@
                 <div class="col">
                     <div class="form-group">
                         <label for="name">Name</label>
+                        <em *ngIf="productForm.controls.name?.invalid &&
+                        (productForm.controls.name?.touched || mouseOverSubmit)
+                        ">Required</em>
                         <input type="text" formControlName="name" placeholder="prodoct name" class="form-control">
                     </div>
                 </div>
                 <div class="col">
                         <div class="form-group">
                             <label for="price">Price</label>
+                            <em *ngIf="productForm.controls.price?.invalid &&
+                            (productForm.controls.price?.touched || mouseOverSubmit)
+                            ">Required</em>
                             <input type="number" formControlName="price" placeholder="product price" class="form-control">
                         </div>
                 </div>
@@ -25,18 +31,27 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="quantity">Quantity</label>
+                            <em *ngIf="productForm.controls.quantity?.invalid &&
+                            (productForm.controls.quantity?.touched || mouseOverSubmit)
+                            ">Required</em>
                             <input type="number" formControlName="quantity" name="quantity" placeholder="product inventery" class="form-control">
                         </div>
                     </div>
                     <div class="col">
                             <div class="form-group">
                                 <label for="brand">Brand</label>
+                                <em *ngIf="productForm.controls.brand?.invalid &&
+                                (productForm.controls.brand?.touched || mouseOverSubmit)
+                                ">Required</em>
                                 <input type="text" formControlName="brand" name="brand" placeholder="brand name" class="form-control">
                             </div>
                     </div>
                     <div class="col">
                         <div class="form-group">
                             <label for="category">Select category</label>
+                            <em *ngIf="productForm.controls.category?.invalid &&
+                            (productForm.controls.category?.touched || mouseOverSubmit)
+                            ">Required</em>
                             <select name="category" formControlName="category" aria-placeholder="select"  id="category" class="form-control">
                                 <option *ngFor="let category of categories$ | async" value={{category.name}}>{{category.name}}</option>
                             </select>
@@ -70,6 +85,9 @@
                     <div class="col">
                         <div class="form-group">
                             <label for="description">Description</label>
+                            <em *ngIf="productForm.controls.description?.invalid &&
+                            (productForm.controls.description?.touched || mouseOverSubmit)
+                            ">Required</em>
                             <textarea class="form-control" formControlName="description" placeholder="product description"></textarea>
                         </div>
                     </div>
@@ -82,12 +100,15 @@
                             </div>
                         </div>
             </div>
-            <button type="submit" class="btn btn-danger btn-lg" [disabled] = "!productForm.valid">
-                <div class="spinner-border text-light spinner-border-sm" role="status" *ngIf="isLoading">
-                        <span class="sr-only">loading...</span>
-                </div>
-                <div *ngIf="!isLoading"> Submit</div>
-            </button>
+
+            <span (mouseenter)="mouseOverSubmit=true" (mouseleave)="mouseOverSubmit=false">
+                    <button type="submit" class="btn btn-danger" [disabled]="productForm.invalid">
+                        <span *ngIf="!isLoading">Submit</span>
+                        <div *ngIf="isLoading" class="spinner-border text-light spinner-border-sm" role="status">
+                            <span class="sr-only">loading...</span>
+                        </div>
+                    </button>
+                </span>
                 
         </form>
     </div>

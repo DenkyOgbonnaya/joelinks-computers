@@ -16,6 +16,10 @@ import { ActivatedRoute, Router } from '@angular/router';
         font-weight: bold;
         text-align: center;
     }
+    em {
+        color: crimson;
+        float: right;
+    }
     .logo :nth-child(2) {
         color: crimson;
     }

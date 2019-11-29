@@ -6,11 +6,18 @@ import { Observable } from 'rxjs';
 
 @Component({
     selector: "products-form",
-    templateUrl: "./product-form.component.html"
+    templateUrl: "./product-form.component.html",
+    styles: [`
+        em {
+            color:crimson;
+            float:right;
+        }
+    `]
 })
 export class ProductFormComponent implements OnInit {
     productForm:FormGroup;
     files: Array<File> = [];
+    mouseOverSubmit:boolean;
     @Input() product:Product;
     categories$:Observable<any>;
     isLoading:boolean = false;
