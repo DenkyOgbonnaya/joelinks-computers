@@ -4,27 +4,46 @@
             <p>WE LOVE TO HERE FROM YOU</p>
             <h4>Contact Us</h4>
             <section>
-              
-                <form class="form">
+                <div *ngIf="errorMessage" class="alert alert-danger"> {{errorMessage}} </div>
+                <form class="form" #contactForm="ngForm" (ngSubmit)="sendMail(contactForm.value)">
                     <div class="form-row">
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Your Name" />
+                            <em *ngIf="contactForm.controls.name?.invalid &&
+                            (contactForm.controls.name?.touched || mouseOverSend)
+                            ">Required</em>
+                            <input type="text" (ngModel)="name" required name="name" class="form-control" placeholder="Your Name" />
                         </div>
                         <div class="col">
-                            <input type="email" class="form-control" placeholder="Your Email" />
+                                <em *ngIf="contactForm.controls.email?.invalid &&
+                                (contactForm.controls.email?.touched || mouseOverSend)
+                                ">Required</em>
+                            <input type="email" (ngModel)="email" name="email" required class="form-control" placeholder="Your Email" />
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" placeholder="Subject" />
+                                <em *ngIf="contactForm.controls.subject?.invalid &&
+                                (contactForm.controls.subject?.touched || mouseOverSend)
+                                ">Required</em>
+                            <input type="text" (ngModel)="subject" name="subject" required class="form-control" placeholder="Subject" />
                         </div>
                     </div>
                     <br />
                     <div class="form-row">
                         <div class="col">
-                            <textarea class="form-control" placeholder="Message" ></textarea>
+                                <em *ngIf="contactForm.controls.message?.invalid &&
+                                (contactForm.controls.message?.touched || mouseOverSend)
+                                ">Required</em>
+                            <textarea class="form-control" (ngModel)="message" name="message" required placeholder="Message" ></textarea>
                         </div>
                     </div>
                     <br />
-                        <button class="btn btn-danger">Send Message</button>
+                    <span (mouseenter)="mouseOverSend=true" (mouseleave)="mouseOverSend=false">
+                            <button type="submit" class="btn btn-danger" [disabled]="contactForm.invalid">
+                                <span *ngIf="!isLoading">Send Message</span>
+                                <div *ngIf="isLoading" class="spinner-border text-light spinner-border-sm" role="status">
+                                    <span class="sr-only">loading...</span>
+                                </div>
+                            </button>
+                        </span>
                 </form>
             </section>
     </div>
