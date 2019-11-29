@@ -1,10 +1,14 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { Observable, Subscription } from 'rxjs';
-import { tap } from "rxjs/operators";
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/shared';
 
 @Component({
-    templateUrl: "./admin-users.component.html"
+    templateUrl: "./admin-users.component.html",
+    styles: [`
+        th {
+            color: crimson
+        }
+    `]
 })
 export class AdminUsersComponent implements OnInit, OnDestroy {
     users:any;
@@ -26,9 +30,9 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
     changePage(pageNumber:number){
         this.getUsers(pageNumber, 20);
     }
-    handleAdmin(event:any, userId:string){
-        let status = event.target.value
-        if(status === "make admin"){
+    handleAdmin(event:any, userId:string, isAdmin:boolean){
+        
+        if(!isAdmin){
             this.authService.makeAdmin(userId)
             .subscribe(data => {
                 this.users = this.users.map( (user:any) => user._id === userId ? Object.assign({}, user, data.user) : user)
@@ -39,6 +43,7 @@ export class AdminUsersComponent implements OnInit, OnDestroy {
                 this.users = this.users.map( (user:any) => user._id === userId ? Object.assign({}, user, data.user) : user)
             })
         }
+        event.stopPropagation();
     }
     ngOnInit(){
         this.getUsers(1, 20);
