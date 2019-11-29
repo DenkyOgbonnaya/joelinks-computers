@@ -12,6 +12,7 @@ interface IUser extends Document {
         state?: string,
         image?: string
     }
+    isAdmin:boolean
 }
 const userSchema: Schema = new Schema({
     username: {
@@ -48,6 +49,10 @@ const userSchema: Schema = new Schema({
         image: {
             type: String
         }
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false
     }
 
 },

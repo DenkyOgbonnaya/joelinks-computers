@@ -25,7 +25,8 @@ const userController = {
                     _id: user._id, 
                     username: user.username, 
                     email: user.email,
-                    profile: user.profile
+                    profile: user.profile,
+                    isAdmin: user.isAdmin
                 }},
                 SECRET_KEY,
                 {expiresIn: '24h'} ) 
@@ -60,13 +61,13 @@ const userController = {
                     _id: user._id, 
                     username: user.username, 
                     email: user.email,
-                    profile: user.profile
+                    profile: user.profile,
+                    isAdmin: user.isAdmin
                 }},
                 SECRET_KEY,
                 {expiresIn: '24h'} ) 
             return res.status(200).send({status: 'success', token})
         }catch(err){
-            console.log(err)
             res.status(400).send(err);
         }
     },

@@ -3,6 +3,8 @@ const productRouter= Router();
 import productController from "./products-controller";
 import upload from "../../utills/config/multer-config";
 import { isLoggedIn, isAdmin} from "../../middlewares/authorization";
+import validationResult from "../../middlewares/validation";
+import { validateProduct } from "./product-validation";
 
 const{
     addProduct,
@@ -15,12 +17,12 @@ const{
 } = productController;
 
 productRouter.route('/products')
-.post(isLoggedIn, isAdmin, upload.array('image', 4), addProduct)
+.post(isLoggedIn, isAdmin, validateProduct, validationResult, upload.array('image', 4), addProduct)
 .get(getAllProducts)
 
 productRouter.route('/products/:id')
 .get(getSingleProduct)
-.put(isLoggedIn, isAdmin, editProduct)
+.put(isLoggedIn, isAdmin, validateProduct, validationResult, editProduct)
 .delete(isLoggedIn, isAdmin, deleteProduct)
 
 productRouter.get("/product/search", searchProduct)

@@ -2,6 +2,8 @@ import { Router } from "express";
 import userController from "./user-controller";
 import { orderController } from "../order";
 import { isLoggedIn, isAdmin} from "../../middlewares/authorization";
+import validationResult from "../../middlewares/validation";
+import { validateLoginData, validateSignUpData, validateProfileData } from "./user-validations";
 
 const userRouter = Router();
 const{
@@ -17,8 +19,8 @@ const{
 const{getUserOrders} = orderController;
 
 
-userRouter.post('/signup', usernamExist, emailExist, createUser)
-userRouter.post('/login', loginUser)
+userRouter.post('/signup', validateSignUpData, validationResult, usernamExist, emailExist, createUser)
+userRouter.post('/login', validateLoginData, validationResult, loginUser)
 userRouter.get('/verify/:token', verifyToken)
 userRouter.get("/:userId/orders", isLoggedIn,  getUserOrders)
 userRouter.get("/", isLoggedIn, isAdmin, getUsers)

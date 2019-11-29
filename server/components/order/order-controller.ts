@@ -12,7 +12,7 @@ const{
 } = orderService;
 
 const orderController = {
-    async createOrder(req:Request, res:Response, netxt:NextFunction){
+    async createOrder(req:Request, res:Response, next:NextFunction){
         const{userId} = req.params;
         const{firstname, lastname, phone, address, city, state} = req.body;
         const items = req.session && req.session.cart;
@@ -32,7 +32,7 @@ const orderController = {
             if(req.session)
                 req.session.orderId = newOrder._id;
             userEvent.emit("addProfile", userId, {firstname, lastname, phone, address, city, state})
-            netxt();
+            next();
         } catch (err) {
             res.status(500).send(err)
         }
