@@ -11,7 +11,7 @@ const orderService = {
     },
     async edit(orderId:string, data:any){
         try {
-            return await Order.findByIdAndUpdate(orderId, {$set: data})
+            return await Order.findByIdAndUpdate(orderId, {$set: data}, {new: true})
         } catch (err) {
             throw err;
         }

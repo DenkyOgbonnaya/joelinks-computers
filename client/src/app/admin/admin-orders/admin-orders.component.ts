@@ -12,8 +12,6 @@ export class AdminOrdersComponent implements OnInit {
     constructor(private orderService: OrderService){}
 
     getOrdersInStatus(status:string){
-        console.log(status);
-        
         this.orders$ =  this.orderService.getOrdersInStatus(status);
     }
 

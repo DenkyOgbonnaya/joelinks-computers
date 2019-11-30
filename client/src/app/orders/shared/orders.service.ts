@@ -22,4 +22,7 @@ export class OrderService {
     getOrdersInStatus(status:string):Observable<any> {
         return this.http.get(`/api/orders/${status}/status`, httOptions);
     }
+    updateOrder(orderId:string, status:string):Observable<any>{
+        return this.http.put(`/api/orders/${orderId}`,{status}, httOptions);
+    }
 }

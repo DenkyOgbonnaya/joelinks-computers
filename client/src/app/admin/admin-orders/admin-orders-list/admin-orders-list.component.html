@@ -8,17 +8,29 @@
                 <th class ='thead'>items</th>
                 <th class ='thead'>shipping fee</th>
                 <th class ='thead'>Total</th>
+                <th class="thead">view order</th>
+                <th class="thead">Update</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let order of orders">
                 <td>{{order.createdAt | date}}</td>
                 <td> {{order.paymentRef || "-"}}</td>
-                <td> <a routerLink="/profile/{{order.user}}"> {{order.customerName}} </a> </td>
+                <td> <a routerLink="/user/profile/{{order.user}}"> {{order.customerName}} </a> </td>
                 <td> {{order.items.length}}</td>
                 <td> {{order.shippingFee | currency}}</td>
                 <td> {{(getTotalPrice(order.items, order.shippingFee) | currency )}} </td>
-                <td [routerLink]="['/user/order', order._id]"> <button class="btn btn-light">Update</button></td>
+                <td [routerLink]="['/user/order', order._id]"> <button class="btn btn-light">view</button> </td>
+                <td>
+                    <select name="status" value=order.status (change)="updateStatus($event, order._id)"  class="form-control">
+                        <option value={{order.status}} selected>{{order.status}}</option>
+                        <option value="Cancelled">Cancelled</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Processing">Processing</option>
+                        <option value="Shipped">Shipped</option>
+                        <option value="Delivered">Delivered</option>
+                    </select>
+                </td>
             </tr>
         </tbody>
     </table>
