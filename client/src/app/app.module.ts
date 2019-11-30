@@ -38,6 +38,7 @@ import { CategoriesModule } from './admin/admin-categories/categories.module';
 import { CategoriesStoreService } from './shared/categories-store.service';
 import { CategoryService } from './admin/admin-categories/shared/categories.service';
 import { ProfileComponent } from './profile/profile.component';
+import { DragDropFileUploadDirective } from './drag-drop-file-upload.directive';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { ProfileComponent } from './profile/profile.component';
     LoginComponent,
     SignupComponent,
     CheckoutComponent,
-    ProfileComponent
+    ProfileComponent,
+    DragDropFileUploadDirective
   ],
   imports: [
     BrowserModule,
