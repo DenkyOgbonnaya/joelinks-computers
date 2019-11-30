@@ -6,4 +6,5 @@ import {Component, Input} from '@angular/core';
 })
 export class HeaderDropdownComponent {
     @Input()username:string;
+    @Input()userId:string;
 }

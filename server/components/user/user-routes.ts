@@ -14,7 +14,9 @@ const{
     emailExist, 
     getUsers,
     makeAdmin,
-    disAdmin
+    disAdmin,
+    editProfile,
+    getUser
 } = userController;
 const{getUserOrders} = orderController;
 
@@ -23,6 +25,9 @@ userRouter.post('/signup', validateSignUpData, validationResult, usernamExist, e
 userRouter.post('/login', validateLoginData, validationResult, loginUser)
 userRouter.get('/verify/:token', verifyToken)
 userRouter.get("/:userId/orders", isLoggedIn,  getUserOrders)
+userRouter.route("/:userId")
+.post(isLoggedIn, editProfile)
+.get(isLoggedIn, getUser)
 userRouter.get("/", isLoggedIn, isAdmin, getUsers)
 userRouter.post("/:userId/makeadmin", isLoggedIn, isAdmin, makeAdmin)
 userRouter.post("/:userId/disadmin", isLoggedIn, isAdmin, disAdmin)

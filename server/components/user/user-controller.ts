@@ -5,7 +5,17 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-const{create, usernameExist, emailExist, getUsers, userCount, makeAdmin, disAdmin} = userService;
+const{
+    create, 
+    usernameExist, 
+    emailExist, 
+    getUsers, 
+    userCount, 
+    makeAdmin, 
+    disAdmin,
+    getUser,
+    edit
+} = userService;
 const SECRET_KEY:any = process.env.SECRET_KEY;
 
 const userController = {
@@ -138,6 +148,30 @@ const userController = {
             if(user)
                 return res.status(200).send({user})
             return res.status(400).send({message: "user does not exist"})
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    }, 
+    async getUser(req:Request, res:Response){
+        const{userId} = req.params;
+
+        try {
+            const user = await getUser(userId);
+            if(user)
+                return res.status(200).send({user});
+            return res.status(401).send({message: "User not found"})
+        } catch (err) {
+            res.status(500).send(err);
+        }
+    },
+    async editProfile(req:Request, res:Response){
+        const{userId} = req.params;
+        
+        try {
+            const profile = await edit(userId, req.body);
+            if(profile)
+                return res.status(200).send({profile});
+            return res.status(401).send({message: "User not found"})
         } catch (err) {
             res.status(500).send(err);
         }

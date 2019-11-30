@@ -45,6 +45,12 @@ export class AuthService {
     getUsers(pageNumber:number, limit:number):Observable<any>{
         return this.http.get(`/api/users?page=${pageNumber}&limit=${limit}`, httOptions);
     }
+    getUser(userId:string):Observable<any>{
+        return this.http.get(`/api/users/${userId}`, httOptions);
+    }
+    saveProfile(userId:string, data:any):Observable<any> {
+        return this.http.post<any>(`/api/users/${userId}`, data, httOptions);
+    }
     makeAdmin(userId:string){
         return this.http.post<any>(`/api/users/${userId}/makeadmin`, httOptions);
     }

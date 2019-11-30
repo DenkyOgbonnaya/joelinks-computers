@@ -31,7 +31,14 @@ const userService = {
     },
     async edit(userId:any, profile:any){
         try {
-            return await User.findByIdAndUpdate(userId, {$set: {profile}})
+            return await User.findByIdAndUpdate(userId, {$set: {profile}}, {new:true})
+        } catch (err) {
+            throw err;
+        }
+    },
+    async getUser(userId:any){
+        try {
+            return await User.findById(userId)
         } catch (err) {
             throw err;
         }

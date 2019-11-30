@@ -1,0 +1,49 @@
+.profile_container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    
+}
+.profile {
+    background: linear-gradient(to bottom, #424242 50%, white 0%);
+    margin: 20px;
+    padding: 50px;
+    border-radius: 20px 20px 0 0;
+    border: 1px solid #cccccc;
+}
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 10%;
+}
+.logout_btn {
+    display: none;
+}
+h4 {
+    color: crimson;
+}
+input {
+    border: 1px solid #cccccc;
+}
+.image_wrapper {
+    padding: 12px;
+    background: #ffffff;
+    width: 180px;
+    height: 180px;
+    border-radius: 100%;
+}
+img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+}
+@media only screen and (min-width: 65.625em) {
+    .profile {
+        width: 50%;
+    }
+    .logout_btn {
+        display: block;
+        margin-top: 25%;
+    }
+}

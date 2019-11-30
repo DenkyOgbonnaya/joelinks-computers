@@ -37,6 +37,7 @@ import { AdminCategoriesComponent } from './admin/admin-categories/admin-categor
 import { CategoriesModule } from './admin/admin-categories/categories.module';
 import { CategoriesStoreService } from './shared/categories-store.service';
 import { CategoryService } from './admin/admin-categories/shared/categories.service';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { CategoryService } from './admin/admin-categories/shared/categories.serv
     FooterComponent,
     LoginComponent,
     SignupComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

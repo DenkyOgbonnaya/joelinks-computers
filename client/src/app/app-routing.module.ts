@@ -19,6 +19,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { AdminUsersComponent } from './admin/admin-users/admin-users.component';
 import { AuthGuard } from './shared/auth.guard';
 import { AdminGuard } from './shared';
+import { ProfileComponent } from './profile/profile.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,8 @@ const routes: Routes = [
   {path: 'cart', component: ShoppingCartComponent},
   {path: 'about', component: AboutPageComponent},
   {path: 'user/order', component: OrdersComponent, canActivate: [AuthGuard]},
+  {path: 'user/profile/:id', component: ProfileComponent, canActivate: [AuthGuard]},
+
   {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AdminGuard]},
   {path: 'admin/products', component: AdminProductsComponent, canActivate: [AdminGuard]},
   {path: 'admin/product/new', component: AddProductComponent, canActivate: [AuthGuard]},
@@ -34,6 +37,7 @@ const routes: Routes = [
   {path: 'admin/categories', component: AdminCategoriesComponent, canActivate: [AdminGuard]},
   {path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AdminGuard]},
   {path: 'admin/users', component: AdminUsersComponent, canActivate: [AdminGuard]},
+
   {path: 'services', component: ServicePageComponent},
   {path: 'contact', component: ContactUsComponent},
   {path: 'login', component: LoginComponent},
