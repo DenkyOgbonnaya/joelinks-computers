@@ -31,6 +31,9 @@ li {
     font-weight: bold;
     padding: 10px;
 }
+li:hover {
+    background: #cccccc;
+}
 li > a {
     text-decoration: none;
     color: #221122;

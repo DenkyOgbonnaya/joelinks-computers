@@ -11,8 +11,7 @@
                 <a *ngIf="!(currentUser$ | async )" routerLink ="/signup">Sign up</a>
                 <header-dropdown 
                     *ngIf="(currentUser$ | async )" 
-                    [username]="(currentUser$ | async ).username" 
-                    [userId]="(currentUser$ | async )._id"
+                    [currentUser]="(currentUser$ | async )"
                 ></header-dropdown>
                 <span *ngIf="(currentUser$ | async )" (click)="logoutUser()">Logout</span>
             </div>

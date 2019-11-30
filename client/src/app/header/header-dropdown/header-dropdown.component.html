@@ -1,9 +1,9 @@
 <div ngbDropdown class="d-inline-block">
-    <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="dropdownBasic1" role="button">{{username}}</a>
+    <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="dropdownBasic1" role="button">{{currentUser?.username}}</a>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button ngbDropdownItem [routerLink]= "['/user/profile', userId]">Profile</button>
+          <button ngbDropdownItem [routerLink]= "['/user/profile', currentUser?._id]">Profile</button>
           <button ngbDropdownItem routerLink= "/user/order">Orders</button>
-          <button ngbDropdownItem routerLink= "/admin/dashboard">Admin Dashboard</button>
+          <button *ngIf="currentUser?.isAdmin" ngbDropdownItem routerLink= "/admin/dashboard">Admin Dashboard</button>
         </div>
 </div>
 
