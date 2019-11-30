@@ -7,18 +7,18 @@ import { Component } from "@angular/core";
     <div class="card_main">
         <div class="card cards">
             <img src="/assets/icons/desktop_ic30px.png" class="card_icon" />
-            <div class="service_title">Computer sales</div>
-            <p>Installations of all kind of application software, Operating system, games etc</p>
+            <div class="service_title">Computer Accessories</div>
+            <p>Sales of all manner of computer accessories, Laptops, Desktops, etc</p>
         </div>
         <div class="card">
             <img src="/assets/icons/desktop_ic130px.png" class="card_icon" />
-            <div class="service_title">Repairs and Servicing</div>
-            <p>Repairs and Servicing of all computers, Laptops, Desktop, printers</p>
+            <div class="service_title">Office equipments</div>
+            <p>Assorted office equipments, printers, photocopy machines etc.</p>
         </div>
         <div class="card cards">
             <img src="/assets/icons/desktop_ic30px.png" class="card_icon" />
-            <div class="service_title">Software installations</div>
-            <p>Sales of assorted computer sytems, printers and cameras</p>
+            <div class="service_title">Maintenance and servicing</div>
+            <p>Maintenance and servicing of all computer accessories, office equipments etc.</p>
         </div>
     </div>
 </section>

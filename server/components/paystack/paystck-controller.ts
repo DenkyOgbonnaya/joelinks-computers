@@ -56,7 +56,7 @@ const paystackController = {
                 await orderService.edit(orderId, {paymentRef: ref, status: "Pending"});
                 return res.redirect(`http://localhost:4200/order/${orderId}`)
             }
-            await orderService.edit(orderId, {status: "Failed"})
+            await orderService.edit(orderId, {status: "Cancelled"})
             return res.redirect(`http://localhost:4200/order/${orderId}`)
         } catch (err) {
             res.redirect(`http://localhost:4200`)

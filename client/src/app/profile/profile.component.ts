@@ -59,7 +59,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
     initForm(formBuilder: FormBuilder){
         return formBuilder.group({
-            firstname: ['mike'],
+            firstname: [''],
             lastname: [''],
             phone: [''],
             address: [''],

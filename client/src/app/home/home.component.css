@@ -15,6 +15,9 @@ opacity: 0.8;
     padding: 10px;
     color: #ddd;
 }
+.about_btns button {
+    margin-right: 5px;
+}
 h5 {
     text-align: center;
     color: crimson;
@@ -36,7 +39,10 @@ h5 {
         text-align: center;
         margin: 70px;
         padding: 50px;
-        color: crimson;
+        color: crimson
+    }
+    .about p {
+        font-size: 18px;
     }
     .home-container {
         background-image: url("/assets/images/joee.jpg");

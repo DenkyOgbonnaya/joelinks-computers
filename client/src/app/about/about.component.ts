@@ -11,11 +11,12 @@ import { Component } from "@angular/core";
     <div class="about">
         <h5>The JoeLinks</h5>
         <h3>ABOUT US</h3>
-        <p>As a computer sales and Servicing company, we pride our self in sales of all manner</p>
+        <p>Computer Accessories store in Abakaliki.</p>
+        <p>7 Water Works Road, Abakaliki</p>
         <ul class="ul">
-            <li class="li">Best ee computers</li>
-            <li class="li">Best recomputers</li>
-            <li class="li">Bestvgg computers</li>
+            <li class="li">Computer Accessories</li>
+            <li class="li">Office Equipments</li>
+            <li class="li">Maintenance</li>
             
         </ul>
         <button class="btn btn-danger btn-sm" [routerLink]= "['/about']">Learn More</button>

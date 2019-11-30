@@ -6,13 +6,12 @@ import { Component } from "@angular/core";
         <h5>What clients say? </h5>
         <div class="comment_main"> 
             <div class="comment"> 
-                <p> Bootstrap’s carousel class exposes two events for 
-                hooking into carousel functionality. Both events have the following additional properties:</p>
+                <p> I got my HP Elitebook notebook from JoeLinks computers, and it has been awesome, meets all my needs and durable.</p>
                 <div class="client">
                     <img src="/assets/images/988.JPG" alt="clint" />
                     <div>
                         <div class="name">Denky Ogbonnaya </div>
-                        <span class="occupation">Client </span>
+                        <span class="occupation">Softwe Developer </span>
                     </div>
                     
                 </div>

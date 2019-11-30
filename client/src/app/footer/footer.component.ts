@@ -12,7 +12,7 @@ import { Component } from "@angular/core";
                 <span>Joe</span>
                 <span>links</span>
             </div>
-            <div> Joe links computers is the best computer in the whole wild world</div>
+            <div> Number one in computer accessories, Laptops/Notebooks, Desktops, Printers etc</div>
             <div class="footer_social_icons"> 
                 <a href="/#"> <img src="/assets/icons/fb_ic10px.png" alt="facebook"/> </a>
                 <a href="/#"> <img src="/assets/icons/twitter_ic15px.png" alt="twitter"/> </a>
@@ -34,7 +34,7 @@ import { Component } from "@angular/core";
             <div class="col">
             <section class="contact">
             <h6>CONTACT INFO</h6>
-            <p>N0 5 water works road</p>
+            <p>N0 7 water works road</p>
             <p>Abakaliki, Ebony state</p>
             <p>joelinkscomputers@gmail.com</p>
             <p>07069797882</p>
