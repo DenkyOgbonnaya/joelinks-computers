@@ -23,6 +23,9 @@ import { ActivatedRoute, Router } from '@angular/router';
     .logo :nth-child(2) {
         color: crimson;
     }
+    .google{
+        text-align: center;
+    }
     .spinner {
         text-align: center;
     }
@@ -68,6 +71,9 @@ export class LoginComponent implements OnInit, OnDestroy {
             
         )
         
+    }
+    googleLogin(){
+        window.location.href = 'http://localhost:8080/api/auth/google';
     }
     ngOnInit(){
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || "/";

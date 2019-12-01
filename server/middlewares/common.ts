@@ -3,6 +3,7 @@ import cors from "cors";
 import compression from "compression";
 import session from "express-session";
 import mongoDBSession from "connect-mongodb-session";
+import passport from "passport";
 
 const mongoDBStore = mongoDBSession(session);
 const store = new mongoDBStore({
@@ -32,4 +33,7 @@ export const handleSession = (router: Router) => {
     resave: false,
     unset: "destroy"
   }))
+}
+export const handlePassportInit = (router:Router) => {
+  router.use(passport.initialize());
 }

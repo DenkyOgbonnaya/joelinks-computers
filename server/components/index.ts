@@ -6,6 +6,7 @@ import { reviewRoute } from "./reviews";
 import { checkoutRoute } from "./paystack";
 import { orderRoute } from "./order";
 import { contactUsRoute } from "./contact-us";
+import { oauthRoutes } from "./oauth";
 
 export const routers = [
     productRoute, 
@@ -15,5 +16,6 @@ export const routers = [
     reviewRoute,
     checkoutRoute,
     orderRoute,
-    contactUsRoute
+    contactUsRoute,
+    oauthRoutes
 ]

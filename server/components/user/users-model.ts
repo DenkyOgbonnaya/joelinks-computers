@@ -2,7 +2,8 @@ import mongoose, { Schema, Document } from "mongoose";
 interface IUser extends Document {
     username: string,
     email: string,
-    password: string,
+    password?: string,
+    oauthId?:string,
     profile?: {
         firstname: string,
         lastname?: string,
@@ -24,8 +25,10 @@ const userSchema: Schema = new Schema({
         default: true
     },
     password: {
-        type: String,
-        required: true
+        type: String
+    },
+    oauthId: {
+        type: String
     },
     profile: {
         firstname: {
