@@ -10,14 +10,14 @@ import { Product } from '../shared';
     <img src='http://localhost:8080{{product?.images[0]}}' alt="product" />
     <div class="product_atr">
         <div class="product_name">{{product?.name | slice:0:16}}  ... </div>
-        <div> {{product?.price | currency:"USD":"symbol"}} </div>
+        <div> {{product?.price | currency}} </div>
     </div>
 <button class="cart_btn" (click)= "addToCart($event)">ADD TO CART</button>
         </div>
     `,
     styles: [`
     .product_card {
-        background: whitesmoke;
+        
         width: 130px;
     }
     .product_card:hover {
