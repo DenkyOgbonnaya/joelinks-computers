@@ -33,12 +33,10 @@ import { JwtInterceptor, ProductsStoreService, ErrorInterceptor } from './shared
 import { OrderService } from './orders/shared/orders.service';
 import { AdminModule } from './admin/admin.module';
 import { PaginationModule } from './pagination/pagination.module';
-import { AdminCategoriesComponent } from './admin/admin-categories/admin-categories.component';
 import { CategoriesModule } from './admin/admin-categories/categories.module';
 import { CategoriesStoreService } from './shared/categories-store.service';
 import { CategoryService } from './admin/admin-categories/shared/categories.service';
 import { ProfileComponent } from './profile/profile.component';
-import { DragDropFileUploadDirective } from './drag-drop-file-upload.directive';
 
 @NgModule({
   declarations: [
@@ -58,7 +56,6 @@ import { DragDropFileUploadDirective } from './drag-drop-file-upload.directive';
     SignupComponent,
     CheckoutComponent,
     ProfileComponent,
-    DragDropFileUploadDirective
   ],
   imports: [
     BrowserModule,

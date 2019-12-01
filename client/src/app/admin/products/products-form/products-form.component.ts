@@ -1,5 +1,6 @@
 import { Component, OnInit, Input} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { DomSanitizer } from '@angular/platform-browser';
 import { ProductsStoreService, NotificationService, CategoriesStoreService } from 'src/app/shared';
 import { Product } from 'src/app/products/shared';
 import { Observable } from 'rxjs';
@@ -7,18 +8,15 @@ import { Observable } from 'rxjs';
 @Component({
     selector: "products-form",
     templateUrl: "./product-form.component.html",
-    styles: [`
-        em {
-            color:crimson;
-            float:right;
-        }
-    `]
+    styleUrls: ["./products-form.component.css"]
 })
 export class ProductFormComponent implements OnInit {
     productForm:FormGroup;
     files: Array<File> = [];
+    filesObjUrl:any[] = [];
     mouseOverSubmit:boolean;
-    @Input() product:Product;
+    @Input() product:Product = null;
+    productImagesUrl:any = null;
     categories$:Observable<any>;
     isLoading:boolean = false;
     errorMessage:string = "";
@@ -27,7 +25,8 @@ export class ProductFormComponent implements OnInit {
         private formBuilder:FormBuilder, 
         private productsStoreService: ProductsStoreService,
         private notifyService: NotificationService,
-        private categoriesStore: CategoriesStoreService
+        private categoriesStore: CategoriesStoreService,
+        private sanitizer: DomSanitizer,
         ){
             this.productForm = this.initForm(this.formBuilder)
     }
@@ -51,10 +50,31 @@ export class ProductFormComponent implements OnInit {
     getCategories(){
         this.categories$ = this.categoriesStore.getCategories();
     }
-    onSelectFile(event:any){
-        if(event.target.files && event.target.files.length)
-            this.files = event.target.files
+    onSelectFile(selectedFiles:any){
+        this.files = Array.from(selectedFiles);
+
+        this.files.forEach( (file:File) => {
+            let url = URL.createObjectURL(file);
+            this.filesObjUrl.push({file, url});
+        })
+        return;
     }
+    removeImage(imageIndex:number){
+        const filteredFiles = this.files.filter( (file:File, index:number) => index !==imageIndex );
+        const filteredFilesObj = this.filesObjUrl.filter( (file:any, index:number) => index !==imageIndex );
+
+        this.files = filteredFiles;
+        this.filesObjUrl = filteredFilesObj;
+    }
+    removeExistingImage(imageIndex:number){
+        const filteredUrl = this.productImagesUrl.filter( (url:any, index:number) => index !==imageIndex );
+        
+        this.productImagesUrl = filteredUrl;
+    }
+    // Clean Url
+  sanitize(url: string) {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
     onSubmit(){
         this.isLoading = true;
         
@@ -94,7 +114,16 @@ export class ProductFormComponent implements OnInit {
         this.isLoading = false;
     }
     editProduct(formData:FormData){
-        this.productsStoreService.editProduct(this.product._id, formData, (err:any, message:string) => {
+        const images:number = this.files.length + this.productImagesUrl.length;
+        if(images > 4){
+            this.notifyService.showErrorMessage("Error!", "you cant upload above 4 images");
+            this.isLoading = false;
+            return;
+        }
+        const formDataCopy = formData;
+        formDataCopy.append('images', this.productImagesUrl);
+
+        this.productsStoreService.editProduct(this.product._id, formDataCopy, (err:any, message:string) => {
             if(err){
                 this.errorMessage = err;
             }else
@@ -106,7 +135,8 @@ export class ProductFormComponent implements OnInit {
 
     ngOnInit(){
         if(this.product){
-            this.productForm.patchValue(this.product)
+            this.productForm.patchValue(this.product);
+            this.productImagesUrl = this.product.images;
         }
         this.getCategories();
     }

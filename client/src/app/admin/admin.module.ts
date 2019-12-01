@@ -16,6 +16,7 @@ import { ProductsModule } from '../products';
 import { AdminOrdersComponent } from './admin-orders/admin-orders.component';
 import { AdminOrderlistComponent } from './admin-orders/admin-orders-list/admin-orders-list.component';
 import { AdminUsersComponent } from './admin-users/admin-users.component';
+import { DragDropFileUploadDirective } from '../drag-drop-file-upload.directive';
 
 @NgModule({
     imports: [
@@ -37,7 +38,8 @@ import { AdminUsersComponent } from './admin-users/admin-users.component';
         EditProductComponent,
         AdminOrdersComponent,
         AdminOrderlistComponent,
-        AdminUsersComponent
+        AdminUsersComponent,
+        DragDropFileUploadDirective
     ]
 })
 export class AdminModule {

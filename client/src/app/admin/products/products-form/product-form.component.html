@@ -53,7 +53,8 @@
                             (productForm.controls.category?.touched || mouseOverSubmit)
                             ">Required</em>
                             <select name="category" formControlName="category" aria-placeholder="select"  id="category" class="form-control">
-                                <option *ngFor="let category of categories$ | async" value={{category.name}}>{{category.name}}</option>
+                                <option value="productForm.value.category" selected> {{productForm.value.category}}</option>
+                                <option *ngFor="let category of categories$ | async" value={{category?.name}}>{{category?.name}}</option>
                             </select>
                         </div>
                     </div>
@@ -92,13 +93,41 @@
                         </div>
                     </div>
                 </div>
-            <div class="row">
-                        <div class="col">
-                            <div class="form-group">
-                                <label for="description">select upto 3 images(hold ctr+select</label>
-                                <input type="file" class="form-control"  (change)="onSelectFile($event)" multiple>
+                <div class="row" *ngIf="product">
+                    <div class="col-md-12">
+                        <h6>Existing images</h6>
+                        <div class="image-list" *ngFor="let imageUrl of productImagesUrl; let i = index">
+                            <div>
+                                <div class="product">
+                                    <img src='http://localhost:8080{{imageUrl}}' alt="">
+                                </div>
                             </div>
+                            <span class="remove" (click)="removeExistingImage(i)">X</span>
                         </div>
+                    </div>
+                </div>
+                
+                <h6>Select product image (4 images max, 2mb max)</h6>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="fileupload" appDragDropFileUpload (click)="fileField.click()"
+                        (fileDropped)="onSelectFile($event)">
+                        <span class="ddinfo"> click here to select image, or drag and drop here...</span>
+                        <input type="file" name="avatars" #fileField (change)="onSelectFile($event.target.files)" hidden multiple>
+                    </div>
+                </div>
+    
+                <div class="col-md-12">
+                    <div class="image-list" *ngFor="let fileObjUrl of filesObjUrl; let i = index">
+                        <div>
+                            <div class="product">
+                                    <img [src]="sanitize(fileObjUrl['url'])" alt="">
+                            </div>
+                            <p>{{fileObjUrl.file.name}}</p>
+                        </div>
+                        <span class="remove" (click)="removeImage(i)">X</span>
+                    </div>
+                </div>
             </div>
 
             <span (mouseenter)="mouseOverSubmit=true" (mouseleave)="mouseOverSubmit=false">

@@ -17,12 +17,12 @@ const{
 } = productController;
 
 productRouter.route('/products')
-.post(isLoggedIn, isAdmin, validateProduct, validationResult, upload.array('image', 4), addProduct)
+.post(isLoggedIn, isAdmin,  upload.array('image', 4), validateProduct, validationResult, addProduct)
 .get(getAllProducts)
 
 productRouter.route('/products/:id')
 .get(getSingleProduct)
-.put(isLoggedIn, isAdmin, validateProduct, validationResult, editProduct)
+.put(isLoggedIn, isAdmin,  upload.array('image', 4), validateProduct, validationResult, editProduct)
 .delete(isLoggedIn, isAdmin, deleteProduct)
 
 productRouter.get("/product/search", searchProduct)

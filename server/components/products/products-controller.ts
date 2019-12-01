@@ -18,7 +18,6 @@ const  productController = {
 
     async addProduct(req: any, res: Response){
         let images = [];
-        const{name, price, discountedPrice, brand, quantity, category, description, attributes} = req.body;
 
         if(req.files.length > 0){
             for(let i=0; i< req.files.length; i+=1){
@@ -28,14 +27,7 @@ const  productController = {
             return res.status(400).send({message: "Atleast one product image is required"})
         }
         const newProduct = {
-            name,
-            price,
-            discountedPrice,
-            brand,
-            quantity,
-            category,
-            description,
-            attributes,
+           ...req.body,
             images
         }
         try {
@@ -82,10 +74,27 @@ const  productController = {
             res.status(500).send(err.message);
         }
     },
-    async editProduct(req:Request, res:Response){
+    async editProduct(req:any, res:Response){
         const{id} = req.params;
+        let newImages = [];
+        let{images} = req.body;
+
+        if(req.files && req.files.length > 0){
+            for(let i=0; i< req.files.length; i+=1){
+                newImages.push(`/public/uploads/${req.files[i].filename}`)
+            }
+        }
+        if(images.length === 0 && (req.files && req.files.length === 0) ){
+            return res.status(400).send({message: "Atleast one product image is required"})
+        }
+        const imagesArray = images.split(",");
+        
+        const credentials = {
+            ...req.body,
+            images: newImages.concat(imagesArray)
+        }
         try {
-            const product = await edit(id, req.body);
+            const product = await edit(id, credentials);
             if(product)
                 return res.status(200).send({product, message: "Product edited successfully"});
             return res.status(400).send({message: "No such product exist"})
