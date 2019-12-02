@@ -7,7 +7,7 @@ import { Product } from '../shared';
     selector: "products-product",
     template: `
     <div class="product_card" [routerLink] = "['/product', product?._id]" >
-    <img src='http://localhost:8080{{product?.images[0]}}' alt="product" />
+    <img src={{product?.images[0]}}' alt="product" />
     <div class="product_atr">
         <div class="product_name">{{product?.name | slice:0:16}}  ... </div>
         <div> {{product?.price | currency}} </div>
