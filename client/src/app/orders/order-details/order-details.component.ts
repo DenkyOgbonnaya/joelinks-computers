@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
 import { OrderService } from '../shared/orders.service';
 import { Subscription } from 'rxjs';
+import { environment } from ".././../../environments/environment";
 
 @Component({
     templateUrl: "./order-details.component.html",
@@ -10,7 +11,8 @@ import { Subscription } from 'rxjs';
 
 export class OrdersDetailsComponent implements OnInit, OnDestroy {
     order:any;
-    orderSub:Subscription
+    orderSub:Subscription;
+    baseUrl:string = environment.baseUrl;
     constructor(private route: ActivatedRoute, private orderService:OrderService){}
 
     getOrder(){

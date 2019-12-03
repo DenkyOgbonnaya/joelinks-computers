@@ -4,7 +4,7 @@
         <div class="order_id">Order ID: {{order?._id}}</div>
         <small class="text-muted">Order items: {{getNumOfItems(order?.items)}} | </small>
         <small class="text-muted">placed on: {{order?.createdAt | date }} | </small>
-        <small class="text-muted">Grand total: {{(getTotalPrice(order.items, order.shippingFee) | currency )}}</small>
+        <small class="text-muted">Grand total: {{(getTotalPrice(order.items, order.shippingFee) | currency:"NGN" )}}</small>
     </section>
     <hr />
     <section>
@@ -17,13 +17,13 @@
                         <tbody>
                             <tr *ngFor="let item of order?.items">
                                 <td>
-                                    <img src={{item?.image}} class="item_image" alt="item" />
+                                    <img src='{{baseUrl}}{{item?.image}}' class="item_image" alt="item" />
                                 </td>
                                 <td>
                                     <div class="item_name">{{item.name}}</div>
                                     <small>{{item.quantity}} x {{item.price}}</small>
                                 </td>
-                                <td> {{getSubTotal(item.quantity, item.price) | currency}}</td>
+                                <td> {{getSubTotal(item.quantity, item.price) | currency:"N"}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -33,16 +33,16 @@
                 <h6>Payment information</h6>
                 <div class="payment_info">
                     <p>payment details</p>
-                    <div class="items_total">Items total: {{(getTotalPrice(order.items, 0) | currency )}}</div>
-                    <div class="shipping_fee">Shipping fee: {{ order.shippingFee | currency}}</div>
-                    <div class="order_total">Grand total: {{(getTotalPrice(order.items, order.shippingFee) | currency )}}</div>
+                    <div class="items_total">Items total: {{(getTotalPrice(order.items, 0) | currency:"N" )}}</div>
+                    <div class="shipping_fee">Shipping fee: {{ order.shippingFee | currency:"N"}}</div>
+                    <div class="order_total">Grand total: {{(getTotalPrice(order.items, order.shippingFee) | currency:"N" )}}</div>
                 </div>
                 <h6>Delivery information</h6>
                 <div class="delivery_info">
                     <p>Delivery details </p>
                     <div class="customer_name">{{order.customerName}}</div>
-                    <address class="shipping_address">No 23 Hillcon street</address>
-                    <div class="shipping_state">Enugu, Enugu state </div>
+                    <address class="shipping_address">{{order.deliveryAddress.address}}</address>
+                    <div class="shipping_state">{{order.deliveryAddress?.city}}, {{order.deliveryAddress?.state}} </div>
                 </div>
             </div>
         </div>

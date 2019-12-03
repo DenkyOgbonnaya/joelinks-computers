@@ -40,11 +40,8 @@
 .product_description {
     display: flex;
     flex-direction: column;
-    font-size: 13px;
+    font-size: 14px;
     padding: 10px;
-}
-.category {
-    font-weight: bold;
 }
 .input {
     width: 35px;

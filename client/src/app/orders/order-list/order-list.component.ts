@@ -1,5 +1,6 @@
 import { Component, Input } from "@angular/core";
 import { Router } from '@angular/router';
+import { environment } from "../../../environments/environment";
 
 @Component({
     selector: "order-list",
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
             <div *ngIf="orders.orders.length === 0 else orderlist" class="jumbotron" style="text-align: center;">You have no available order</div>
             <div #orderlist class="order_card" *ngFor="let order of orders?.orders">
                 <div class="card" (click)="toOrderDetails(order?._id)" >
-                    <img src={{order?.items[0].image}} alt="product"/>
+                    <img src='{{baseUrl}}{{order?.items[0].image}}' alt="product"/>
                     <div class="order_details">
                         <div class="order_id">{{order?.items[0].name}} {{isOtherItems(order.items)}}</div>
                         <div class="order_info">
@@ -60,6 +61,7 @@ import { Router } from '@angular/router';
 
 export class orderListComponent {
     @Input() orders:any[];
+    baseUrl:string = environment.baseUrl;
     constructor(private router: Router){}
 
     isOtherItems(items:any[]){

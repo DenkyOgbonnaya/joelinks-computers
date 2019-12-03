@@ -21,22 +21,22 @@
                         <tbody class="tbody">
                             <tr class="tr" *ngFor="let cartProduct of cart$ | async ">
                                 <td class="td">
-                                    <img src={{cartProduct?.image}} alt="product" />
+                                    <img src='{{baseUrl}}{{cartProduct?.image}}' alt="product" />
                                 </td>
                                 <td class="td">
                                     <div class="product_name" [routerLink]= "['/product', cartProduct._id]">{{cartProduct?.name}} </div>
-                                    <div class="product_price">price {{cartProduct?.price | currency:"USD":"symbol"}} </div>
+                                    <div class="product_price">price {{cartProduct?.price | currency:"NGN":"symbol"}} </div>
                                 </td>
                                 <td class="td">
                                     <span class="quantity_pane">
-                                        <input type="number" class="quantity_field" readonly value= {{cartProduct.quantity}} />
+                                        <input type="number" class="quantity_field" readonly value= {{cartProduct?.quantity}} />
                                         <div class="quantity_btns">
                                             <button (click)= "onQuantityChange(cartProduct._id, cartProduct?.quantity+1)">^</button>
                                             <button (click)= "onQuantityChange(cartProduct._id, cartProduct?.quantity-1)">v</button>
                                         </div>
                                     </span>
                                 </td>
-                                <td> {{cartProduct?.price * cartProduct?.quantity | currency:"USD":"symbol"}}</td>
+                                <td> {{cartProduct?.price * cartProduct?.quantity | currency:"NGN":"symbol"}}</td>
                                 <td class="remove_icon" (click) = "removeProduct(cartProduct?._id)"> x </td>
                             </tr>
                         </tbody>
@@ -50,17 +50,17 @@
                     <tr>
                         <td>{{(cart$ | async)?.length}} items</td>
                         
-                        <td>{{getTotalPrice(cart$ | async)| currency:"USD":"symbol"}}</td>
+                        <td>{{getTotalPrice(cart$ | async)| currency:"NGN":"symbol"}}</td>
                     </tr>
                     <tr>
                         <td>shipping</td>
                         
-                        <td>0</td>
+                        <td>NGN0.00</td>
                     </tr>
                     <tr>
                         <td>Total</td>
                         
-                        <td>{{getTotalPrice(cart$ | async) | currency:"USD":"symbol" }}</td>
+                        <td>{{getTotalPrice(cart$ | async) | currency:"NGN":"symbol" }}</td>
                     </tr>
                     <tr>
                       <td>

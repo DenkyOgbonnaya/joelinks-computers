@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ProductsStoreService, NotificationService, CategoriesStoreService } from 'src/app/shared';
 import { Product } from 'src/app/products/shared';
 import { Observable } from 'rxjs';
+import { environment } from "../../../../environments/environment";
 
 @Component({
     selector: "products-form",
@@ -15,6 +16,7 @@ export class ProductFormComponent implements OnInit {
     files: Array<File> = [];
     filesObjUrl:any[] = [];
     mouseOverSubmit:boolean;
+    baseUrl:string = environment.baseUrl;
     @Input() product:Product = null;
     productImagesUrl:any = null;
     categories$:Observable<any>;

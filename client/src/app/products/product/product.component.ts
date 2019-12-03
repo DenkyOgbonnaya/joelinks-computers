@@ -1,23 +1,23 @@
 import { Component, Input } from "@angular/core";
 import { CartStoreService, NotificationService } from 'src/app/shared';
 import { Product } from '../shared';
+import { environment } from "../../../environments/environment";
 
 
 @Component({
     selector: "products-product",
     template: `
     <div class="product_card" [routerLink] = "['/product', product?._id]" >
-    <img src={{product?.images[0]}}' alt="product" />
+    <img src='{{baseUrl}}{{product?.images[0]}}' alt="product" />
     <div class="product_atr">
         <div class="product_name">{{product?.name | slice:0:16}}  ... </div>
-        <div> {{product?.price | currency}} </div>
+        <div> {{product?.price | currency:"N"}} </div>
     </div>
 <button class="cart_btn" (click)= "addToCart($event)">ADD TO CART</button>
         </div>
     `,
     styles: [`
     .product_card {
-        
         width: 130px;
     }
     .product_card:hover {
@@ -25,7 +25,7 @@ import { Product } from '../shared';
     }
     .product_atr {
         padding: 10px;
-        font-size: 10px;
+        font-size: 11px;
     }
     img {
         width: 100%;
@@ -44,6 +44,7 @@ import { Product } from '../shared';
 
 export class ProductComponent {
     @Input() product:Product;
+    baseUrl:string = environment.baseUrl;
     constructor(private cartstoreService: CartStoreService, private notifyService: NotificationService){}
 
     addToCart(e:any){

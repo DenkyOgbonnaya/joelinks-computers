@@ -12,7 +12,7 @@
     font-weight: bold;
 }
 .delivery_info, .payment_info,  .order_summary, .items{
-    font-size: 13px;
+    font-size: 14px;
     margin-top: 5px;
     padding: 5px;
     border: 1px solid #ccc;
