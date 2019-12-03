@@ -17,7 +17,8 @@ import { Router } from '@angular/router';
     `]
 })
 export class AdminProductsComponent implements OnInit {
-    products$:Observable<Product[]>
+    products$:Observable<Product[]>;
+    searchedProducts$:Observable<Product[]>;
     currentPage:number = 1;
     pages:number = 1;
 
@@ -40,6 +41,9 @@ export class AdminProductsComponent implements OnInit {
             })
         )
     }
+    getSearchedProducts(){
+        this.searchedProducts$ = this.productsStoreService.getSearchedProducts();
+    }
     handleEdit(event:Event, id:string){
         this.router.navigate([`/admin/product/edit/${id}`]);
 
@@ -56,5 +60,6 @@ export class AdminProductsComponent implements OnInit {
     }
     ngOnInit(){
         this.getProducts(1, 10);
+        this.getSearchedProducts();
     }
 }

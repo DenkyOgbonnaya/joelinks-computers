@@ -11,6 +11,7 @@ export class ProductsStoreService {
         total: 1
     }
     private _products$ = new BehaviorSubject(this.initialState);
+    private _searchedProducts$ = new BehaviorSubject([]);
 
     constructor(private productService: ProductService){}
 
@@ -66,14 +67,14 @@ export class ProductsStoreService {
     searchProduct(search:string, cb:Function){
         this.productService.searchProduct(search)
         .subscribe( data => {
-            this._products$.next({
-                ...this._products$.getValue(),
-                ...data
-            });
+            this._searchedProducts$.next(data.products);
             cb(null);
         },
         err => cb(err)
         );
+    }
+    getSearchedProducts():Observable<any>{
+        return this._searchedProducts$.asObservable();
     }
     getProductsByCat(name:string):Observable<any>{
         this.productService.getProductsByCat(name)

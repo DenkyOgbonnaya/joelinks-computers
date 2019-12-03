@@ -117,7 +117,6 @@ const  productController = {
     },
     async searchProduct(req:Request, res:Response){
         const{search} = req.query;
-        const limit = 10;
         const query:any = {};
 
         if(search)
@@ -126,12 +125,7 @@ const  productController = {
             const products = await searchProduct(query); 
             
             if(products.length>0)
-            return res.status(200).send({
-                products,
-                page: 1,
-                pages: Math.ceil(products.length/limit)
-                
-            })
+            return res.status(200).send({products})
             return res.status(401).send({message: 'This product could not be found'});
         }catch(err){
             res.status(500).send(err);

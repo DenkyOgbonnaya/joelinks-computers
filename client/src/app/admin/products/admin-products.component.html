@@ -1,42 +1,14 @@
 <div class="products_container">
     <button class="btn btn-danger" routerLink="/admin/product/new">Add new+</button>
-    <div class="spinner">
-        <div class="spinner-border text-danger" role="status" *ngIf="!(products$ | async).products.length">
-            <span class="sr-only">loading...</span>
-        </div>
-    </div>
-    <div *ngIf="(products$ | async).products.length >=1" class="table-responsive">
-        <products-search></products-search>
-        <br />
-        <table class="table w-100 table-hover">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>price</th>
-                    <th>Quantity</th>
-                    <th>Brand</th>
-                    <th>Category</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let product of (products$ | async).products" [routerLink]= "['/product', product?._id]" >
-                    <td>{{product?.name}}</td>
-                    <td>{{product?.price | currency: "N"}}</td>
-                    <td>{{product?.quantity}}</td>
-                    <td>{{product?.brand}}</td>
-                    <td>{{product?.category}}</td>
-                    <td> <img src="/assets/icons/edit_ic20px.png" (click)="handleEdit($event, product._id)" alt="edit" /> </td>
-                    <td> <img src="/assets/icons/delete_ic20px.png" (click)="deleteProduct($event, product._id)" alt="edit" /> </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div *ngIf="(products$ | async).products.length === 0" class="jumbotron"> No Products!</div>
+    <products-search></products-search>
+    <br>
+    <admin-productslist [products]="(searchedProducts$ | async)" *ngIf="(searchedProducts$ | async).length > 0"></admin-productslist>
+    <br>
+    <admin-productslist [products]="(products$ | async).products"></admin-productslist>
     <app-pagination 
-            [pages]="pages" 
-            [currentPage]="currentPage" 
-            (pageChanged)="changePage($event)"
-            *ngIf="pages>1">
-        </app-pagination>
+        [pages]="pages" 
+        [currentPage]="currentPage" 
+        (pageChanged)="changePage($event)"
+        *ngIf="pages>1">
+    </app-pagination>
 </div>

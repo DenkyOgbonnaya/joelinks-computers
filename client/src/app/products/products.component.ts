@@ -10,6 +10,7 @@ import {tap } from 'rxjs/operators';
 
 export class ProductsComponent implements OnInit {
     products$:Observable<any>;
+    searchedProducts$:Observable<any>
     categories$:Observable<any>;
     pageName:string = "Products";
     currentPage:number = 1;
@@ -26,6 +27,7 @@ export class ProductsComponent implements OnInit {
     ngOnInit(){
         this.getProducts(1, 10);
         this.getCategories();
+        this.getSearchedProducts();
     }
     getProducts(pageNumber:number, limit:number){
         this.products$ = this.productStoreService.getProducts(pageNumber, limit)
@@ -36,6 +38,9 @@ export class ProductsComponent implements OnInit {
                 
             })
         )
+    }
+    getSearchedProducts(){
+       this.searchedProducts$=  this.productStoreService.getSearchedProducts();
     }
     getCategories(){
         this.categories$ = this.categoriesStoreService.getCategories();
