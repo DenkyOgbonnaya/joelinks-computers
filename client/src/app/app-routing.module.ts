@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { AboutPageComponent } from './about/about-page.component';
 import { ServicePageComponent } from './service/service-page.component';
@@ -47,7 +47,12 @@ const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'}];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {
+    preloadingStrategy: PreloadAllModules,
+    useHash: false,
+    anchorScrolling: "enabled",
+    scrollPositionRestoration:"enabled"
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
