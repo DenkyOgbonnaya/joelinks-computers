@@ -1,4 +1,4 @@
-import {Request, Response} from "express";
+import {Request, Response, NextFunction} from "express";
 import productService from "./products-service";
 import { IProduct } from "./product";
 
@@ -11,7 +11,11 @@ const{
     getProductsCount,
     searchProduct,
     getSimilar,
-    getByCategory
+    getByCategory,
+    reserve,
+    rollbackReservation,
+    pullReservation,
+    returnProducts
 
 } = productService;
 const  productController = {
@@ -144,7 +148,68 @@ const  productController = {
         } catch (err) {
             res.status(500).send(err);
         }
-}
+    },
+    //reserve the products quantiy purchased in the cart
+    async reserveProducts(req:Request, res: Response, next:NextFunction){
+        const sessionId = req.sessionID || "";
+        const cart = req.session && req.session.cart;
+        
+        let success = [];
+        let failed = [];
+
+        for(let i = 0; i < cart.length; i+=1){
+            let product = cart[i];
+
+            try {
+                let result = await reserve(product._id, sessionId, product.quantity);
+                if(result){
+                    success.push(product)
+                }else failed.push(product)
+            } catch (err) {
+                console.log(err);
+                
+            }
+        }
+        //rollback all the successful reservations back to the product
+        if(failed.length > 0){
+           for(let i=0; i<success.length; i+=1){ 
+               let product = success[i];
+               await rollbackReservation(product._id, sessionId, product.quantity);
+           }
+           return res.status(400).send({message: "The products requested are out of stock!"})
+        } else {
+            //else create order, release all reservation from the inventories, clear cart
+            next();
+        }
+    },
+    // release reservations for successfully checkout
+    async releaseReservations(cart:any, cartId:string){
+        console.log(cart, 'release');
+        
+        for(let i=0; i<cart.length; i+=1){
+            try {
+                return await pullReservation(cartId);
+            } catch (err) {
+                throw err;
+            }
+        }
+            
+    },
+    //return products quantity to inventry on failed checkout
+    async returnProducts(cart:any, cartId:string){
+        console.log(cart, 'return');
+        
+        for(let i=0; i<cart.length; i+=1){
+            let product = cart[i]
+            try {
+                return await returnProducts(product._id, cartId, product.quantity);
+            } catch (err) {
+                throw err;
+            }
+        }
+            
+    }
+    
 }
 
 export default productController;

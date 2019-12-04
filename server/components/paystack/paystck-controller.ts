@@ -2,6 +2,7 @@ import axios from "axios";
 import { Request, Response } from "express";
 import { calculateTotalPrice } from "./paystack-helper";
 import orderService from "../order/order-service";
+import { productsEvents } from "../products";
 
 const paystackController = {
     async initiatePayment(req:Request, res:Response){
@@ -34,6 +35,9 @@ const paystackController = {
     },
     async verifyPayment(req:Request, res:Response){
         const secretKey = `Bearer ${process.env.PAYSTACK_SK}`;
+        const cart = req.session && req.session.cart;
+        const cartId = req.sessionID;
+
         const confiq = {
             headers : {
                 authorization: secretKey,
@@ -48,17 +52,24 @@ const paystackController = {
             const {data} = await axios.get(`https://api.paystack.co/transaction/verify/${encodeURIComponent(reference)}`, confiq);
             
             const ref = data.data.reference;
-            //save reference to db
-            if(ref){
-                if(req.session)
-                    req.session.cart = [];
-                    
+            
+            if(ref){ 
+            //successful checkout
                 await orderService.edit(orderId, {paymentRef: ref, status: "Pending"});
-                return res.redirect(`http://localhost:4200/order/${orderId}`)
+                productsEvents.emit("releaseReservations", cart, cartId);
+                
+                if(req.session)
+                req.session.cart = []; //empty cart
+                return res.redirect(`http://localhost:4200/user/order/${orderId}`)
             }
+            //unsuccessful checkout
             await orderService.edit(orderId, {status: "Cancelled"})
-            return res.redirect(`http://localhost:4200/order/${orderId}`)
+            productsEvents.emit("returnProducts", cart, cartId);
+
+            return res.redirect(`http://localhost:4200/user/order/${orderId}`)
         } catch (err) {
+            console.log(err);
+            //redirect to error page
             res.redirect(`http://localhost:4200`)
         }
 

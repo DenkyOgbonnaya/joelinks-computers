@@ -65,5 +65,58 @@ const productService =  {
             throw err;
         }
     },
+    async reserve(productId:string, sessionId:string, quantity:number){
+        
+        try {
+            return await Product.findOneAndUpdate(
+                {_id: productId, quantity: {$gte: quantity}}, 
+                {
+                $inc: {quantity: -quantity}, 
+                $push: {
+                    reservations: {quantity, cartId:sessionId}}
+                })
+        } catch (err) {
+            throw err;
+        }
+    },
+    //rollback product reservation attempt
+    async rollbackReservation(productId:string, cartId:string, quantity:number){
+        
+        try {
+            return Product.findOneAndUpdate({_id: productId}, {
+                $inc: {quantity:quantity},
+                $pull: {reservations: {cartId}}
+            })
+        } catch (err) {
+            throw err;
+        }
+    },
+    //release all reservations from the product collect fo successful checkout
+    async pullReservation(cartId:string){
+        
+        try {
+            return await Product.findOneAndUpdate({"reservations.cartId": cartId},
+            {$pull: {reservations: {cartId}}},
+            
+            )
+        } catch (err) {
+            throw err;
+        }
+    }, 
+    //return product quantity and release reservation on failed checkout
+    async returnProducts(productId:string, cartId:string, quantity:number){
+        try {
+            return await Product.findOneAndUpdate(
+                {_id: productId},
+                {
+                    $inc: {quantity},
+                    $pull: {reservations: {cartId} }
+                }
+            )
+        } catch (err) {
+            throw err;
+        }
+    }
+
 }
 export default productService;

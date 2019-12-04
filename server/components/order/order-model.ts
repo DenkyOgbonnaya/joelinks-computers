@@ -21,7 +21,7 @@ const orderSchema = new Schema({
     customerName: {
         type: String
     },
-    deliverAddress: {
+    deliveryAddress: {
         street:String,
         city:String,
         state:String
