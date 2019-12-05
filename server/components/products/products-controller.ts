@@ -1,6 +1,8 @@
 import {Request, Response, NextFunction} from "express";
 import productService from "./products-service";
 import { IProduct } from "./product";
+import { dataUri } from "../../utills/config/multer-config";
+import { uploader } from "../../utills/config/cloudinary-config";
 
 const{
     add,
@@ -24,8 +26,19 @@ const  productController = {
         let images = [];
 
         if(req.files.length > 0){
+            
             for(let i=0; i< req.files.length; i+=1){
-                images.push(`/public/uploads/${req.files[i].filename}`)
+                let datauri = dataUri(req.files[i]).content;
+                try {
+                    let result = await uploader.upload(datauri, {folder: "joelinks"});
+                images.push({
+                    url: result.url,
+                    id: result.public_id
+                })
+                } catch (err) {
+                    res.status(500).send(err)
+                }
+                
             }
         }else {
             return res.status(400).send({message: "Atleast one product image is required"})
@@ -38,6 +51,8 @@ const  productController = {
             const product = await add(newProduct);
             res.status(201).send({product, message: "Product Successfully added!"});
         } catch (err) {
+            console.log(err);
+            
             res.status(500).send(err.message);
         }
         
@@ -83,11 +98,23 @@ const  productController = {
         let newImages = [];
         let{images} = req.body;
 
-        if(req.files && req.files.length > 0){
+        if(req.files.length > 0){
+            
             for(let i=0; i< req.files.length; i+=1){
-                newImages.push(`/public/uploads/${req.files[i].filename}`)
+                let datauri = dataUri(req.files[i]).content;
+                try {
+                    let result = await uploader.upload(datauri, {folder: "joelinks"});
+                newImages.push({
+                    url: result.url,
+                    id: result.public_id
+                })
+                } catch (err) {
+                    res.status(500).send(err)
+                }
+                
             }
         }
+
         if(images.length === 0 && (req.files && req.files.length === 0) ){
             return res.status(400).send({message: "Atleast one product image is required"})
         }

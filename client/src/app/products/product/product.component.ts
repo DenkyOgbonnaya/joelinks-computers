@@ -1,14 +1,13 @@
 import { Component, Input } from "@angular/core";
 import { CartStoreService, NotificationService } from 'src/app/shared';
 import { Product } from '../shared';
-import { environment } from "../../../environments/environment";
 
 
 @Component({
     selector: "products-product",
     template: `
     <div class="product_card" [routerLink] = "['/product', product?._id]" >
-    <img src='{{baseUrl}}{{product?.images[0]}}' alt="product" />
+    <img src={{product?.images[0].url}} alt="product" />
     <div class="product_atr">
         <div class="product_name">{{product?.name | slice:0:16}}  ... </div>
         <div> {{product?.price | currency:"N"}} </div>
@@ -44,14 +43,13 @@ import { environment } from "../../../environments/environment";
 
 export class ProductComponent {
     @Input() product:Product;
-    baseUrl:string = environment.baseUrl;
     constructor(private cartstoreService: CartStoreService, private notifyService: NotificationService){}
 
     addToCart(e:any){
         e.stopPropagation();
 
         const{_id, name, price, images} = this.product;
-        this.cartstoreService.addToCart({_id, name, price, image:images[1], quantity:1});
+        this.cartstoreService.addToCart({_id, name, price, image:images[1].url, quantity:1});
 
         this.notifyService.showSuccessMessage("Notification", "Added to cart!");
         

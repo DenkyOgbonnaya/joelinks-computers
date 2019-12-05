@@ -3,7 +3,6 @@ import { ActivatedRoute } from "@angular/router";
 import { ProductService, Product } from '../shared';
 import { CartStoreService, NotificationService } from 'src/app/shared';
 import { Subscription } from 'rxjs';
-import { environment } from "../../../environments/environment";
 
 @Component({
     templateUrl: "./product-details.component.html",
@@ -17,7 +16,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     quantity:number = 1;
     productSub: Subscription;
     routeSub:Subscription;
-    baseUrl:string= environment.baseUrl;
 
     constructor(
         private route: ActivatedRoute, 

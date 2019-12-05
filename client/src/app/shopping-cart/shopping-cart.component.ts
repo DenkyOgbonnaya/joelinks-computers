@@ -6,7 +6,6 @@ import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { CheckoutComponent } from "./checkout/checkout.component";
 import { AuthService } from '../shared';
 import { Router } from '@angular/router';
-import { environment } from "../../environments/environment";
 
 @Component({
     templateUrl: "./shopping-cart.component.html",
@@ -18,7 +17,6 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     cart$:Observable<ICartItem[]>;
     currentUser:any;
     authSub:Subscription;
-    baseUrl:string = environment.baseUrl
 
     constructor(
         private cartstoreService: CartStoreService, 

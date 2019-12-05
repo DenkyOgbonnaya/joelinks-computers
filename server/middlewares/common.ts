@@ -4,10 +4,15 @@ import compression from "compression";
 import session from "express-session";
 import mongoDBSession from "connect-mongodb-session";
 import passport from "passport";
+import dotenv from "dotenv";
 
+dotenv.config();
+const MONGODB_URL:any = process.env.MONGODB_URL
 const mongoDBStore = mongoDBSession(session);
+const dbUrl = process.env.MONGODB_URI || MONGODB_URL;
+
 const store = new mongoDBStore({
-  uri: "mongodb://localhost:27017/joelinks",
+  uri: dbUrl,
   collection: "sessions"
 })
 store.on("error", err => console.log(err));

@@ -99,7 +99,7 @@
                         <div class="image-list" *ngFor="let imageUrl of productImagesUrl; let i = index">
                             <div>
                                 <div class="product">
-                                    <img src='{{baseUrl}}{{imageUrl}}' alt="">
+                                    <img src={{imageUrl.url}} alt="">
                                 </div>
                             </div>
                             <span class="remove" (click)="removeExistingImage(i)">X</span>

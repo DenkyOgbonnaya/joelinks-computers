@@ -2,8 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Observable } from 'rxjs';
 import { tap } from "rxjs/operators";
 import { Product} from 'src/app/products/shared';
-import { ProductsStoreService, NotificationService } from 'src/app/shared';
-import { Router } from '@angular/router';
+import { ProductsStoreService} from 'src/app/shared';
 
 @Component({
     templateUrl: "./admin-products.component.html",
@@ -23,9 +22,7 @@ export class AdminProductsComponent implements OnInit {
     pages:number = 1;
 
     constructor(
-        private productsStoreService:ProductsStoreService,
-        private notify: NotificationService,
-        private router: Router
+        private productsStoreService:ProductsStoreService
     ){}
 
     changePage(pageNumber:number){
@@ -44,20 +41,7 @@ export class AdminProductsComponent implements OnInit {
     getSearchedProducts(){
         this.searchedProducts$ = this.productsStoreService.getSearchedProducts();
     }
-    handleEdit(event:Event, id:string){
-        this.router.navigate([`/admin/product/edit/${id}`]);
-
-        event.stopPropagation();
-    }
-    deleteProduct(event:Event, id:string){
-        event.stopPropagation();
-
-        this.productsStoreService.deleteProduct(id, (err:any, message:string) => {
-            if(!err){
-                this.notify.showSuccessMessage("Succes", message);
-            }
-        })
-    }
+    
     ngOnInit(){
         this.getProducts(1, 10);
         this.getSearchedProducts();

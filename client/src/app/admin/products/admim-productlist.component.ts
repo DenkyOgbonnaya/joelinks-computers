@@ -1,4 +1,6 @@
 import { Component, Input } from "@angular/core";
+import { Router } from "@angular/router";
+import { ProductsStoreService, NotificationService } from "../../shared";
 
 @Component({
     selector: "admin-productslist",
@@ -32,4 +34,20 @@ import { Component, Input } from "@angular/core";
 })
 export class AdminProductslistComponent {
     @Input() products:any = [];
+    constructor(private router:Router, private productsStoreService:ProductsStoreService, private notify:NotificationService){}
+
+    handleEdit(event:Event, id:string){
+        this.router.navigate([`/admin/product/edit/${id}`]);
+
+        event.stopPropagation();
+    }
+    deleteProduct(event:Event, id:string){
+        event.stopPropagation();
+
+        this.productsStoreService.deleteProduct(id, (err:any, message:string) => {
+            if(!err){
+                this.notify.showSuccessMessage("Succes", message);
+            }
+        })
+    }
 }

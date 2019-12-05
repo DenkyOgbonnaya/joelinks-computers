@@ -4,18 +4,18 @@
         <section class="product_container">
             <div class="product_images">
                 <div class="main_image">
-                    <img src='{{baseUrl}}{{ product?.images[0]}}' alt="product image" />
+                    <img src={{product?.images[0].url}} alt="product image" />
                 </div>
                 <div class="thumbnails">
-                        <div class="thumbnail" *ngIf="product?.images[1]"><img src='{{baseUrl}}{{ product?.images[1]}}' alt="product image" /></div>
-                        <div class="thumbnail" *ngIf="product?.images[2]"><img src='{{baseUrl}}{{ product?.images[2]}}' alt="product image" /></div>
-                        <div class="thumbnail" *ngIf="product?.images[3]"><img  src='{{baseUrl}}{{ product?.images[3]}}' alt="product image" /></div>
+                        <div class="thumbnail" *ngIf="product?.images[1]"><img src={{product?.images[1].url}} alt="product image" /></div>
+                        <div class="thumbnail" *ngIf="product?.images[2]"><img src={{product?.images[2].url}} alt="product image" /></div>
+                        <div class="thumbnail" *ngIf="product?.images[3]"><img  src={{product?.images[3].url}} alt="product image" /></div>
                     </div>
             </div>
             <div class="product_description">
                 <div class="product_name"> {{ product?.name}}</div>
                 <div> {{ product?.attributes.processor}}</div>
-                <div> {{ product.attributes.ram}}, {{ product.attributes.display}}</div>
+                <div> {{ product.attributes.ram}}, {{ product.attributes.size}}</div>
                 <div class="category"> Category: <small>{{ product?.category}}</small></div>
                 <div> {{ product?.description}}</div>
                 <div>
