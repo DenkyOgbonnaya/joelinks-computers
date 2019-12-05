@@ -4,6 +4,7 @@ import { applyMiddleware, applyRoutes } from "./server/utills";
 import middleware from "./server/middlewares";
 import { routers } from "./server/components";
 import connectDatabase from "./server/database";
+import path from "path";
 
 const app = express();
 const PORT = process.env.PORT || 8080
@@ -11,9 +12,13 @@ passportSetup();
 applyMiddleware(middleware, app);
 applyRoutes(routers, app);
 app.use('/public', express.static(__dirname + '/public'));
-app.get('/', (req:Request, res: Response) => {
-    res.status(200).send('hurray! app is working!.');
-})
+
+app.use(express.static(path.join(__dirname + "/client/dist")))
+if(process.env.NODE_ENV == 'production'){
+    app.get('*', (req:Request, res:Response) => {
+        res.sendFile(path.join(__dirname, '/client/dist', 'index.html'));
+    })
+}
 
 connectDatabase();
 app.listen(PORT, () => {

@@ -45,7 +45,8 @@ const  productController = {
         }
         const newProduct = {
            ...req.body,
-            images
+           attributes: JSON.parse(req.body.attributes),
+           images
         }
         try {
             const product = await add(newProduct);
@@ -97,6 +98,16 @@ const  productController = {
         const{id} = req.params;
         let newImages = [];
         let{images} = req.body;
+        let{attributes} = req.body;
+
+        console.log(Array.isArray(images));
+        
+        //let imagesObj = images.map(JSON.parse)
+
+        //console.log(imagesObj);
+        
+        
+        
 
         if(req.files.length > 0){
             
@@ -118,11 +129,11 @@ const  productController = {
         if(images.length === 0 && (req.files && req.files.length === 0) ){
             return res.status(400).send({message: "Atleast one product image is required"})
         }
-        const imagesArray = images.split(",");
         
         const credentials = {
             ...req.body,
-            images: newImages.concat(imagesArray)
+            attributes: JSON.parse(attributes),
+            
         }
         try {
             const product = await edit(id, credentials);

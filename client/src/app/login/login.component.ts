@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
         
     }
     googleLogin(){
-        window.location.href = 'http://localhost:8080/api/auth/google';
+        window.location.href = 'https://joelinks-computers.herokuapp.com/api/auth/google';
     }
     ngOnInit(){
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || "/";

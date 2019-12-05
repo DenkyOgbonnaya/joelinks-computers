@@ -121,7 +121,7 @@ export class ProductFormComponent implements OnInit {
             return;
         }
         const formDataCopy = formData;
-        formDataCopy.append('images', this.productImagesUrl);
+        formDataCopy.append('images', JSON.stringify(this.productImagesUrl));
 
         this.productsStoreService.editProduct(this.product._id, formDataCopy, (err:any, message:string) => {
             if(err){

@@ -5,10 +5,11 @@
   "license": "MIT",
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
-    "start": "node server.js",
+    "start": "node server.ts",
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
-    "prod": "tsc && node ./build/server.js"
+    "prod": "tsc && node ./build/server.ts",
+    "heroku-postbuild": "yarn run prod && cd client && ng build --prod"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
@@ -48,7 +49,10 @@
   },
   "devDependencies": {
     "eslint": "^6.6.0",
-    "eslint-config-strongloop": "^2.1.0",
-    "nodemon": "^1.19.4"
+    "eslint-config-strongloop": "^2.1.0"
+  },
+  "engines": {
+    "yarn": "1.19.1",
+    "node": "10.16.3"
   }
 }

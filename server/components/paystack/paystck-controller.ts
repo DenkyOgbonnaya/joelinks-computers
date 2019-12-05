@@ -60,17 +60,17 @@ const paystackController = {
                 
                 if(req.session)
                 req.session.cart = []; //empty cart
-                return res.redirect(`http://localhost:4200/user/order/${orderId}`)
+                return res.redirect(`https://joelinks-computers.herokuapp.com/user/order/${orderId}`)
             }
             //unsuccessful checkout
             await orderService.edit(orderId, {status: "Cancelled"})
             productsEvents.emit("returnProducts", cart, cartId);
 
-            return res.redirect(`http://localhost:4200/user/order/${orderId}`)
+            return res.redirect(`https://joelinks-computers.herokuapp.com/user/order/${orderId}`)
         } catch (err) {
             console.log(err);
             //redirect to error page
-            res.redirect(`http://localhost:4200`)
+            res.redirect(`https://joelinks-computers.herokuapp.com`)
         }
 
     }

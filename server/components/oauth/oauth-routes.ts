@@ -24,7 +24,7 @@ oauthRouter.get('/auth/google/redirect', passport.authenticate('google', {sessio
             
             res.sendStatus(500);
         } else {
-            res.redirect(`http://localhost:4200/?token=${token}`)
+            res.redirect(`https://joelinks-computers.herokuapp.com/?token=${token}`)
         }
     });
 })
