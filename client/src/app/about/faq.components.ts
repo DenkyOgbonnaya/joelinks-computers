@@ -38,21 +38,17 @@ import { Component} from "@angular/core";
                 <div class="accordion" (click)="toggleAccordian($event)"> Do you do door delivery? </div>
                 <div class="panel"  >
                     <small>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-                    exercitation ullamco laboris nisi ut aliquip ex ea
+                    Yes, we do door dlivery, but only within abakaliki and it environs at the moment.
                     </small>
                 </div>
             </div>
         </div>
         <div class="col">
             <div class="faq_main" >
-                <div class="accordion" (click)="toggleAccordian($event)"> what is your </div>
+                <div class="accordion" (click)="toggleAccordian($event)"> When are you open </div>
                 <div class="panel"  >
                     <small>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
-                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
-                    exercitation ullamco laboris nisi ut aliquip ex ea
+                    We are always open for bussiness from monday to friday, 7am-6pm
                     </small>
                 </div>
             </div>

@@ -15,7 +15,6 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthService, private route:ActivatedRoute){}
 
   persistUser(authToken:string){
-    console.log(authToken, "jfjjfjj");
     
     if(authToken){
       this.authSub = this.authService.verifyToken(authToken)

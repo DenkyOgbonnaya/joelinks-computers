@@ -17,24 +17,24 @@ import { Component } from "@angular/core";
                 </div>
             </div>
             <div class="comment"> 
-                <p> Bootstrap’s carousel class exposes two events for 
-                hooking into carousel functionality. Both events have the following additional properties:</p>
+                <p> I am very fortunate to have come accross Joelinks computers. all my office equipments from Joelinks computers
+                has been the best.</p>
                 <div class="client">
-                    <img src="/assets/images/988.JPG" alt="clint" />
+                    <img src="/assets/images/defavatar.png" alt="clint" />
                     <div>
-                        <div class="name">Denky Ogbonnaya </div>
+                        <div class="name">Michael Kenneth </div>
                         <span class="occupation">Client </span>
                     </div>
                     
                 </div>
             </div>
             <div class="comment"> 
-                <p> Bootstrap’s carousel class exposes two events for 
-                hooking into carousel functionality. Both events have the following additional properties:</p>
+                <p> In my history with working with other
+                computer accessory stores, i can honestly say joelinks is the best.:</p>
                 <div class="client">
-                    <img src="/assets/images/988.JPG" alt="clint" />
+                    <img src="/assets/images/defavatar.png" alt="clint" />
                     <div>
-                        <div class="name">Denky Ogbonnaya </div>
+                        <div class="name">Mary Amadi </div>
                         <span class="occupation">Client </span>
                     </div>
                     
