@@ -9,7 +9,7 @@
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "prod": "tsc && node ./build/server.ts",
-    "heroku-postbuild": "yarn run prod && cd client && yarn && ng build --prod"
+    "heroku-postbuild": "yarn run prod && cd client && ng build --prod"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
