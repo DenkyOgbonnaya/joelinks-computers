@@ -16,7 +16,7 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use(express.static(path.join(__dirname + "/client/dist")))
 if(process.env.NODE_ENV == 'production'){
     app.get('*', (req:Request, res:Response) => {
-        res.sendFile(path.join('../client' + '/dist/client', 'index.html'));
+        res.sendFile(path.join(__dirname + '/client/dist/client', 'index.html'));
     })
 }
 
