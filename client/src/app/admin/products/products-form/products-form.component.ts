@@ -1,23 +1,24 @@
-import { Component, OnInit, Input} from "@angular/core";
+import { Component, OnInit, Input, OnDestroy} from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DomSanitizer } from '@angular/platform-browser';
-import { ProductsStoreService, NotificationService, CategoriesStoreService } from 'src/app/shared';
-import { Product } from 'src/app/products/shared';
-import { Observable } from 'rxjs';
+import { ProductsStoreService, NotificationService, CategoriesStoreService } from "../../../shared" //'src/app/shared';
+import { ProductService } from "../../../products/shared" //'src/app/products/shared';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
     selector: "products-form",
     templateUrl: "./product-form.component.html",
     styleUrls: ["./products-form.component.css"]
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
     productForm:FormGroup;
     files: Array<File> = [];
     filesObjUrl:any[] = [];
-    mouseOverSubmit:boolean;
-    @Input() product:Product = null;
-    productImagesUrl:any = null;
-    categories$:Observable<any>;
+    mouseOverSubmit:boolean = false;
+    @Input() product:any = null;
+    productImages:any = null;
+    categories$:Observable<any> | undefined
+    productsServiceSub:Subscription | undefined;
     isLoading:boolean = false;
     errorMessage:string = "";
 
@@ -27,6 +28,7 @@ export class ProductFormComponent implements OnInit {
         private notifyService: NotificationService,
         private categoriesStore: CategoriesStoreService,
         private sanitizer: DomSanitizer,
+        private productService: ProductService
         ){
             this.productForm = this.initForm(this.formBuilder)
     }
@@ -66,10 +68,11 @@ export class ProductFormComponent implements OnInit {
         this.files = filteredFiles;
         this.filesObjUrl = filteredFilesObj;
     }
-    removeExistingImage(imageIndex:number){
-        const filteredUrl = this.productImagesUrl.filter( (url:any, index:number) => index !==imageIndex );
-        
-        this.productImagesUrl = filteredUrl;
+    removeExistingImage(imageId:string){
+        const filteredImages = this.productImages.filter( (image:any, index:number) => image.id !== imageId );
+        this.productImages = filteredImages;
+        this.productsServiceSub = this.productService.deleteProductImage(this.product._id, imageId)
+        .subscribe(data => this.notifyService.showSuccessMessage("Success", data.message));
     }
     // Clean Url
   sanitize(url: string) {
@@ -114,32 +117,35 @@ export class ProductFormComponent implements OnInit {
         })
     }
     editProduct(formData:FormData){
-        const images:number = this.files.length + this.productImagesUrl.length;
+        const images:number = this.files.length + this.productImages.length;
         if(images > 4){
             this.notifyService.showErrorMessage("Error!", "you cant upload above 4 images");
             this.isLoading = false;
             return;
         }
         const formDataCopy = formData;
-        formDataCopy.append('images', JSON.stringify(this.productImagesUrl));
+        formDataCopy.append('images', JSON.stringify(this.productImages));
 
         this.productsStoreService.editProduct(this.product._id, formDataCopy, (err:any, message:string) => {
             if(err){
                 this.errorMessage = err;
+                this.isLoading = false;
             }else
             this.notifyService.showSuccessMessage("Success", message);
+            this.isLoading = false;
         })
-
-        this.isLoading = false;
     }
 
     ngOnInit(){
         if(this.product){
             this.productForm.patchValue(this.product);
-            this.productImagesUrl = this.product.images;
+            this.productImages = this.product.images;
         }
         this.getCategories();
     }
-
+    ngOnDestroy(){
+        if(this.productsServiceSub)
+            this.productsServiceSub.unsubscribe();
+    }
     
 }

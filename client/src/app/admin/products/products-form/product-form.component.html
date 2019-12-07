@@ -96,13 +96,13 @@
                 <div class="row" *ngIf="product">
                     <div class="col-md-12">
                         <h6>Existing images</h6>
-                        <div class="image-list" *ngFor="let imageUrl of productImagesUrl; let i = index">
+                        <div class="image-list" *ngFor="let image of productImages; let i = index">
                             <div>
                                 <div class="product">
-                                    <img src={{imageUrl.url}} alt="">
+                                    <img src={{image.url}} alt="">
                                 </div>
                             </div>
-                            <span class="remove" (click)="removeExistingImage(i)">X</span>
+                            <span class="remove" (click)="removeExistingImage(image.id)">X</span>
                         </div>
                     </div>
                 </div>

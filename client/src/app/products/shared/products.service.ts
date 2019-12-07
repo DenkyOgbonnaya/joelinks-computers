@@ -37,6 +37,8 @@ export class ProductService {
     getProductsByCat(name:string):Observable<any> {
         return this.http.get<any>(`/api/product/category/${name}`)
     }
-    
+    deleteProductImage(productId:any, imageId:any):Observable<any>{
+        return this.http.delete<any>(`/api/product/${productId}/deleteImage?imageId=${imageId}`, httOptions);
+    }
 }
 

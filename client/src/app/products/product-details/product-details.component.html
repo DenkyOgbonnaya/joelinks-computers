@@ -4,7 +4,7 @@
         <section class="product_container">
             <div class="product_images">
                 <div class="main_image">
-                    <img src={{product?.images[0].url}} alt="product image" />
+                    <img src={{product?.images[0].url}} alt="product image" *ngIf="product?.images[0]" />
                 </div>
                 <div class="thumbnails">
                         <div class="thumbnail" *ngIf="product?.images[1]"><img src={{product?.images[1].url}} alt="product image" /></div>
@@ -15,8 +15,8 @@
             <div class="product_description">
                 <div class="product_name"> {{ product?.name}}</div>
                 <div> {{ product?.attributes.processor}}</div>
-                <div> {{ product.attributes.ram}}, {{ product.attributes.size}}</div>
-                <div class="category"> Category: <small>{{ product?.category}}</small></div>
+                <div> {{ product.attributes.ram}} {{ product.attributes.size}}</div>
+                <div class="category"> <b>Category: </b> <span>{{ product?.category}}</span></div>
                 <div> {{ product?.description}}</div>
                 <div>
                     <span class="product_quantity">
