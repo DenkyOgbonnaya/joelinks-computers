@@ -24,7 +24,7 @@ export class AuthService {
     }
     setCurrentUser(authToken: string){
         localStorage.authToken = authToken;
-        const decoded = jwt_decode(authToken);
+        const decoded:any = jwt_decode(authToken);
         this._currentUser$.next(decoded.currentUser);
     }
     getCurrentUser():Observable<any>{
