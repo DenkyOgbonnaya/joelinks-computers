@@ -1,6 +1,6 @@
 <div class="container">
         <div *ngIf="errorMessage" class="alert alert-danger"> {{errorMessage}}</div>
-        <form [formGroup]= "productForm" (ngSubmit)="onSubmit(productForm.value)" >
+        <form [formGroup]= "productForm" (ngSubmit)="onSubmit()" >
             <div class="row">
                 <div class="col">
                     <div class="form-group">
