@@ -13,7 +13,8 @@ const{
     editProduct,
     deleteProduct,
     searchProduct, 
-    getProductByCat
+    getProductByCat,
+    deleteProductImage
 } = productController;
 
 productRouter.route('/products')
@@ -25,6 +26,7 @@ productRouter.route('/products/:id')
 .put(isLoggedIn, isAdmin,  multerUploads.array('image', 4), validateProduct, validationResult, editProduct)
 .delete(isLoggedIn, isAdmin, deleteProduct)
 
+productRouter.delete("/product/:id/deleteImage/", isLoggedIn, isAdmin, deleteProductImage)
 productRouter.get("/product/search", searchProduct)
 productRouter.get("/product/category/:name", getProductByCat)
 const api ={

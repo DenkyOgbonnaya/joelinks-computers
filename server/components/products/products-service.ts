@@ -44,6 +44,19 @@ const productService =  {
             throw err;
         }
     }, 
+    async deleteImage(productId:string, imageId:string){
+        try {
+            const product = await Product.findById(productId);
+            if(product){
+                const updatedImages = product.images.filter( (image:any) => image.id !== imageId);
+                product.images = updatedImages;
+                product.save();
+            }
+            return product;
+        } catch (err) {
+            throw err;
+        }
+    },
     async searchProduct(query:any){
         try{
             return await  Product.find(query)

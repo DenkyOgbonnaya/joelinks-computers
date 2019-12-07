@@ -3,6 +3,8 @@ import productService from "./products-service";
 import { IProduct } from "./product";
 import { dataUri } from "../../utills/config/multer-config";
 import { uploader } from "../../utills/config/cloudinary-config";
+import { uploadImagesToCloudinary } from "./products-helper";
+import { productsEvents } from ".";
 
 const{
     add,
@@ -17,32 +19,18 @@ const{
     reserve,
     rollbackReservation,
     pullReservation,
-    returnProducts
+    returnProducts,
+    deleteImage
 
 } = productService;
 const  productController = {
 
     async addProduct(req: any, res: Response){
-        let images = [];
 
-        if(req.files.length > 0){
-            
-            for(let i=0; i< req.files.length; i+=1){
-                let datauri = dataUri(req.files[i]).content;
-                try {
-                    let result = await uploader.upload(datauri, {folder: "joelinks"});
-                images.push({
-                    url: result.url,
-                    id: result.public_id
-                })
-                } catch (err) {
-                    res.status(500).send(err)
-                }
-                
-            }
-        }else {
+        if(req.files.length === 0)
             return res.status(400).send({message: "Atleast one product image is required"})
-        }
+        const images = await uploadImagesToCloudinary(req.files, dataUri, uploader);
+
         const newProduct = {
            ...req.body,
            attributes: JSON.parse(req.body.attributes),
@@ -96,49 +84,36 @@ const  productController = {
     },
     async editProduct(req:any, res:Response){
         const{id} = req.params;
-        let newImages = [];
-        let{images} = req.body;
-        let{attributes} = req.body;
-
-        console.log(Array.isArray(images));
+        const{images} = req.body;
+        let {attributes} = req.body;
         
-        //let imagesObj = images.map(JSON.parse)
-
-        //console.log(imagesObj);
-        
-        
-        
-
-        if(req.files.length > 0){
-            
-            for(let i=0; i< req.files.length; i+=1){
-                let datauri = dataUri(req.files[i]).content;
-                try {
-                    let result = await uploader.upload(datauri, {folder: "joelinks"});
-                newImages.push({
-                    url: result.url,
-                    id: result.public_id
-                })
-                } catch (err) {
-                    res.status(500).send(err)
-                }
-                
-            }
-        }
-
-        if(images.length === 0 && (req.files && req.files.length === 0) ){
+        if(images.length === 0 && (req.files && req.files.length === 0) )
             return res.status(400).send({message: "Atleast one product image is required"})
-        }
+        const newImages = await uploadImagesToCloudinary(req.files, dataUri, uploader);
         
         const credentials = {
             ...req.body,
             attributes: JSON.parse(attributes),
-            
         }
         try {
             const product = await edit(id, credentials);
-            if(product)
+            if(product){
+                if(newImages && newImages.length > 0){
+                    let productsImageCopy = JSON.parse(product.images);
+                    
+                    let images = productsImageCopy.concat(newImages)
+                    product.images = images;
+                    product.save()
+                }else{
+                    //for weird reasons when a product credentials is edited without new images
+                    //the images array becomes searialized.
+                    //this block will unsearialize it
+                    let productsImageCopy = JSON.parse(product.images);
+                    product.images = productsImageCopy;
+                    product.save();
+                }
                 return res.status(200).send({product, message: "Product edited successfully"});
+            }
             return res.status(400).send({message: "No such product exist"})
         } catch (err) {
             res.status(500).send(err.message);
@@ -149,13 +124,33 @@ const  productController = {
         const{id} = req.params;
         try {
             const product = await deleteOne(id);
-            if(product)
+            if(product){
+                const productImagesCopy = product.images;
+                productImagesCopy.forEach( (image:any) => productsEvents.emit("deleteImage", image.id, uploader) )
                 return res.status(200).send({message:"Product deleted successfully"});
+            }
             return res.status(400).send({message: "No such product exist"})
         } catch (err) {
             res.status(500).send(err.message);
-            
         }
+    },
+    async deleteProductImage(req:Request, res: Response){
+        const{id} = req.params;
+        const{imageId} = req.query;
+        try {
+            const product = await deleteImage(id, imageId);
+            if(product){
+                //delete from cloudinary
+                productsEvents.emit("deleteImage", imageId, uploader);
+                return res.status(200).send({message: "image deleted successfully"});
+            }
+            return res.status(400).send({message: "failed to delete image"});
+        } catch (err) {
+            console.log(err);
+            
+            res.status(500).send(err);
+        }
+
     },
     async searchProduct(req:Request, res:Response){
         const{search} = req.query;
