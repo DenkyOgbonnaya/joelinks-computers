@@ -13,10 +13,10 @@ applyMiddleware(middleware, app);
 applyRoutes(routers, app);
 app.use('/public', express.static(__dirname + '/public'));
 
-app.use(express.static(path.join(__dirname + "/client/dist")))
+app.use(express.static(path.join(__dirname + "/client/dist/client")))
 if(process.env.NODE_ENV == 'production'){
     app.get('*', (req:Request, res:Response) => {
-        res.sendFile(path.resolve(__dirname + '/client/dist/client', 'index.html'));
+        res.sendFile(path.join(__dirname + '/client/dist/client', 'index.html'));
     })
 }
 
