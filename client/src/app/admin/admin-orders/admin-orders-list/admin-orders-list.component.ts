@@ -1,6 +1,6 @@
 import { Component, Input, OnDestroy } from "@angular/core";
-import { OrderService } from 'src/app/orders/shared/orders.service';
-import { NotificationService } from 'src/app/shared';
+import { OrderService } from "../../../orders/shared/orders.service"; //'src/app/orders/shared/orders.service';
+import { NotificationService } from "../../../shared"//'src/app/shared';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 })
 export class AdminOrderlistComponent implements OnDestroy {
     @Input() orders:any[] = [];
-    orderSub: Subscription;
+    orderSub: Subscription | undefined;
     constructor(private orderService:OrderService, private notify: NotificationService){}
 
     getTotalPrice(items:any[], shippingFee:number){
@@ -29,11 +29,11 @@ export class AdminOrderlistComponent implements OnDestroy {
 
         this.orderSub = this.orderService.updateOrder(orderId, status)
         .subscribe(
-            data => {
+            (data:any) => {
                 this.notify.showSuccessMessage("Success", data.message);
                 this.orders = this.orders.map( order => order._id == orderId ? Object.assign({}, order, data.order): order)
             },
-            err => this.notify.showErrorMessage("Failed", err)
+            (err:any) => this.notify.showErrorMessage("Failed", err)
         )
         
     }

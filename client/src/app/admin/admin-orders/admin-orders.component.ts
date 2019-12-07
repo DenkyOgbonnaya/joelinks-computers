@@ -1,13 +1,13 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from 'rxjs';
-import { OrderService } from 'src/app/orders/shared/orders.service';
+import { OrderService } from "../../orders/shared/orders.service"; //'src/app/orders/shared/orders.service';
 
 @Component({
     templateUrl: "./admin-orders.component.html",
     styles:[]
 })
 export class AdminOrdersComponent implements OnInit {
-    orders$:Observable<any>
+    orders$:Observable<any> | undefined;
 
     constructor(private orderService: OrderService){}
 

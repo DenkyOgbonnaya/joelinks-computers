@@ -14,9 +14,9 @@ import { Router } from '@angular/router';
 
 export class ShoppingCartComponent implements OnInit, OnDestroy {
     pageName:string = "Shopping Cart";
-    cart$:Observable<ICartItem[]>;
-    currentUser:any;
-    authSub:Subscription;
+    cart$:Observable<ICartItem[]> | undefined;
+    currentUser:any | undefined;
+    authSub:Subscription | undefined;
 
     constructor(
         private cartstoreService: CartStoreService, 
@@ -43,7 +43,7 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
     }
     getCurrentUser(){
        this.authSub = this.authService.getCurrentUser()
-        .subscribe( data => {
+        .subscribe( (data:any) => {
             this.currentUser = data;
         })
     }
@@ -55,11 +55,11 @@ export class ShoppingCartComponent implements OnInit, OnDestroy {
         const modalRef = this.ModalService.open(CheckoutComponent);
         modalRef.componentInstance.user = this.currentUser;
 
-        modalRef.result.then(result => {
+        modalRef.result.then( (result:any) => {
             console.log(result);
             
         })
-        .catch(err => {
+        .catch( (err:any) => {
             console.log(err);
             
         })

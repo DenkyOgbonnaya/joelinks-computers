@@ -8,7 +8,7 @@
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "prod": "tsc && node ./build/server.js",
-    "heroku-postbuild": "cd client && yarn && yarn run build && cd .. && yarn run tsc",
+    "heroku-postbuild": "tsc && cd client && yarn && yarn run build",
     "start": "node ./build/server.js"
   },
   "dependencies": {

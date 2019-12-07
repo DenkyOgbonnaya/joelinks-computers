@@ -59,7 +59,7 @@ import { Router } from '@angular/router';
 })
 
 export class orderListComponent {
-    @Input() orders;
+    @Input() orders: any | undefined;
     constructor(private router: Router){}
 
     hasOtherItems(items:any[]){

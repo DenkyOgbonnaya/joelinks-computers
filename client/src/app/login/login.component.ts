@@ -43,13 +43,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class LoginComponent implements OnInit, OnDestroy {
     pageName:string = "Login";
-    mouseOverLogin:boolean;
-    username:string;
-    password:string;
+    mouseOverLogin:boolean | undefined;
+    username:string = "";
+    password:string = "";
     errorMessage:string = "";
     loading: boolean = false;
-    authSub:Subscription;
-    returnUrl:string;
+    authSub:Subscription | undefined;
+    returnUrl:string | undefined;
 
     constructor(
         private authService: AuthService, 
@@ -61,12 +61,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         this.loading = true;
         this.authSub = this.authService.login(user)
         .subscribe( 
-            data => {
+            (data:any) => {
             this.authService.setCurrentUser(data.token);
             this.loading = false;
             this.router.navigate([this.returnUrl]);
             },
-            err => {
+            (err:any) => {
                 this.errorMessage = err
                 this.loading = false;
             }

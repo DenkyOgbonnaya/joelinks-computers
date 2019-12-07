@@ -20,11 +20,11 @@ import { Subscription } from "rxjs";
 })
 
 export class CheckoutComponent implements OnInit, OnDestroy {
-    @Input() user:any;
+    @Input() user:any | undefined;
     loading:boolean = false;
-    mouseOverProceed:boolean;
+    mouseOverProceed:boolean | undefined;
     errorMessage:string = "";
-    cartSub: Subscription;
+    cartSub: Subscription | undefined;
 
     checkoutForm:FormGroup;
     name:FormControl;
@@ -50,11 +50,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
         this.loading = true;
         this.cartSub = this.cartService.checkout(this.checkoutForm.value, this.user._id)
         .subscribe(
-            data => {
+            (data:any) => {
                 this.activeModal.close();
                 window.location.href = data.authUrl;
             },
-            err => {
+            (err:any) => {
                 this.loading = false;
                 this.errorMessage = err;
             }

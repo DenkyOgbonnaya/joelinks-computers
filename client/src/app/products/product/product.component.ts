@@ -1,5 +1,5 @@
 import { Component, Input } from "@angular/core";
-import { CartStoreService, NotificationService } from 'src/app/shared';
+import { CartStoreService, NotificationService } from "../../shared"; //'src/app/shared';
 import { Product } from '../shared';
 
 
@@ -42,7 +42,7 @@ import { Product } from '../shared';
 })
 
 export class ProductComponent {
-    @Input() product:Product;
+    @Input() product:Product | undefined;
     constructor(private cartstoreService: CartStoreService, private notifyService: NotificationService){}
 
     addToCart(e:any){

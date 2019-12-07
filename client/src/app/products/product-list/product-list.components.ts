@@ -42,5 +42,5 @@ import { Product } from '../shared/product.model';
 })
 
 export class productlistComponent {
-    @Input() products:Product[];
+    @Input() products:Product[] | undefined;
 }

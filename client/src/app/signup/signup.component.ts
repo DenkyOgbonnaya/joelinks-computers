@@ -37,13 +37,13 @@ import { Router } from '@angular/router';
 
 export class SignupComponent implements OnDestroy {
     pageName:string = "Signup";
-    username:string;
-    email:string;
-    password:string;
-    mouseOverCreate:boolean;
+    username:string = ""
+    email:string = "";
+    password:string = "";
+    mouseOverCreate:boolean = false;
     errorMessage:string = "";
     loading: boolean = false;
-    authSub:Subscription;
+    authSub:Subscription | undefined
 
     constructor(private authService: AuthService, private router: Router){}
 
@@ -51,13 +51,13 @@ export class SignupComponent implements OnDestroy {
         this.loading = true;
         this.authSub = this.authService.signup(user)
         .subscribe( 
-            data => {
+            (data:any) => {
             this.authService.setCurrentUser(data.token);
             this.loading = false;
             this.router.navigate(["/"]);
             
             },
-            err => {
+            (err:any) => {
                 this.errorMessage = err;
                 this.loading = false;
             }

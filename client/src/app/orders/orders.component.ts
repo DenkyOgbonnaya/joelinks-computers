@@ -11,7 +11,7 @@ import { AuthService } from "../shared";
 })
 
 export class OrdersComponent implements OnInit {
-    orders$:Observable<any>;
+    orders$:Observable<any> | undefined;
 
     constructor(private orderService:OrderService, private authService:AuthService){}
     getOrders(){

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from 'rxjs';
 import { tap } from "rxjs/operators";
-import { Product} from 'src/app/products/shared';
-import { ProductsStoreService} from 'src/app/shared';
+import { Product} from "../../products/shared" //'src/app/products/shared';
+import { ProductsStoreService} from "../../shared"; //'src/app/shared';
 
 @Component({
     templateUrl: "./admin-products.component.html",
@@ -16,8 +16,8 @@ import { ProductsStoreService} from 'src/app/shared';
     `]
 })
 export class AdminProductsComponent implements OnInit {
-    products$:Observable<any>;
-    searchedProducts$:Observable<Product[]>;
+    products$:Observable<any> | undefined;
+    searchedProducts$:Observable<Product[]> | undefined;
     currentPage:number = 1;
     pages:number = 1;
 
@@ -31,7 +31,7 @@ export class AdminProductsComponent implements OnInit {
     getProducts(pageNumber:number, limit:number){
         this.products$ = this.productsStoreService.getProducts(pageNumber, limit)
         .pipe(
-            tap(data => {
+            tap( (data:any) => {
                 this.currentPage = data.page;
                 this.pages = data.pages;
                 

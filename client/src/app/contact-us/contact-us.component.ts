@@ -10,14 +10,14 @@ import { Subscription } from 'rxjs';
 })
 export class ContactUsComponent implements OnDestroy {
   @Input() pageName:string= "Contact Us";
-  name:string;
-  subject:string;
-  email:string;
-  message:string;
-  mouseOverSend:boolean;
+  name:string = "";
+  subject:string = "";
+  email:string = "";
+  message:string = "";
+  mouseOverSend:boolean = false;
   errorMessage:string = "";
   isLoading:boolean = false;
-  contactSub: Subscription;
+  contactSub: Subscription | undefined;
   constructor(private contactService: ContactUsService, private notify: NotificationService) { }
 
   sendMail(mailData:string){
@@ -26,11 +26,11 @@ export class ContactUsComponent implements OnDestroy {
     
     this.contactSub = this.contactService.sendMail(mailData)
      .subscribe(
-      data => {
+      (data:any) => {
         this.notify.showSuccessMessage("Succes", data.message);
         this.isLoading = false;
       },
-      err => {
+      (err:any) => {
         this.errorMessage = err;
         this.isLoading = false;
       }

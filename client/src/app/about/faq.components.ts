@@ -124,7 +124,7 @@ import { Component} from "@angular/core";
 export class FaqComponent {
     isVisible:boolean = false;
     
-    toggleAccordian(event) {
+    toggleAccordian(event:any) {
         let questionelement = event.target;
         let answerElement = questionelement.nextElementSibling;
         

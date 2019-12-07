@@ -52,7 +52,7 @@ const userController = {
     async loginUser(req:Request, res:Response){
         const{username, password} = req.body;
         try{
-            const user = await usernameExist(username);
+            const user:any = await usernameExist(username);
             if(!user)
                 return res.status(401).send({
                 status: 'error',

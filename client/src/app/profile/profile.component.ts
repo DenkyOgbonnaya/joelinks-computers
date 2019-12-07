@@ -11,9 +11,9 @@ import { ActivatedRoute } from '@angular/router';
 export class ProfileComponent implements OnInit, OnDestroy {
     isLoading:boolean = false;
     errorMessage:string = "";
-    user:any;
-    authSub:Subscription;
-    profileForm:FormGroup;
+    user:any | undefined;
+    authSub:Subscription | undefined;
+    profileForm:FormGroup | undefined;
 
     constructor(
         private formBuilder: FormBuilder, 
@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     getUser(userId:string){
         
         this.authSub = this.authService.getUser(userId)
-        .subscribe(data => {
+        .subscribe( (data:any) => {
             this.user = data.user;
             
             this.setProfile(data.user.profile)
@@ -38,16 +38,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
             this.profileForm.patchValue(data);
     }
     saveProfile(data:any){
-        console.log(data);
         this.isLoading = true;
         
         this.authSub = this.authService.saveProfile(this.user._id, data)
         .subscribe( 
-            data => {
+            (data:any) => {
                 this.isLoading = false;
                 this.notify.showSuccessMessage("Success", "Your changes have been saved")
             },
-            err => {
+            (err:any) => {
                 this.isLoading = false;
                 this.errorMessage = err;
                 

@@ -17,7 +17,7 @@ export class ProductsStoreService {
 
     getProducts(page:number, limit:number):Observable<any>{
         this.productService.getProducts(page, limit)
-        .subscribe( data => {
+        .subscribe( (data:any) => {
             this._products$.next({
                 ...this._products$.getValue(),
                 ...data
@@ -28,12 +28,12 @@ export class ProductsStoreService {
     addProduct(product: FormData, cb:any){
         this.productService.addProduct(product)
         .subscribe(
-            data => {
+            (data:any) => {
                 const updatedProducts = this._products$.getValue().products.concat(data.product);
                 this.updateProductsState(updatedProducts);
                 return cb(null, data.message);
             },
-            err => {
+            (err:any) => {
                 console.log(err);
                 return cb(err);
                 
@@ -43,7 +43,7 @@ export class ProductsStoreService {
     editProduct(productId:string, credentials:any, cb:any){
         this.productService.editProduct(productId, credentials)
         .subscribe(
-            data => {
+            (data:any) => {
                 let updatedProducts = this._products$.getValue().products.map( (product:Product) => 
                     product._id === productId ? Object.assign({}, product, data.product) : product);
 
@@ -51,7 +51,7 @@ export class ProductsStoreService {
 
                 return cb(null, data.message);
             },
-            err => cb(err)
+            (err:any) => cb(err)
         )
     }
     deleteProduct(productId:string, cb:any){
@@ -60,17 +60,18 @@ export class ProductsStoreService {
 
         this.productService.deleteProduct(productId)
         .subscribe(
-            data => cb(null, data.message),
-            err => cb(err)
+            (data:any) => cb(null, data.message),
+            (err:any) => cb(err)
         )
     }
     searchProduct(search:string, cb:Function){
         this.productService.searchProduct(search)
-        .subscribe( data => {
+        .subscribe( 
+            (data:any) => {
             this._searchedProducts$.next(data.products);
             cb(null);
         },
-        err => cb(err)
+            (err:any) => cb(err)
         );
     }
     getSearchedProducts():Observable<any>{
@@ -78,7 +79,7 @@ export class ProductsStoreService {
     }
     getProductsByCat(name:string):Observable<any>{
         this.productService.getProductsByCat(name)
-        .subscribe( data => {
+        .subscribe( (data:any) => {
             this._products$.next({
                 ...this._products$.getValue(),
                 ...data

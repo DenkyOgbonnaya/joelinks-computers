@@ -10,8 +10,8 @@ import { AuthService } from '../shared';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  cart$:Observable<ICartItem[]>;
-  currentUser$:Observable<any>;
+  cart$:Observable<ICartItem[]> | undefined;
+  currentUser$:Observable<any> | undefined;
   constructor(private cartstoreService:CartStoreService, private authService: AuthService) { }
 
   ngOnInit() {

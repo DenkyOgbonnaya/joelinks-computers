@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { CategoriesStoreService } from 'src/app/shared/categories-store.service';
 import { Observable } from 'rxjs';
-import { NotificationService } from 'src/app/shared';
+import { NotificationService, CategoriesStoreService } from "../../shared" //'src/app/shared';
 
 @Component({
     template: `
@@ -27,7 +26,7 @@ import { NotificationService } from 'src/app/shared';
     `
 })
 export class AdminCategoriesComponent implements OnInit {
-    categories:Observable<any>
+    categories:Observable<any> | undefined;
     constructor(
         private categoriesStoreService: CategoriesStoreService,
         private notifyService:NotificationService

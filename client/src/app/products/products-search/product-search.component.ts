@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { ProductsStoreService } from 'src/app/shared';
+import { ProductsStoreService } from "../../shared" //'src/app/shared';
 
 @Component({
     selector: "products-search",
@@ -20,7 +20,7 @@ import { ProductsStoreService } from 'src/app/shared';
 })
 export class ProductSerchComponent {
     isLoading:boolean = false;
-    errorMessage: "";
+    errorMessage:any = "";
 
     constructor(private productsStoreService: ProductsStoreService){}
     search(formValue:any){

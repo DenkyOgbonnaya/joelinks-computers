@@ -31,7 +31,7 @@ export class CategoriesStoreService {
         );
     }
     editCategory(categoryId:string, credentials:any, cb:any){
-        let categories = this._categories$.getValue().map(category => category._id === categoryId ? 
+        let categories = this._categories$.getValue().map( (category:any) => category._id === categoryId ? 
             Object.assign({}, category, credentials) : category);
 
         this._categories$.next(categories);

@@ -1,6 +1,6 @@
 import { Component, OnInit} from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
-import { ProductService } from 'src/app/products/shared';
+import { ProductService } from "../../../products/shared"; //'src/app/products/shared';
 import {  Observable } from 'rxjs';
 
 @Component({
@@ -31,7 +31,7 @@ import {  Observable } from 'rxjs';
     `]
 })
 export class EditProductComponent implements OnInit {
-    product$:Observable<any>;
+    product$:Observable<any> | undefined;
     constructor(private route: ActivatedRoute, private productService: ProductService){
 
     }

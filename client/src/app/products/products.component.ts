@@ -9,9 +9,9 @@ import {tap } from 'rxjs/operators';
 })
 
 export class ProductsComponent implements OnInit {
-    products$:Observable<any>;
-    searchedProducts$:Observable<any>
-    categories$:Observable<any>;
+    products$:Observable<any> | any;
+    searchedProducts$:Observable<any> | undefined;
+    categories$:Observable<any> | undefined
     pageName:string = "Products";
     currentPage:number = 1;
     pages:number = 1;
@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit {
     getProducts(pageNumber:number, limit:number){
         this.products$ = this.productStoreService.getProducts(pageNumber, limit)
         .pipe(
-            tap(data => {
+            tap( (data:any) => {
                 this.currentPage = data.page;
                 this.pages = data.pages;
                 

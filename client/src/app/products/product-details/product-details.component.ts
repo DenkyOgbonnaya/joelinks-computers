@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { ProductService, Product } from '../shared';
-import { CartStoreService, NotificationService } from 'src/app/shared';
+import { CartStoreService, NotificationService } from "../../shared"; //'src/app/shared';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -11,11 +11,11 @@ import { Subscription } from 'rxjs';
 
 export class ProductDetailsComponent implements OnInit, OnDestroy {
     pageName:string = "Products Details";
-    product:Product;
-    similarProducts:Product[];
+    product:Product | undefined;
+    similarProducts:Product[] | undefined;
     quantity:number = 1;
-    productSub: Subscription;
-    routeSub:Subscription;
+    productSub: Subscription | undefined;
+    routeSub:Subscription | undefined;
 
     constructor(
         private route: ActivatedRoute, 
@@ -34,7 +34,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     getProduct(){
         const productId:string = this.route.snapshot.params["id"];
         this.productSub = this.productService.getProduct(productId)
-        .subscribe( data => {
+        .subscribe( (data:any) => {
             this.product = data.product;
             this.similarProducts = data.similarProducts;
         })

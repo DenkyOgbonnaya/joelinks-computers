@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, EventEmitter, Output } from "@angular/core";
-import { CategoriesStoreService } from 'src/app/shared/categories-store.service';
-import { NotificationService } from 'src/app/shared';
+import { NotificationService, CategoriesStoreService } from "../../../shared"//'src/app/shared';
 
 @Component({
     selector: "categories-form",
@@ -32,7 +31,7 @@ export class CategoriesForm implements OnInit {
     name:string = "";
     isLoading:boolean = false;
     errorMessage:string = "";
-    @Input() category:any;
+    @Input() category:any | undefined;
     @Output() close =  new EventEmitter<boolean>();
 
     constructor(private categoriesStoreService: CategoriesStoreService, private notifyService: NotificationService){}

@@ -9,14 +9,14 @@ import { Subscription } from 'rxjs';
 })
 
 export class OrdersDetailsComponent implements OnInit, OnDestroy {
-    order:any;
-    orderSub:Subscription;
+    order:any | undefined;
+    orderSub:Subscription | undefined;
     constructor(private route: ActivatedRoute, private orderService:OrderService){}
 
     getOrder(){
         const orderId = this.route.snapshot.params["id"];
         this.orderSub = this.orderService.getOrder(orderId)
-        .subscribe(data => {
+        .subscribe( (data:any) => {
             this.order = data.order;
         })
         
