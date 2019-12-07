@@ -6,7 +6,7 @@
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
     "tsc": "tsc",
-    "start": "node ./build/server.js",
+    "start": "node ./server.js",
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "prod": "tsc && node ./build/server.js",
     "heroku-postbuild": "tsc && cd client && yarn && yarn run build"
