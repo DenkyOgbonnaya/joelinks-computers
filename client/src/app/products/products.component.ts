@@ -9,7 +9,7 @@ import {tap } from 'rxjs/operators';
 })
 
 export class ProductsComponent implements OnInit {
-    products$:Observable<any> | any;
+    products$:Observable<any> | undefined;
     searchedProducts$:Observable<any> | undefined;
     categories$:Observable<any> | undefined
     pageName:string = "Products";
