@@ -10,7 +10,11 @@ import { Subscription } from 'rxjs';
 })
 export class ContactUsComponent implements OnDestroy {
   @Input() pageName:string= "Contact Us";
-  mouseOnSend:boolean;
+  name:string;
+  subject:string;
+  email:string;
+  message:string;
+  mouseOverSend:boolean;
   errorMessage:string = "";
   isLoading:boolean = false;
   contactSub: Subscription;

@@ -6,19 +6,19 @@ import { Router } from '@angular/router';
     template: `
         <div class="order_container container">
             <h4>Your Orders</h4>
-            <div *ngIf="orders.orders.length === 0 else orderlist" class="jumbotron" style="text-align: center;">You have no available order</div>
-            <div #orderlist class="order_card" *ngFor="let order of orders?.orders">
-                <div class="card" (click)="toOrderDetails(order?._id)" >
-                    <img src={{order?.items[0].image}} alt="product"/>
-                    <div class="order_details">
-                        <div class="order_id">{{order?.items[0].name}} {{isOtherItems(order.items)}}</div>
-                        <div class="order_info">
-                            <small class="order_created">Ordered on: {{order?.createdAt | date }}</small>
-                            <small class="order_status">Status: {{order?.status}}</small>
+            <div *ngIf="orders.length === 0 " class="jumbotron" style="text-align: center;">You have no available order</div>
+            <div *ngIf="orders.length>0">
+                <div class="order_card" *ngFor="let order of orders">
+                    <div class="card" (click)="toOrderDetails(order?._id)" >
+                        <img src={{order?.items[0].image}} alt="product"/>
+                        <div class="order_details">
+                            <div class="order_id">{{order?.items[0].name}} {{hasOtherItems(order.items)}}</div>
+                            <div class="order_info">
+                                <small class="order_created">Ordered on: {{order?.createdAt | date }}</small>
+                                <small class="order_status">Status: {{order?.status}}</small>
+                            </div>
                         </div>
                     </div>
-                        
-                    
                 </div>
             </div>
         </div>`,
@@ -59,10 +59,10 @@ import { Router } from '@angular/router';
 })
 
 export class orderListComponent {
-    @Input() orders:any[];
+    @Input() orders;
     constructor(private router: Router){}
 
-    isOtherItems(items:any[]){
+    hasOtherItems(items:any[]){
         if(!items || items.length-1 === 0)
             return "";
         return `plus ${items.length-1} others`;

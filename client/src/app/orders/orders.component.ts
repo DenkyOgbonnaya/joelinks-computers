@@ -5,7 +5,7 @@ import { AuthService } from "../shared";
 
 @Component({
     template: `<div class="contain-fluid">
-        <order-list [orders]= "orders$ | async "></order-list>
+        <order-list [orders]= "(orders$ | async).orders "></order-list>
     </div>`,
     styles: []
 })

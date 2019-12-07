@@ -43,7 +43,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class LoginComponent implements OnInit, OnDestroy {
     pageName:string = "Login";
-    mouseOverLogin;
+    mouseOverLogin:boolean;
+    username:string;
+    password:string;
     errorMessage:string = "";
     loading: boolean = false;
     authSub:Subscription;

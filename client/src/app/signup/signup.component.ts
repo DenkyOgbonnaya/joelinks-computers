@@ -37,7 +37,10 @@ import { Router } from '@angular/router';
 
 export class SignupComponent implements OnDestroy {
     pageName:string = "Signup";
-    mouseOverCreate;
+    username:string;
+    email:string;
+    password:string;
+    mouseOverCreate:boolean;
     errorMessage:string = "";
     loading: boolean = false;
     authSub:Subscription;

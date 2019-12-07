@@ -43,6 +43,9 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     closeModal() {
         this.activeModal.close();
     }
+    dismissModal(){
+        this.activeModal.dismiss();
+    }
     checkout(){
         this.loading = true;
         this.cartSub = this.cartService.checkout(this.checkoutForm.value, this.user._id)

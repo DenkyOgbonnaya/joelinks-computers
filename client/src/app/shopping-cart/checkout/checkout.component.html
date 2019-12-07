@@ -1,6 +1,6 @@
 <div class="modal-header">
     <h4 class="modal-title">Checkout</h4>
-    <button type="button" class="close" aria-label="close" (click)="activeModal.dismiss('cross click')">x</button>
+    <button type="button" class="close" aria-label="close" (click)="dismissModal()">x</button>
 </div>
         <form [formGroup] ="checkoutForm" (ngSubmit)="checkout()">
             <div class="modal-body">

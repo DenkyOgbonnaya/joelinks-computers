@@ -16,7 +16,7 @@ import { ProductsStoreService} from 'src/app/shared';
     `]
 })
 export class AdminProductsComponent implements OnInit {
-    products$:Observable<Product[]>;
+    products$:Observable<any>;
     searchedProducts$:Observable<Product[]>;
     currentPage:number = 1;
     pages:number = 1;

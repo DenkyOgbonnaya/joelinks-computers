@@ -7,7 +7,7 @@ export class DragDropFileUploadDirective {
 
   @Output() fileDropped = new EventEmitter<any>();
 
-  @HostBinding('style.background-color') private background = '#ffffff';
+  @HostBinding('style.background-color') background = '#ffffff';
 
   // Dragover Event
   @HostListener('dragover', ['$event']) dragOver(event) {
