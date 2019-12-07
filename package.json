@@ -6,12 +6,9 @@
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
     "start": "node ./build/server.ts",
-    "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "prod": "tsc && node ./build/server.ts",
-    "build": "tsc",
-    "postinstall": "yarn run build",
-    "heroku-postbuild": "cd client && yarn && yarn run build"
+    "heroku-postbuild": "tsc & cd client && yarn && yarn run build"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",
