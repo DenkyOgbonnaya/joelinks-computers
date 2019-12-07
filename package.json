@@ -8,8 +8,8 @@
     "tsc": "tsc",
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "prod": "tsc && node ./build/server.js",
-    "postinstall": "cd client && yarn",
-    "build": "tsc && ./cd client && yarn run build",
+    "postinstall": "cd client && yarn && yarn run build",
+    "build": "tsc",
     "start": "node ./build/server.js"
   },
   "dependencies": {
