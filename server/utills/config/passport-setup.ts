@@ -10,7 +10,7 @@ const passportSetup = () => {
     passport.use('google',new Strategy({
         clientID: CLIENT_ID,
         clientSecret: CLIENT_SECRET,
-        callbackURL: '/api/auth/google/redirect'
+        callbackURL: 'https://joelinks-computers/api/auth/google/redirect'
     }, async (AccessToken:any, refreshToken:any, profile:any, done:any) => {
     
         const user = await User.findOne({oauthId:profile.id});

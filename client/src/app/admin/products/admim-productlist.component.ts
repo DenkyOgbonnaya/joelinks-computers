@@ -24,7 +24,7 @@ import { ProductsStoreService, NotificationService } from "../../shared";
             <td>{{product?.brand}}</td>
             <td>{{product?.category}}</td>
             <td> <button class="btn btn-light" (click)="handleEdit($event, product._id)">Edit</button> </td>
-            <td> <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="disabled" (click)="deleteProduct($event, product._id)" >Delete </button> </td>
+            <td> <button class="btn btn-danger btn-sm" data-toggle="tooltip" title="disabled" (click)="deleteProduct($event, product._id)" disabled >Delete </button> </td>
         </tr>
     </tbody>
 </table>
