@@ -4,7 +4,7 @@ import { ProductService, Product } from '../products/shared';
 
 @Injectable({providedIn: "root"})
 export class ProductsStoreService {
-    initialState = {
+    private initialState:any = {
         products: [],
         page: 1,
         pages: 1,
@@ -87,7 +87,7 @@ export class ProductsStoreService {
         })
         return this._products$.asObservable();
     }
-    updateProductsState(updatedProducts:Product[]){
+    updateProductsState(updatedProducts:any[]){
         const  updatedState = {
             ...this._products$.getValue(),
             products: updatedProducts

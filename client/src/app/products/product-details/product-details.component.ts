@@ -53,8 +53,8 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.notifyService.showSuccessMessage("Notification", "Added to cart!");
     }
     ngOnDestroy(){
-        this.productSub.unsubscribe();
-        this.routeSub.unsubscribe();
+        this.productSub && this.productSub.unsubscribe();
+        this.routeSub && this.routeSub.unsubscribe();
     }
 }
 

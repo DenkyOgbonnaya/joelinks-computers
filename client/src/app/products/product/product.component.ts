@@ -47,11 +47,12 @@ export class ProductComponent {
 
     addToCart(e:any){
         e.stopPropagation();
+        if(this.product){
+            const{_id, name, price, images} = this.product;
+            this.cartstoreService.addToCart({_id, name, price, image:images[1].url, quantity:1});
 
-        const{_id, name, price, images} = this.product;
-        this.cartstoreService.addToCart({_id, name, price, image:images[1].url, quantity:1});
-
-        this.notifyService.showSuccessMessage("Notification", "Added to cart!");
+            this.notifyService.showSuccessMessage("Notification", "Added to cart!");
+        }
         
     }
 }

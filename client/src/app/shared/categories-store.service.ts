@@ -4,27 +4,26 @@ import { CategoryService } from '../admin/admin-categories/shared/categories.ser
 
 @Injectable({providedIn: "root"})
 export class CategoriesStoreService {
-    
-    private _categories$ = new BehaviorSubject([]);
+    private initialState:Array<any> = []
+    private _categories$ = new BehaviorSubject(this.initialState);
 
     constructor(private categoryService:CategoryService){}
 
     getCategories():Observable<any>{
         this.categoryService.getCategories()
-        .subscribe( data => {
+        .subscribe( (data:any) => {
             this._categories$.next(data.categories);
         })
         return this._categories$.asObservable();
     }
-    addCategory(category:any, cb:any){
+    addCategory( category:any, cb:any){
         this.categoryService.addCategory(category)
         .subscribe(
-            data => {
+            (data:any) => {
                 this._categories$.next(this._categories$.getValue().concat(data.category))
                 return cb(null, data.message);
             },
-            err => {
-                console.log(err);
+            (err:any) => {
                 return cb(err);
                 
             }
@@ -37,10 +36,10 @@ export class CategoriesStoreService {
         this._categories$.next(categories);
         this.categoryService.editCategory(categoryId, credentials)
         .subscribe(
-            data => {
+            (data:any) => {
                 return cb(null, data.message);
             },
-            err => cb(err)
+            (err:any) => cb(err)
         )
     }
     deleteCategory(categoryId:string, cb:any){
@@ -49,8 +48,8 @@ export class CategoriesStoreService {
 
         this.categoryService.deleteCategory(categoryId)
         .subscribe(
-            data => cb(null, data.message),
-            err => cb(err)
+            (data:any) => cb(null, data.message),
+            (err:any) => cb(err)
         )
     }
 }

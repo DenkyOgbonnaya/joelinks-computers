@@ -6,10 +6,10 @@
   "scripts": {
     "pretest": "eslint --ignore-path .gitignore .",
     "tsc": "tsc",
-    "start": "tsc && node ./build/server.js",
+    "start": "node ./build/server.js",
     "dev": "ts-node-dev --respawn --transpileOnly ./server.ts",
     "prod": "tsc && node ./build/server.js",
-    "heroku-postbuild": "cd client && yarn && yarn run build"
+    "heroku-postbuild": "tsc && cd client && yarn && yarn run build"
   },
   "dependencies": {
     "@types/axios": "^0.14.0",

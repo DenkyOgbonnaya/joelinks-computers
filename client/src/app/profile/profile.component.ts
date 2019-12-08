@@ -13,7 +13,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
     errorMessage:string = "";
     user:any | undefined;
     authSub:Subscription | undefined;
-    profileForm:FormGroup | undefined;
+    profileForm:FormGroup;
 
     constructor(
         private formBuilder: FormBuilder, 
