@@ -13,10 +13,11 @@ applyMiddleware(middleware, app);
 applyRoutes(routers, app);
 app.use('/public', express.static(__dirname + '/public'));
 
-app.use(express.static(path.join(__dirname + "/client/dist")))
 if(process.env.NODE_ENV == 'production'){
     app.get('*', (req:Request, res:Response) => {
-        res.sendFile(path.join(__dirname, '/client/dist', 'index.html'));
+        //the compiled server.js file is servered from "./build/server.js"
+        //so dist folder is in ../client/dist..
+        res.sendFile(path.join("../client", "/dist/client", "index.html"));
     })
 }
 
