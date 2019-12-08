@@ -61,7 +61,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
     initForm(formBuilder:FormBuilder){
         return formBuilder.group({
-            email: [this.user.email, Validators.required],
+            email: ['', Validators.required],
             phone: ['', Validators.required],
             address: ['', Validators.required],
             city: ['', Validators.required],

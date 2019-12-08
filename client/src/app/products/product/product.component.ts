@@ -9,7 +9,7 @@ import { Product } from '../shared';
     <div class="product_card" [routerLink] = "['/product', product?._id]" >
     <img src={{product?.images[0].url}} alt="product" />
     <div class="product_atr">
-        <div class="product_name">{{product?.name | slice:0:16}}  ... </div>
+        <div class="product_name">{{product?.name | slice:0:13}}  ... </div>
         <div> {{product?.price | currency:"N"}} </div>
     </div>
 <button class="cart_btn" (click)= "addToCart($event)">ADD TO CART</button>

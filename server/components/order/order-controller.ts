@@ -20,7 +20,7 @@ const orderController = {
         const order = {
             items,
             customerName: `${firstname} ${lastname}`,
-            DeliveryAddress: {
+            deliveryAddress: {
                 address,
                 city,
                 state
